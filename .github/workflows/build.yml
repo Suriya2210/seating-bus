@@ -1,0 +1,36 @@
+name: Serverless CD
+
+on:
+  push:
+    branches:
+      - main
+          
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - run: |
+        npm install -g serverless@"${{inputs.serverless-version}}"
+        npm install -g serverless-dotenv-plugin
+
+    - name: install dependencies
+      run: npm install
+    
+    - name: Run tests
+      run: npm run test 
+      
+    - name: Build
+      run: |
+        npm run build
+        ls -ltr
+      
