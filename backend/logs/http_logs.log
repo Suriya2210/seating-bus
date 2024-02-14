@@ -1,5 +1,0 @@
-::1 - - [14/Feb/2024:04:07:43 +0000] "OPTIONS /api/auth/signin HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [14/Feb/2024:04:07:43 +0000] "POST /api/auth/signin HTTP/1.1" 200 520 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [14/Feb/2024:04:07:44 +0000] "GET /admin/get-users HTTP/1.1" 200 952 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [14/Feb/2024:05:46:46 +0000] "OPTIONS /admin/edit-user/7 HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [14/Feb/2024:05:46:46 +0000] "PATCH /admin/edit-user/7 HTTP/1.1" 200 456 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

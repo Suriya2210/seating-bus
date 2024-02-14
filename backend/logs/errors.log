@@ -1,12 +1,3 @@
 {"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":"getaddrinfo ENOTFOUND mysql57"}
-{"level":"error","message":""}
-{"level":"error","message":""}
-{"level":"error","message":""}
-{"level":"error","message":""}
-{"level":"error","message":""}
-{"level":"error","message":""}
+
+{"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
