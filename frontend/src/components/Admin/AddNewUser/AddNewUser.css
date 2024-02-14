@@ -1,0 +1,130 @@
+.add-user-page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 50px;
+  border: 2px solid rebeccapurple;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rebeccapurple;
+  background-image: url('./cubes_veralto.png');
+  background-color: rebeccapurple;
+  height: 80%;
+}
+
+
+.add-user-page:hover
+{
+  box-shadow: 0px 0px 40px rebeccapurple;
+
+}
+
+.add-user-header {
+  text-align: center;
+  color: white;
+}
+
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+}
+
+.left-column {
+  flex: 1;
+  margin-right: 40px;
+  /* Add margin to create space between columns */
+  margin-top: 40px;
+  /* Add margin to move the column down */
+}
+
+.right-column {
+  flex: 1;
+  margin-left: 40px;
+  /* Add margin to create space between columns */
+  margin-top: 40px;
+  /* Add margin to move the column down */
+}
+
+.addnewuser-group {
+  margin-bottom: 20px;
+}
+
+.addnewuser-group input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-bottom: 5px solid #185299;
+  /* Green color for border */
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  transition: border-bottom-color 0.3s;
+}
+
+
+.addnewuser-group input:focus {
+  outline: none;
+  border-bottom-color: rgb(84, 223, 25);
+}
+
+.submit-row {
+  text-align: center;
+}
+
+.submit-button {
+  width: 200px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.message {
+  margin-top: 60px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.message.success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.message.error {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+@media screen and (max-width: 1000px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    flex: none;
+    width: 100%;
+    margin: 0;
+    /* Reset margin for smaller screens */
+  }
+
+  .submit-button {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}

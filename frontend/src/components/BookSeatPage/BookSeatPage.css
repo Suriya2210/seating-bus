@@ -1,0 +1,156 @@
+.book-seat-page {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif; /* Example font family */
+}
+
+
+.bks-h2
+{
+  text-align: center;
+  color: rebeccapurple;
+  margin: 20px;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: calc(100% - 10px); /* Adjust for input padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+ 
+}
+
+input[type="date"],
+select {
+  width: calc(100% - 10px); /* Adjust for input padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.user-info {
+  width: 95%;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  box-shadow: 0 0 20px rgb(82, 75, 85);
+}
+
+.user-info form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info .form-group {
+  width: calc(33.33% - 10px); /* Adjust spacing */
+}
+
+.user-info .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.user-info .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.date-time-picker {
+  width: 95%;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  box-shadow: 0 0 20px rgb(82, 75, 85);
+}
+
+.date-time-picker form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.date-time-picker .form-group {
+  width: calc(50% - 10px);
+}
+
+.date-time-picker .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.date-time-picker .form-group input,
+.date-time-picker .form-group select {
+  width: calc(100% - 10px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.date-time-picker .form-group select {
+  width: calc(33.33% - 10px);
+  margin: 5px;
+}
+
+.flex-1{
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info h2,
+.date-time-picker h2 {
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+
+.bsp-sb {
+  background-color: rebeccapurple;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  left: 45%;
+}
+
+.bsp-sb:hover {
+  background-color:rgb(170,187,17);
+  box-shadow: 0 0 30px rgb(170,187,17);
+}
+
+.bsp-sb:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 600px) {
+  .user-info,
+  .date-time-picker {
+    max-width: 90%; /* Adjust for smaller screens */
+  }
+}

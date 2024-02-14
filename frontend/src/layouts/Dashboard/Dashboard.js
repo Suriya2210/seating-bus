@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { renderRoutes } from "react-router-config";
+
 import { NavBar } from "./components/NavBar";
 import { TopBar } from "./components/TopBar";
 

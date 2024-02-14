@@ -1,7 +1,9 @@
 import { Redirect } from "react-router";
 import { Home } from "../components/Home";
 import { Login } from "../components/Login";
-import  UserManagementPage  from "../components/Admin/UserManagementPage.jsx";
+import  UserManagementPage  from "../components/Admin/UserManagement/UserManagementPage";
+import  BookSeatPage  from "../components/BookSeatPage/BookSeatPage";
+import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
@@ -34,9 +36,21 @@ export const routes = [
           ,
       },
       {
-        path: "/usermanagement",
+        path: "/admin/usermanagement",
         exact: true,
         component: (props) => {return props.isAuthenticated ? <UserManagementPage /> : <Redirect to="/auth/login" />}
+          ,
+      },
+      {
+        path: "/bookyourseat",
+        exact: true,
+        component: (props) => {return props.isAuthenticated ? <BookSeatPage /> : <Redirect to="/auth/login" />}
+          ,
+      },
+      {
+        path: "/admin/addnewuser",
+        exact: true,
+        component: (props) => {return props.isAuthenticated ? <AddNewUser /> : <Redirect to="/auth/login" />}
           ,
       },
       {

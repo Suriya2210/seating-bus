@@ -51,7 +51,6 @@ function TopBar(props) {
         </Button>
         <Menu open={Boolean(anchorEl)} onClose={handleMenuClose} anchorEl={anchorEl}>
           <MenuItem>Profile</MenuItem>
-          <MenuItem>My Account</MenuItem>
           <MenuItem><Link to="/auth/login" onClick={()=>{
             localStorage.removeItem("user");
           }}> Logout</Link></MenuItem>
