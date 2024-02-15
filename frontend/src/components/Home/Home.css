@@ -1,14 +1,14 @@
-.hero {
+.userhome-hero {
     position: relative;
     background: url('./home-heropage.jpg') center/cover no-repeat;
-    height: 60vh;
+    height: 92vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Helvetica Neue, Helvetica, Arial;
 }
 
-.hero::before {
+.userhome-hero::before {
     content: "";
     position: absolute;
     top: 0;
@@ -21,20 +21,20 @@
     /* Ensure the overlay is behind the content */
 }
 
-.hero-content {
+.userhome-hero-content {
     text-align: center;
     color: #fff;
     z-index: 2;
     /* Ensure the content is on top of the overlay */
 }
 
-.hero-title {
+.userhome-hero-title {
     font-size: 3em;
     margin-bottom: 20px;
     animation: fadeInUp 1s ease-in-out;
 }
 
-.hero-subtitle {
+.userhome-hero-subtitle {
     font-size: 1.5em;
     margin-bottom: 30px;
     animation: fadeInUp 1s ease-in-out 0.5s;

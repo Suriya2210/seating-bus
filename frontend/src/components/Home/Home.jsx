@@ -10,18 +10,18 @@ const scrollToSection = (id) => {
 
 const HeroSection = () => {
   return (
-    <header className="hero">
-      <div className="hero-content">
-        <h1 className="hero-title">Your Comfort Awaits, Reserve Now</h1>
-        <p className="hero-subtitle">
+    <header className="userhome-hero">
+      <div className="userhome-hero-content">
+        <h1 className="userhome-hero-title">Your Comfort Awaits, Reserve Now</h1>
+        <p className="userhome-hero-subtitle">
           Make seat reservations simple and straightforward.
         </p>
-        <div className="hero-button">
+        <div className="userhome-hero-button">
           <button
             onClick={() => scrollToSection("user-bookseatsection")}
             className="HomePage-btn-1"
           >
-            Manage Booking
+            Book Your Seat
           </button>
         </div>
         <div id="wrapper">

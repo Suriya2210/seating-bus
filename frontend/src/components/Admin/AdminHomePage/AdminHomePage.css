@@ -1,7 +1,25 @@
-.hero {
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Set thumb color */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(3, 81, 224);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(14, 177, 50);
+}
+
+/* Set track color */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.adminhome-hero {
     position: relative;
     background: url('./adminhome-heroimage.jpg') center/cover no-repeat;
-    height: 90vh;
+    height: 92vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -9,7 +27,7 @@
     font-family: Helvetica Neue, Helvetica, Arial;
 }
 
-.hero::before {
+.adminhome-hero::before {
     content: "";
     position: absolute;
     top: 0;
@@ -21,7 +39,7 @@
     /* Ensure the overlay is behind the content */
 }
 
-.hero-content {
+.adminhome-hero-content {
     text-align: center;
     color: #fff;
     z-index: 2;
@@ -30,37 +48,36 @@
     /* Ensure the content is on top of the overlay */
 }
 
-.hero-title {
+.adminhome-hero-title {
     font-size: 3em;
     margin-bottom: 20px;
     animation: fadeInUp 1s ease-in-out;
 }
 
-.hero-subtitle {
+.adminhome-hero-subtitle {
     font-size: 1.5em;
     margin-bottom: 30px;
     animation: fadeInUp 1s ease-in-out 0.5s;
 }
 
-.AdminHomePage-btn-2
-{
-    padding:20px auto;
+.AdminHomePage-btn-2 {
+    padding: 20px auto;
     font-size: 1.3em;
     background-color: rebeccapurple;
 }
 
-.AdminHomePage-btn-1
-{
+.AdminHomePage-btn-1 {
     background-color: rebeccapurple;
-    padding:20px auto;
+    padding: 20px auto;
     font-size: 1.3em;
 }
 
-.AdminHomePage-btn-1:hover{
+.AdminHomePage-btn-1:hover {
     background-color: rgb(9, 34, 88);
     box-shadow: 0px 10px 10px rgb(51, 111, 241);
 }
-.AdminHomePage-btn-2:hover{
+
+.AdminHomePage-btn-2:hover {
     background-color: rgb(9, 34, 88);
     box-shadow: 0px 10px 10px rgb(51, 111, 241);
 }
@@ -460,7 +477,7 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    top:20px;
+    top: 20px;
 }
 
 .input-container:hover,
@@ -518,7 +535,7 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    top:20px;
+    top: 20px;
 }
 
 .button-container:hover,
