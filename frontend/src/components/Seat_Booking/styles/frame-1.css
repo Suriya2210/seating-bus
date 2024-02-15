@@ -1,4 +1,3 @@
-
 html {
 	font-size:62.5%;
 }
@@ -4895,4 +4894,16 @@ body {
   object-fit: cover;
   vertical-align: top;
   flex-shrink: 0;
+}
+
+img[class^="seat"]:hover
+{
+  content: url("../assets/armchair-3-2.png");
+  
+}
+
+img[class^="seat"]:checked
+{
+  content: url("../assets/armchair-5-1.png");
+  
 }
