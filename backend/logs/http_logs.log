@@ -1,4 +1,0 @@
-::1 - - [15/Feb/2024:09:11:12 +0000] "GET /admin/get-users HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [15/Feb/2024:10:48:25 +0000] "GET /admin/get-users HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [15/Feb/2024:10:48:43 +0000] "GET /admin/get-users HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
-::1 - - [15/Feb/2024:10:48:45 +0000] "GET /admin/get-user/5 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

@@ -9,8 +9,10 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
+
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
+
 
 export const routes = [
   {
@@ -26,6 +28,17 @@ export const routes = [
         path: "/auth/login",
         exact: true,
         component: Login,
+      },
+    ],
+  },
+  {
+    path: "/seatlayout",
+    component: SeatLayout,
+    routes: [
+      {
+        path: "/seatlayout",
+        exact: true,
+        component: SeatLayout,
       },
     ],
   },

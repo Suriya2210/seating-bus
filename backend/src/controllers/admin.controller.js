@@ -153,6 +153,7 @@ exports.addUser = async(req, res, next)=>{
     const associate_id = req.body.associate_id;
     const localsystemid = req.body.localsystemid;
     const email = req.body.email;
+    const mobile_no=req.body.mobile_no;
     const manager_id = req.body.manager_id;
     const manager_email = req.body.manager_email;
     const manager_name = req.body.manager_name;
@@ -169,6 +170,7 @@ exports.addUser = async(req, res, next)=>{
         password:password,
         localsystemid:localsystemid,
         email:email,
+        mobile_no:mobile_no,
         manager_id:manager_id,
         manager_email:manager_email,
         manager_name:manager_name,
@@ -240,6 +242,7 @@ exports.editUser = (req, res, next)=>{
     const associate_name = req.body.associate_name;
     const localsystemid = req.body.localsystemid;
     const email = req.body.email;
+    const mobile_no=req.body.mobile_no;
     const manager_id = req.body.manager_id;
     const manager_email = req.body.manager_email;
     const manager_name = req.body.manager_name;
@@ -259,6 +262,7 @@ exports.editUser = (req, res, next)=>{
         user.associate_name = associate_name;
         user.localsystemid = localsystemid;
         user.email = email;
+        user.mobile_no=mobile_no;
         user.manager_id = manager_id;
         user.manager_email = manager_email;
         user.manager_name = manager_name;
