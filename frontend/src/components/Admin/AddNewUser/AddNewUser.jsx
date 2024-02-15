@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddNewUser.css"; // Import CSS for AddNewUser page
+import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
+
+
+
 
 const AddNewUser = () => {
+  const history = useHistory(); // Initialize useHistory
   const [formData, setFormData] = useState({
     associate_name: "",
     associate_id:0,
     localsystemid: "",
     email: "",
     manager_id: "",
-    password:"varsan",
+    password:"",
     isAdmin:false,
     ismanager:false,
     manager_email: "",
@@ -68,6 +73,11 @@ const AddNewUser = () => {
           setMessage("");
         }, 3000);
       });
+  };
+
+  const handleCancel = () => {
+    history.push("/admin/usermanagement"); // Redirect to UserManagementPage
+    // history.push("/UserManagement/UserManagementPage");
   };
 
   return (
@@ -173,6 +183,9 @@ const AddNewUser = () => {
         <div className="submit-row">
           <button type="submit" className="submit-button">
             {loading ? "Adding User..." : "Add User"}
+          </button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancel
           </button>
         </div>
       </form>
