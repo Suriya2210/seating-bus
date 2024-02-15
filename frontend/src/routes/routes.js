@@ -31,17 +31,17 @@ export const routes = [
       },
     ],
   },
-  {
-    path: "/seatlayout",
-    component: SeatLayout,
-    routes: [
-      {
-        path: "/seatlayout",
-        exact: true,
-        component: SeatLayout,
-      },
-    ],
-  },
+  // {
+  //   path: "/seatlayout",
+  //   component: SeatLayout,
+  //   routes: [
+  //     {
+  //       path: "/seatlayout",
+  //       exact: true,
+  //       component: SeatLayout,
+  //     },
+  //   ],
+  // },
   {
     route: '*',
     component: DashboardLayout,
