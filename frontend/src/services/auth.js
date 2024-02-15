@@ -14,7 +14,7 @@ function login(username, password) {
     })
     .then(response => {
       console.log("working fine")
-      localStorage.setItem("user", JSON.stringify(response.data.data.firstname));
+      localStorage.setItem("user", JSON.stringify(response.data.data.associate_name));
       return response.data;
     });
 }
