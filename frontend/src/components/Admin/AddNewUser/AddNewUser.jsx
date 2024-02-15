@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddNewUser.css"; // Import CSS for AddNewUser page
+import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
+
+
+
 
 const AddNewUser = () => {
+  const history = useHistory(); // Initialize useHistory
   const [formData, setFormData] = useState({
     associate_name: "",
     associate_id:0,
     localsystemid: "",
     email: "",
     manager_id: "",
-    password:"varsan",
+    password:"",
     isAdmin:false,
     ismanager:false,
     manager_email: "",
     manager_name: "",
+    mobile_no: "", 
     direct_reports: 0,
     company: "",
     OpCo: "",
@@ -53,6 +59,7 @@ const AddNewUser = () => {
           ismanager:false,
           manager_email: "",
           manager_name: "",
+          mobile_no: "",
           direct_reports: "",
           company: "",
           OpCo: "",
@@ -68,6 +75,11 @@ const AddNewUser = () => {
           setMessage("");
         }, 3000);
       });
+  };
+
+  const handleCancel = () => {
+    history.push("/admin/usermanagement"); // Redirect to UserManagementPage
+    // history.push("/UserManagement/UserManagementPage");
   };
 
   return (
@@ -115,6 +127,15 @@ const AddNewUser = () => {
             <div className="addnewuser-group">
               <input
                 type="text"
+                name="mobile_no"
+                placeholder="Phone Number"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="addnewuser-group">
+              <input
+                type="text"
                 name="manager_id"
                 placeholder="Manager ID"
                 onChange={handleChange}
@@ -125,9 +146,9 @@ const AddNewUser = () => {
           <div className="right-column">
             <div className="addnewuser-group">
               <input
-                type="email"
-                name="manager_email"
-                placeholder="Manager Email"
+                type="password"
+                name="passowrd"
+                placeholder="Enter Password"
                 onChange={handleChange}
                 required
               />
@@ -137,6 +158,15 @@ const AddNewUser = () => {
                 type="text"
                 name="manager_name"
                 placeholder="Manager Name"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="addnewuser-group">
+              <input
+                type="email"
+                name="manager_email"
+                placeholder="Manager Email"
                 onChange={handleChange}
                 required
               />
@@ -173,6 +203,9 @@ const AddNewUser = () => {
         <div className="submit-row">
           <button type="submit" className="submit-button">
             {loading ? "Adding User..." : "Add User"}
+          </button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancel
           </button>
         </div>
       </form>
