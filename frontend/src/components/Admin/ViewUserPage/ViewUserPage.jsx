@@ -15,6 +15,7 @@ const ViewUserPage = ({ onSave, onCancel }) => {
     password: '',
     manager_id: '',
     manager_name: '',
+    mobile_no: '',
     manager_email: '',
     company: '',
     OpCo: ''
@@ -77,7 +78,7 @@ const ViewUserPage = ({ onSave, onCancel }) => {
           </div>
           <div className="vup-field">
             <label>Phone Number:</label>
-            <input type="text" name="password" value="123456789" onChange={handleChange} />
+            <input type="text" name="mobile_no"  value={viewUser.mobile_no} onChange={handleChange} />
             {/* <input type="password" name="password" value={viewUser.password} onChange={handleChange} /> */}
           </div>
         </div>

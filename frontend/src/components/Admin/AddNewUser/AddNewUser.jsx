@@ -19,6 +19,7 @@ const AddNewUser = () => {
     ismanager:false,
     manager_email: "",
     manager_name: "",
+    mobile_no: "", 
     direct_reports: 0,
     company: "",
     OpCo: "",
@@ -58,6 +59,7 @@ const AddNewUser = () => {
           ismanager:false,
           manager_email: "",
           manager_name: "",
+          mobile_no: "",
           direct_reports: "",
           company: "",
           OpCo: "",
@@ -125,6 +127,15 @@ const AddNewUser = () => {
             <div className="addnewuser-group">
               <input
                 type="text"
+                name="mobile_no"
+                placeholder="Phone Number"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="addnewuser-group">
+              <input
+                type="text"
                 name="manager_id"
                 placeholder="Manager ID"
                 onChange={handleChange}
@@ -135,9 +146,9 @@ const AddNewUser = () => {
           <div className="right-column">
             <div className="addnewuser-group">
               <input
-                type="email"
-                name="manager_email"
-                placeholder="Manager Email"
+                type="password"
+                name="passowrd"
+                placeholder="Enter Password"
                 onChange={handleChange}
                 required
               />
@@ -147,6 +158,15 @@ const AddNewUser = () => {
                 type="text"
                 name="manager_name"
                 placeholder="Manager Name"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="addnewuser-group">
+              <input
+                type="email"
+                name="manager_email"
+                placeholder="Manager Email"
                 onChange={handleChange}
                 required
               />
