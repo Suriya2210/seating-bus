@@ -7,6 +7,7 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
+import SeatLayout from "../components/Seat_Booking/SeatLayout";
 
 export const routes = [
   {
@@ -22,6 +23,17 @@ export const routes = [
         path: "/auth/login",
         exact: true,
         component: Login,
+      },
+    ],
+  },
+  {
+    path: "/seatlayout",
+    component: SeatLayout,
+    routes: [
+      {
+        path: "/seatlayout",
+        exact: true,
+        component: SeatLayout,
       },
     ],
   },
