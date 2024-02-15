@@ -1,1 +1,7 @@
-::1 - - [15/Feb/2024:11:16:11 +0000] "POST /generate_seat HTTP/1.1" 200 59 "-" "PostmanRuntime/7.32.1"
+::1 - - [15/Feb/2024:13:08:49 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:08:50 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:09:43 +0000] "OPTIONS /api/auth/signin HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:09:44 +0000] "POST /api/auth/signin HTTP/1.1" 200 550 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:10:07 +0000] "OPTIONS /api/auth/signin HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:10:07 +0000] "POST /api/auth/signin HTTP/1.1" 200 550 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [15/Feb/2024:13:10:10 +0000] "GET /admin/get-users HTTP/1.1" 200 527 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
