@@ -40,7 +40,26 @@ function SeatLayout() {
     const [loading,setloading]=useState(true);
     const [seat_status,set_seat_status] =useState([])
 
+    function ImageToggle({ defaultSrc, hoverSrc, selectedSrc,clsname,style }) {
+      const [isHovered, setIsHovered] = useState(false);
+      const [isSelected, setIsSelected] = useState(false);
     
+      const imageSource = isSelected ? selectedSrc : (isHovered ? hoverSrc : defaultSrc);
+    
+      return (
+        <img
+          src={imageSource}
+          alt="Image"
+          style={style}
+          className={clsname}
+          onMouseOver={() => setIsHovered(true)}
+          onMouseOut={() => setIsHovered(false)}
+          onClick={() => {
+            setIsSelected(!isSelected)
+          }}
+        />
+      );
+    }
 
     useEffect(()=>{
 
@@ -105,14 +124,17 @@ function SeatLayout() {
               <div className="group-166-Bc9">
                 <div className="group-1-Fru">
                   <div className="table-1-CGM"></div>
-                  {
-                    console.log("react  "+seat_status[4])
-                  }
+
+                  {console.log(seat_status)}
+                  
                   { seat_status[1] == 1 ? (
-                    <img alt="IMGGG"
+                    <ImageToggle
+                    key={1}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-1-JMK"
                     style={{ rotate: "180deg" }}
-                    className="seat-1-JMK seat"
-                    src={seat}                 
                   />
                   ) 
                   : seat_status[1]== 2 ? (
@@ -136,10 +158,13 @@ function SeatLayout() {
                   <div className="table-2-PNm"></div>
 
                   { seat_status[2] == 1 ? (
-                    <img alt="IMGGG"
+                    <ImageToggle
+                    key={2}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-2-jxR"
                     style={{ rotate: "180deg" }}
-                    className="seat-2-jxR seat"
-                    src={seat}                 
                   />
                   ) 
                   : seat_status[2]== 2 ? (
@@ -157,14 +182,19 @@ function SeatLayout() {
                   />
                   ) }
 
+              
+
                 </div>
                 <div className="group-3-eJh">
                   <div className="table-3-Cb7"></div>
                   { seat_status[3] == 1 ? (
-                    <img alt="IMGGG"
+                    <ImageToggle
+                    key={3}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-3-XdP"
                     style={{ rotate: "180deg" }}
-                    className="seat-3-XdP seat"
-                    src={seat}                 
                   />
                   ) 
                   : seat_status[3]== 2 ? (
@@ -181,15 +211,19 @@ function SeatLayout() {
                     src={onbookedseat}                 
                   />
                   ) }
+                  
 
                 </div>
                 <div className="group-4-eT7">
                   <div className="table-4-DFK"></div>
                   { seat_status[4] == 1 ? (
-                    <img alt="IMGGG"
+                    <ImageToggle
+                    key={4}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-4-AwF"
                     style={{ rotate: "180deg" }}
-                    className="seat-4-AwF seat"
-                    src={seat}                 
                   />
                   ) 
                   : seat_status[4]== 2 ? (
@@ -206,15 +240,19 @@ function SeatLayout() {
                     src={onbookedseat}                 
                   />
                   ) }
+                 
                   
                 </div>
                 <div className="group-5-udw">
                   <div className="table-5-rZB"></div>
                   { seat_status[5] == 1 ? (
-                    <img alt="IMGGG"
+                    <ImageToggle
+                    key={5}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-5-1gy"
                     style={{ rotate: "180deg" }}
-                    className="seat-5-1gy seat"
-                    src={seat}                 
                   />
                   ) 
                   : seat_status[5]== 2 ? (
@@ -231,38 +269,115 @@ function SeatLayout() {
                     src={onbookedseat}                 
                   />
                   ) }
+                
                   
                 </div>
                 <div className="group-6-mAM">
                   <div className="table-6-XQR"></div>
-                  <img alt="IMGGG"
+
+                  { seat_status[6] == 1 ? (
+                    <ImageToggle
+                    key={6}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-6-V6M"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[6]== 2 ? (
+                    <img alt="IMGGG"
                     style={{ rotate: "180deg" }}
                     className="seat-6-V6M"
-                    src={seat}                  />
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-6-V6M"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+
                 </div>
               </div>
               <div className="auto-group-jwau-Rkh">
                 <div className="group-16-yGR">
                   <div className="table-16-uA5"></div>
-                  <img alt="IMGGG"
+
+                  { seat_status[16] == 1 ? (
+                    <ImageToggle
+                    key={16}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-16-Ei9"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[16]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-16-Ei9"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-16-Ei9"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+
+                  
+
+                  {/* <img alt="IMGGG"
                     style={{ rotate: "180deg" }}
                     className="seat-16-Ei9"
                     src={seat}
-                  />
+                  /> */}
                 </div>
                 <div className="group-15-kgV">
                   <div className="table-15-Ve5"></div>
-                  <img alt="IMGGG"
+
+                  { seat_status[15] == 1 ? (
+                    <ImageToggle
+                    key={15}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-15-e1B"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[1]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-15-e1B"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-15-e1B"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                  
+                  {/* <img alt="IMGGG"
                     style={{ rotate: "180deg" }}
                     className="seat-15-e1B"
                     src={seat}
-                  />
+                  /> */}
                 </div>
                 <div className="group-14-Nxm">
                   <div className="table-14-Kd7"></div>
                   <img alt="IMGGG"
                     style={{ rotate: "180deg" }}
-                    className="seat-14-H49"
+                    className="seat-14-H49 seat"
                     src={seat}
                   />
                 </div>
@@ -282,11 +397,31 @@ function SeatLayout() {
                     <div className="auto-group-t549-757">
                       <div className="group-21-eaq">
                         <div className="table-21-CcM"></div>
-                        <img alt="IMGGG"
+                        { seat_status[21] == 1 ? (
+                          <ImageToggle
+                          key={21}
+                          defaultSrc={seat}
+                          hoverSrc={onhowerseat}
+                          selectedSrc={onselectseat}
+                          clsname="seat-21-k85"
+                          style={{ rotate: "180deg" }}
+                        />
+                        ) 
+                        : seat_status[1]== 2 ? (
+                          <img alt="IMGGG"
                           style={{ rotate: "180deg" }}
                           className="seat-21-k85"
-                          src={seat}
+                          src={onblockedseat}                 
                         />
+                        )  
+                        : (
+                          <img alt="IMGGG"
+                          style={{ rotate: "180deg" }}
+                          className="seat-21-k85"
+                          src={onbookedseat}                 
+                        />
+                        ) }
+                       
                       </div>
                       <div className="group-22-tzy">
                         <div className="table-22-dxZ"></div>
@@ -301,59 +436,236 @@ function SeatLayout() {
                   <div className="auto-group-7dg1-tdb">
                     <div className="auto-group-nu3b-nU5">
                       <div className="group-17-RG9">
-                        <img alt="IMGGG" className="seat-17-PCy" src={seat} />
+                      { seat_status[17] == 1 ? (
+                    <ImageToggle
+                    key={17}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-17-PCy"
+                    
+                  />
+                  ) 
+                  : seat_status[17]== 2 ? (
+                    <img alt="IMGGG"
+                  
+                    className="seat-17-PCy"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                   
+                    className="seat-17-PCy"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                        
                         <div className="table-17-hjT"></div>
                       </div>
                       <div className="group-23-TyX">
                         <div className="table-23-8Jy"></div>
-                        <img alt="IMGGG"
-                          style={{ rotate: "180deg" }}
-                          className="seat-23-GRB"
-                          src={seat}
-                        />
+                        { seat_status[23] == 1 ? (
+                    <ImageToggle
+                    key={23}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-23-GRB"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[23]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-23-GRB"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-23-GRB"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                      
                       </div>
                     </div>
                     <div className="auto-group-yc2h-pBo">
                       <div className="group-18-yaV">
-                        <img alt="IMGGG" className="seat-18-Xru" src={seat} />
+                      { seat_status[18] == 1 ? (
+                    <ImageToggle
+                    key={18}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-18-Xru"
+                    
+                  />
+                  ) 
+                  : seat_status[1]== 2 ? (
+                    <img alt="IMGGG"
+                    
+                    className="seat-18-Xru"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                  
+                    className="seat-18-Xru"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                       
                         <div className="table-18-5Nd"></div>
                       </div>
                       <div className="group-24-SU5">
                         <div className="table-24-b65"></div>
-                        <img alt="IMGGG"
-                          style={{ rotate: "180deg" }}
-                          className="seat-24-Yn1"
-                          src={seat}
-                        />
+                        { seat_status[24] == 1 ? (
+                    <ImageToggle
+                    key={24}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-24-Yn1"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[24]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-24-Yn1"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-24-Yn1"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                        
                       </div>
                     </div>
                     <div className="auto-group-7ta1-hQ1">
                       <div className="group-19-4VT">
-                        <img alt="IMGGG" className="seat-19-mPs" src={seat} />
+                      { seat_status[19] == 1 ? (
+                    <ImageToggle
+                    key={19}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-19-mPs"
+                   
+                  />
+                  ) 
+                  : seat_status[1]== 2 ? (
+                    <img alt="IMGGG"
+                    
+                    className="seat-19-mPs"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    
+                    className="seat-19-mPs"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                        {/* <img alt="IMGGG" className="seat-19-mPs" src={seat} /> */}
                         <div className="table-19-uky"></div>
                       </div>
                       <div className="group-25-fEM">
                         <div className="table-25-c9b"></div>
-                        <img alt="IMGGG"
-                          style={{ rotate: "180deg" }}
-                          className="seat-25-mYH"
-                          src={seat}
-                        />
+                        { seat_status[25] == 1 ? (
+                    <ImageToggle
+                    key={25}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-25-mYH"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[25]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-25-mYH"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-25-mYH"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                        
                       </div>
                     </div>
                     <div className="auto-group-znwh-6qT">
                       <div className="group-26-fNm">
                         <div className="table-26-pFf"></div>
-                        <img alt="IMGGG"
-                          style={{ rotate: "180deg" }}
-                          className="seat-26-MWV"
-                          src={seat}
-                        />
+                        { seat_status[26] == 1 ? (
+                    <ImageToggle
+                    key={26}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-26-MWV"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[26]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-26-MWV"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-26-MWV"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                     
                       </div>
                       <div className="group-20-HQ9">
-                        <img alt="IMGGG" className="seat-20-3PK" src={seat} />
+                      { seat_status[20] == 1 ? (
+                    <ImageToggle
+                    key={20}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-20-3PK"
+                    
+                  />
+                  ) 
+                  : seat_status[20]== 2 ? (
+                    <img alt="IMGGG"
+                    
+                    className="seat-20-3PK"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    
+                    className="seat-20-3PK"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                        
                         <div className="table-20-PTB"></div>
                       </div>
+                      
                       <img alt="IMGGG" className="group-164-vCD" src={grass} />
                     </div>
                   </div>
@@ -361,29 +673,166 @@ function SeatLayout() {
                 <div className="group-167-Ruf">
                   <div className="auto-group-bp9t-BP3">
                     <div className="group-7-7nV">
-                      <img alt="IMGGG" className="seat-7-V8q" src={seat}/>
+                    { seat_status[7] == 1 ? (
+                    <ImageToggle
+                    key={7}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-7-V8q"
+                   
+                  />
+                  ) 
+                  : seat_status[7]== 2 ? (
+                    <img alt="IMGGG"
+                    className="seat-7-V8q"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    className="seat-7-V8q"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                    
                       <div className="table-7-bBs"></div>
                     </div>
                     <div className="group-8-Z8h">
-                      <img alt="IMGGG" className="seat-8-7vu" src={seat}/>
+                    { seat_status[8] == 1 ? (
+                    <ImageToggle
+                    key={8}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-8-7vu"
+                   
+                  />
+                  ) 
+                  : seat_status[8]== 2 ? (
+                    <img alt="IMGGG"
+                 
+                    className="seat-8-7vu"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+               
+                    className="seat-8-7vu"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                    
                       <div className="table-8-Dyw"></div>
                     </div>
                     <div className="group-9-zUu">
-                      <img alt="IMGGG" className="seat-9-MqF" src={seat}/>
+                    { seat_status[9] == 1 ? (
+                    <ImageToggle
+                    key={9}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-9-MqF"
+                  
+                  />
+                  ) 
+                  : seat_status[9]== 2 ? (
+                    <img alt="IMGGG"
+                   
+                    className="seat-9-MqF"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                 
+                    className="seat-9-MqF"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                     
                       <div className="table-9-Hiu"></div>
                     </div>
                     <div className="group-10-rX7">
-                      <img alt="IMGGG" className="seat-10-R4R" src={seat} />
+                    { seat_status[10] == 1 ? (
+                    <ImageToggle
+                    key={10}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-10-R4R"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[10]== 2 ? (
+                    <img alt="IMGGG"
+                    
+                    className="seat-10-R4R"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+            
+                    className="seat-10-R4R"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                      
                       <div className="table-10-k6h"></div>
                     </div>
                     <div className="group-11-i3X">
-                      <img alt="IMGGG" className="seat-11-UYV" src={seat} />
+                    { seat_status[11] == 1 ? (
+                    <ImageToggle
+                    key={11}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-11-UYV"
+                  />
+                  ) 
+                  : seat_status[11]== 2 ? (
+                    <img alt="IMGGG"
+                    className="seat-11-UYV"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    
+                    className="seat-11-UYV"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                      {/* <img alt="IMGGG" className="seat-11-UYV" src={seat} /> */}
                       <div className="table-11-pMT"></div>
                     </div>
                   </div>
                   <div className="auto-group-37vw-McH">
                     <div className="group-12-ihj">
-                      <img alt="IMGGG" className="seat-12-FbB" src={seat} />
+                    { seat_status[12] == 1 ? (
+                    <ImageToggle
+                    key={12}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-12-FbB"
+                  />
+                  ) 
+                  : seat_status[12]== 2 ? (
+                    <img alt="IMGGG"
+                    className="seat-12-FbB"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    className="seat-12-FbB"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                      {/* <img alt="IMGGG" className="seat-12-FbB" src={seat} /> */}
                       <div className="table-12-zYm"></div>
                     </div>
                     <img alt="IMGGG" className="group-165-ZLy" src={grass} />
@@ -392,11 +841,59 @@ function SeatLayout() {
               </div>
               <div className="auto-group-o17t-GmB">
                 <img alt="IMGGG" className="group-163-1yf" src={grass} />
-                <img alt="IMGGG"
+                { seat_status[37] == 1 ? (
+                    <ImageToggle
+                    key={37}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-37-M1w"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[1]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-37-M1w"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-37-M1w"
+                    src={onbookedseat}                 
+                  />
+                  ) }
+                {/* <img alt="IMGGG"
                   style={{ rotate: "180deg" }}
                   className="seat-37-M1w"
                   src={seat}
-                />
+                /> */}
+                { seat_status[36] == 1 ? (
+                    <ImageToggle
+                    key={36}
+                    defaultSrc={seat}
+                    hoverSrc={onhowerseat}
+                    selectedSrc={onselectseat}
+                    clsname="seat-36-HwB"
+                    style={{ rotate: "180deg" }}
+                  />
+                  ) 
+                  : seat_status[1]== 2 ? (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-36-HwB"
+                    src={onblockedseat}                 
+                  />
+                  )  
+                  : (
+                    <img alt="IMGGG"
+                    style={{ rotate: "180deg" }}
+                    className="seat-36-HwB"
+                    src={onbookedseat}                 
+                  />
+                  ) }
                 <img alt="IMGGG"
                   style={{ rotate: "180deg" }}
                   className="seat-36-HwB"

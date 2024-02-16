@@ -4896,6 +4896,14 @@ body {
   flex-shrink: 0;
 }
 
+.seat{
+  content:url("../assets/seat-1.png")
+}
+
+.seat:hover{
+  content: url("../assets/armchair-3-2.png");
+}
+
 /* img[class*="seat"] :hover
 {
   background-color: blue;
@@ -4909,8 +4917,14 @@ img[class^="seat"] :checked
   
 } */
 
-.seat:hover{
+/* .seat:hover{
   content: url("../assets/armchair-3-2.png");
-}
+} */
 
+/* .seat:hover {
+  background-image: url('hover-image.png'); 
+} */
 
+/* .seat.selected {
+  background-image: url('selected-image.png');
+} */
