@@ -4896,14 +4896,21 @@ body {
   flex-shrink: 0;
 }
 
-img[class^="seat"]:hover
+/* img[class*="seat"] :hover
 {
+  background-color: blue;
   content: url("../assets/armchair-3-2.png");
   
 }
 
-img[class^="seat"]:checked
+img[class^="seat"] :checked
 {
-  content: url("../assets/armchair-5-1.png");
+  content: url("../assets/armchair-3-2.png");
   
+} */
+
+.seat:hover{
+  content: url("../assets/armchair-3-2.png");
 }
+
+

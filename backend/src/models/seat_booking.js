@@ -25,7 +25,7 @@ const BookSeat = sequelize.define('book_seat',{
     },
     seat_status:{
         type:Sequelize.INTEGER,
-        default:null
+        default:1
     },
     seat_booked_by:{
         type:Sequelize.STRING,
