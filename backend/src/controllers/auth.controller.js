@@ -45,10 +45,13 @@ exports.signin = (req, res) => {
             });
           } else {
             var hashpass_db=data.password;
+            const jwt_token = generateToken(data.associate_id,data.email);
+            console.log("jwt_token:=>"+jwt_token);
             if(comparePassword(pass,hashpass_db)){
                 return res.status(200).json({
                     status:"success",
                     message: "Logged In Successfully",
+                    jwt_token: jwt_token,
                     data:data
                   });
             }

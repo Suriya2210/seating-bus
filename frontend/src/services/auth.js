@@ -14,11 +14,13 @@ function login(username, password) {
     })
     .then(response => {
       console.log("working fine")
-      localStorage.setItem("user", JSON.stringify(response.data.data.associate_name));
+      localStorage.setItem("user",response.data.data.associate_name);
+      localStorage.setItem("jwt_token",response.data.jwt_token);
       return response.data;
     });
 }
 
 function logout() {
-  localStorage.removeItem("user");
+  console.log("Logout function called!");
+  localStorage.removeItem("jwt_token");
 }
