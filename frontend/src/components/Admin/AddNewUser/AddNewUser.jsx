@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import "./AddNewUser.css"; // Import CSS for AddNewUser page
 import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
@@ -12,17 +12,17 @@ const AddNewUser = () => {
     associate_name: "",
     associate_id:0,
     localsystemid: "",
-    email: "",
-    manager_id: "",
-    password:"",
-    isAdmin:false,
-    ismanager:false,
-    manager_email: "",
-    manager_name: "",
     mobile_no: "", 
+    email: "", 
+    password: "",
+    manager_id: "",
+    manager_name: "",
+    manager_email: "",
     direct_reports: 0,
     company: "",
     OpCo: "",
+    ismanager:false,
+    isAdmin:false,
   });
 
   const [loading, setLoading] = useState(false);
@@ -77,6 +77,16 @@ const AddNewUser = () => {
       });
   };
 
+  useEffect(() => {
+    if (message === "User added successfully!") {
+      setTimeout(() => {
+        setMessage(""); // Clear the success message after 3 seconds
+        history.push("/admin/usermanagement"); // Redirect to UserManagementPage
+      }, 3000);
+    }
+  }, [message, history]);
+
+
   const handleCancel = () => {
     history.push("/admin/usermanagement"); // Redirect to UserManagementPage
     // history.push("/UserManagement/UserManagementPage");
@@ -117,15 +127,6 @@ const AddNewUser = () => {
             </div>
             <div className="addnewuser-group">
               <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="addnewuser-group">
-              <input
                 type="text"
                 name="mobile_no"
                 placeholder="Phone Number"
@@ -135,9 +136,18 @@ const AddNewUser = () => {
             </div>
             <div className="addnewuser-group">
               <input
-                type="text"
-                name="manager_id"
-                placeholder="Manager ID"
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="addnewuser-group">
+              <input
+                type="password"
+                name="passowrd"
+                placeholder="Enter Password"
                 onChange={handleChange}
                 required
               />
@@ -146,9 +156,9 @@ const AddNewUser = () => {
           <div className="right-column">
             <div className="addnewuser-group">
               <input
-                type="password"
-                name="passowrd"
-                placeholder="Enter Password"
+                type="text"
+                name="manager_id"
+                placeholder="Manager ID"
                 onChange={handleChange}
                 required
               />

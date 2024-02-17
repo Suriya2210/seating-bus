@@ -358,3 +358,20 @@
     }
 }
 
+/* SEAT BOOKING LAYOUT CSS STARTS */
+.section-bookseat {
+    height: 25%;
+    margin: 10px;
+    border: 2px solid #f50606;
+    border-radius: 10px;
+    width: auto;
+}
+
+.section-bookseat h2 {
+    text-align: center;
+    font-family: sans-serif;
+    color: rebeccapurple;
+}
+
+
+/* SEAT BOOKING LAYOUT CSS ENDS  */

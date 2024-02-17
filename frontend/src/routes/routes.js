@@ -33,17 +33,6 @@ export const routes = [
     ],
   },
   {
-    path: "/seatlayout",
-    component: SeatLayout,
-    routes: [
-      {
-        path: "/seatlayout",
-        exact: true,
-        component: SeatLayout,
-      },
-    ],
-  },
-  {
     route: '*',
     component: DashboardLayout,
     routes: [
@@ -52,6 +41,11 @@ export const routes = [
         exact: true,
         component: (props) => {return props.isAuthenticated ? <Home /> : <Redirect to="/auth/login" />}
           ,
+      },
+      {
+        path: "/seatlayout",
+        exact: true,
+        component: (props) => {return props.isAuthenticated ? <SeatLayout /> : <Redirect to="/auth/login" />}
       },
       {
         path: "/admin/usermanagement",
