@@ -9,7 +9,7 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
-import SeatLayout from "../components/Seat_Booking/SeatLayout";
+import Page from "../components/SeatLayout/src/pages/Page";
 
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
@@ -45,7 +45,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return props.isAuthenticated ? <SeatLayout /> : <Redirect to="/auth/login" />}
+        component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
       },
       {
         path: "/admin/usermanagement",
