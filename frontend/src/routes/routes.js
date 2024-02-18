@@ -10,6 +10,8 @@ import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
 import Page from "../components/SeatLayout/src/pages/Page";
+import Manager_seatlayout from "../components/SeatLayout/src/pages/Manager_seatlayout";
+import Employee_seatlayout from "../components/SeatLayout/src/pages/Employee-seatlayout";
 
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
@@ -45,13 +47,13 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
+        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Page/> :  localStorage.getItem('id')==100 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
+        // component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
       },
       {
         path: "/admin/usermanagement",
         exact: true,
         component: (props) => {return props.isAuthenticated ? <UserManagementPage /> : <Redirect to="/auth/login" />}
-          ,
       },
       {
         path: "/user/userprofile",

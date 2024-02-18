@@ -91,3 +91,32 @@ exports.block_seats=(req,res,next)=>{
         })
     }
 }
+
+exports.unblock_seats=(req,res,next)=>{
+    try{
+        const {date,seat_numbers}= req.body
+        for(let i=0;i<seat_numbers.length;i++){
+            book_seat.findOne({
+                where:{
+                    seat_selection_date:date,
+                    seat_number:seat_numbers[i]
+                }
+            })
+            .then((val)=>{
+                val.seat_status=1;
+                val.save();
+            })  
+        }
+        res.status(200).json({
+            status:"success",
+            message:"Seat is successfully unblocked by the admin"
+        })
+    }
+    catch(err){
+        res.status(400).json({
+            status:"ailure",
+            message:"Failed in blocking the seat",
+            error:err
+        })
+    }
+}

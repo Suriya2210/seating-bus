@@ -445,8 +445,8 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     box-sizing: border-box;
-    transition: all 0.3s ease-in-out, margin 0.3s ease;
-    -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease;
+    /* transition: all 0.3s ease-in-out, margin 0.3s ease;
+    -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease; */
 }
 
 /* RESET FORM ELEMENTS */
