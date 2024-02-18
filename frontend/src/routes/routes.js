@@ -9,9 +9,13 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
-import Page from "../components/SeatLayout/src/pages/Page";
-import Manager_seatlayout from "../components/SeatLayout/src/pages/Manager_seatlayout";
-import Employee_seatlayout from "../components/SeatLayout/src/pages/Employee-seatlayout";
+
+import Page from "../components/Seats/Page"
+import Manager_seatlayout from "../components/Seats/Manager_seatlayout";
+import Employee_seatlayout from "../components/Seats/Employee-seatlayout";
+// import Page from "../components/SeatLayout/src/pages/Page";
+// import Manager_seatlayout from "../components/SeatLayout/src/pages/Manager_seatlayout";
+// import Employee_seatlayout from "../components/SeatLayout/src/pages/Employee-seatlayout";
 
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
