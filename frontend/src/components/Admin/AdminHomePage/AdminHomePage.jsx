@@ -6,7 +6,6 @@ const scrollToSection = (id) => {
     const section = document.getElementById(id);
     section.scrollIntoView({ behavior: "smooth" });
 };
-
 const HeroSection = () => {
     return (
         <header className="adminhome-hero">

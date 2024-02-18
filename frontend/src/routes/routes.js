@@ -14,6 +14,8 @@ import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
 
 
+import Page from "../components/Pages/Page";
+
 export const routes = [
   {
     path: "/",
@@ -31,17 +33,17 @@ export const routes = [
       },
     ],
   },
-  // {
-  //   path: "/seatlayout",
-  //   component: SeatLayout,
-  //   routes: [
-  //     {
-  //       path: "/seatlayout",
-  //       exact: true,
-  //       component: SeatLayout,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/seatlayout",
+    component: Page,
+    routes: [
+      {
+        path: "/seatlayout",
+        exact: true,
+        component: Page,
+      },
+    ],
+  },
   {
     route: '*',
     component: DashboardLayout,

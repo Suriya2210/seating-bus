@@ -213,3 +213,7 @@
 {"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
 {"level":"info","message":"Running on PORT 3000"}
 {"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"error","message":""}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
