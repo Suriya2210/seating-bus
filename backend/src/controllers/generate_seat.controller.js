@@ -1,5 +1,6 @@
 const {Sequelize} = require('sequelize')
 const book_seat = require('../models/seat_booking')
+const { exec } = require('child_process');
 
 exports.generate = (req,res,next)=>{
     
@@ -40,7 +41,7 @@ exports.generate = (req,res,next)=>{
 }
 
 exports.get_seat_info=(req,res,next)=>{
-    
+
     const date=new Date(req.params.date);
     book_seat.findAll({
         where:{
