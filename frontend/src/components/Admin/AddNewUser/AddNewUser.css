@@ -3,7 +3,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  margin-top: 50px;
+  margin-top: 20px;
   border-bottom: 2px solid white;
   border-radius: 10px;
   padding: 20px;
@@ -37,16 +37,16 @@
   flex: 1;
   margin-right: 40px;
   /* Add margin to create space between columns */
-  margin-top: 40px;
+  margin-top: 20px;
   /* Add margin to move the column down */
 }
 
 .right-column {
   flex: 1;
-  margin-left: 40px;
   /* Add margin to create space between columns */
-  margin-top: 40px;
+  margin-left: 40px;
   /* Add margin to move the column down */
+  margin-top: 20px;
 }
 
 .addnewuser-group {
@@ -76,6 +76,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .submit-button {
@@ -103,7 +104,9 @@
 }
 
 .message {
-  margin-top: 60px;
+  display:block;
+  position: relative;
+  top: -500px;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
@@ -139,9 +142,17 @@
     margin: 0;
     /* Reset margin for smaller screens */
   }
+  .submit-row {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
 
   .submit-button {
-    width: 100%;
+    width: 50%;
     margin-bottom: 70px;
   }
 }
@@ -167,8 +178,16 @@
     /* Reset margin for smaller screens */
   }
 
+  .submit-row {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
   .submit-button {
-    width: 100%;
+    width: 50%;
     margin-bottom: 70px;
   }
 }
@@ -194,36 +213,17 @@
     margin: 0;
     /* Reset margin for smaller screens */
   }
-
-  .submit-button {
-    width: 100%;
-    margin-bottom: 70px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-
-  .add-user-page {
-    height: 135vh;
-    width: 80%;
-    max-width: 60%;
-    min-width: 30%;
-  }
-
-  .form-row {
-    flex-direction: column;
-  }
-
-  .left-column,
-  .right-column {
-    flex: none;
-    width: 100%;
-    margin: 0;
-    /* Reset margin for smaller screens */
+  .submit-row {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
   }
 
   .submit-button {
-    width: 100%;
+    width: 50%;
     margin-bottom: 70px;
   }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import SeatLayout from "../Seat_Booking/SeatLayout";
+
 
 const scrollToSection = (id) => {
   const section = document.getElementById(id);
@@ -41,8 +43,9 @@ const Home = () => {
   return (
     <div className="content whole-body-home">
       <HeroSection />
-      <div id="user-bookseatsection" className="section-manageseat">
+      <div id="user-bookseatsection" className="section-bookseat">
         <h2 className="section-title">Book Your Seat!!</h2>
+        <SeatLayout /> {/* Render SeatLayout component here */}
       </div>
     </div>
   );

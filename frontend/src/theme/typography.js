@@ -58,7 +58,7 @@ const typography = {
   },
   body1: {
     // color: palette.text.primary,
-    fontSize: '10px',
+    fontSize: '16px',
     letterSpacing: '-0.05px',
     lineHeight: '21px'
   },

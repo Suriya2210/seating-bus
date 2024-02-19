@@ -55,7 +55,7 @@ next();
 });
 
 app.use('/admin',adminRoute)
-app.use(bookSeatRoute);
+// app.use(bookSeatRoute);
 app.use('/api/auth', authRoute);
 app.use('/seats_info',seat_info_route);
 app.use('/generate_seat',generate_seat_route);
