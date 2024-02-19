@@ -51,7 +51,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Page/> :  localStorage.getItem('id')==100 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
+        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Page/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
         // component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
       },
       {

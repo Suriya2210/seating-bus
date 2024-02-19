@@ -22,6 +22,8 @@ const Manager_seatlayout = () => {
   const [seat_info,set_seat_info]=useState();
   const [loading,setloading]=useState(true);
   const [seat_status,set_seat_status] =useState([]);
+  const [max_seat,set_max_seat]=useState(0);
+  var count_selected=0
   
 
   const block={
@@ -43,6 +45,11 @@ const Manager_seatlayout = () => {
     const fetchdata=async()=>{
       try{
         const val=await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
+        var associates=await axios.get(`http://localhost:3000/associates/get-associates/${localStorage.getItem('id')}`);
+        associates=associates.data.data.users;
+        console.log(associates);
+        set_max_seat(associates.length+1);
+        console.log(associates.length+1)
         const array=[];
         for(let i=0;i<161;i++){
           array.push(-4);
@@ -142,13 +149,14 @@ const Manager_seatlayout = () => {
   
   
   function SeatUpComponent(props) {
+
     
     const [selected, setSelected] = React.useState(false);
     const [hover, setHover] = React.useState(false);
-    // console.log("Value of key "+props.seat_id)
+   
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
 
-    // console.log(seat_no); 
+    
     if(seat_status[seat_no]==0){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
@@ -177,22 +185,27 @@ const Manager_seatlayout = () => {
       const imgSrc_select = seatup_imageselect;
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = selected ? imgSrc_select : (hover ? imgSrc_hover : seatup);
-      var exKey = null;
-      if(props.seat_id){
-        // console.log("Key value "+props.seat_id);
-        exKey=props.seat_id;
-      }
+      
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={imgsrc} onClick={() => {
-            if(!selected){
+            
+            if(count_selected==max_seat){
+              alert("You have already chosen the greatest number of seats available.")
+            }
+            else if(!selected){
+              count_selected+=1;
               selectedseat.push(seat_no)
+              setSelected(!selected)
             }
             else{
+              count_selected-=1;
               selectedseat=deleteSeat(seat_no)
+              setSelected(!selected)
             }
+            console.log("no of selected seats "+count_selected)
             console.log(selectedseat);
-            setSelected(!selected)
+            
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)}  />
         </Tooltip>
         
@@ -231,22 +244,25 @@ const Manager_seatlayout = () => {
       const imgSrc_select = seatup_imageselect;
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = selected ? imgSrc_select : (hover ? imgSrc_hover : seatup);
-      var exKey = null;
-      if(props.seat_id){
-        // console.log("Key value "+props.seat_id);
-        exKey=props.seat_id;
-      }
+      
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={imgsrc} onClick={() => {
-            if(!selected){
+            if(count_selected==max_seat){
+              alert("You have already chosen the greatest number of seats available.")
+            } 
+            else if(!selected){
+              count_selected+=1;
               selectedseat.push(seat_no)
+              setSelected(!selected)
             }
             else{
+              count_selected-=1;
               selectedseat=deleteSeat(seat_no)
+              setSelected(!selected)
             }
             console.log(selectedseat);
-            setSelected(!selected)
+            console.log("no of selected seats "+count_selected)
             
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "180deg" }} />
         </Tooltip>
@@ -283,22 +299,25 @@ const Manager_seatlayout = () => {
       const imgSrc_select = seatup_imageselect;
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = selected ? imgSrc_select : (hover ? imgSrc_hover : seatup);
-      var exKey = null;
-      if(props.seat_id){
-        // console.log("Key value "+props.seat_id);
-        exKey=props.seat_id;
-      }
+      
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={imgsrc} onClick={() => {
-            if(!selected){
+            if(count_selected==max_seat){
+              alert("You have already chosen the greatest number of seats available.")
+            } 
+            else if(!selected){
+              count_selected+=1;
               selectedseat.push(seat_no)
+              setSelected(!selected)
             }
             else{
+              count_selected-=1;
               selectedseat=deleteSeat(seat_no)
+              setSelected(!selected)
             }
             console.log(selectedseat);
-            setSelected(!selected)
+            console.log("no of selected seats "+count_selected)
             
           }
             } onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "270deg" }} />
@@ -336,22 +355,25 @@ const Manager_seatlayout = () => {
       const imgSrc_select = seatup_imageselect;
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = selected ? imgSrc_select : (hover ? imgSrc_hover : seatup);
-      var exKey = null;
-      if(props.seat_id){
-        // console.log("Key value "+props.seat_id);
-        exKey=props.seat_id;
-      }
+      
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
            <img className={props.cname} src={imgsrc} onClick={() => {
-            if(!selected){
+            if(count_selected==max_seat){
+              alert("You have already chosen the greatest number of seats available.")
+            }  
+            else if(!selected){
+              count_selected+=1;
               selectedseat.push(seat_no)
+              setSelected(!selected)
             }
             else{
+              count_selected-=1;
               selectedseat=deleteSeat(seat_no)
+              setSelected(!selected)
             }
             console.log(selectedseat);
-            setSelected(!selected)
+            console.log("no of selected seats "+count_selected)
            
             }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "90deg" }} />
         </Tooltip>
