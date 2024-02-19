@@ -109,6 +109,7 @@ const Page = () => {
       }
       seatno='WKS'+seatno;
       seat_numbers.push(seatno);
+      
     });
 
     const json_body={
@@ -160,7 +161,7 @@ const Page = () => {
     
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
-        <img className={props.cname} src={onblockedseat} onClick={()=>{
+        <img className={props.cname} src={onblockedseat}  onClick={()=>{
           if(!(selected_blockedSeat.includes(seat_no))){
             selected_blockedSeat.push(seat_no)
           }
@@ -222,7 +223,15 @@ const Page = () => {
       // console.log("seat-no")
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
-        <img className={props.cname} src={onblockedseat} style={{ rotate: "180deg" }} />
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "180deg" }} onClick={()=>{
+          if(!(selected_blockedSeat.includes(seat_no))){
+            selected_blockedSeat.push(seat_no)
+          }
+          else{
+            selected_blockedSeat=removefromblockedseat(seat_no)
+          }
+          console.log("selected_blockedseat "+selected_blockedSeat)
+        }}  />
         </Tooltip>
       )
     }
@@ -274,7 +283,15 @@ const Page = () => {
       // console.log("seat-no")
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
-        <img className={props.cname} src={onblockedseat} style={{ rotate: "270deg" }} />
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "270deg" }} onClick={()=>{
+          if(!(selected_blockedSeat.includes(seat_no))){
+            selected_blockedSeat.push(seat_no)
+          }
+          else{
+            selected_blockedSeat=removefromblockedseat(seat_no)
+          }
+          console.log("selected_blockedseat "+selected_blockedSeat)
+        }} />
         </Tooltip>
       )
     }
@@ -327,7 +344,15 @@ const Page = () => {
       // console.log("seat-no")
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
-        <img className={props.cname} src={onblockedseat} style={{ rotate: "90deg" }} />
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "90deg" }} onClick={()=>{
+          if(!(selected_blockedSeat.includes(seat_no))){
+            selected_blockedSeat.push(seat_no)
+          }
+          else{
+            selected_blockedSeat=removefromblockedseat(seat_no)
+          }
+          console.log("selected_blockedseat "+selected_blockedSeat)
+        }}  />
         </Tooltip>
       )
     }

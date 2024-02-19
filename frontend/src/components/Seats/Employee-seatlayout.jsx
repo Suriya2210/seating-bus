@@ -156,14 +156,14 @@ const Employee_seatlayout = () => {
     if(seat_status[seat_no]==0){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
-        <img className={props.cname} src={onbookedseat} />
+        <img className={props.cname} src={onbookedseat} style={{ rotate: "180deg" }} />
         </Tooltip>
       )
     }
     if(seat_status[seat_no]==2){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
-        <img className={props.cname} src={onblockedseat}/>
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "180deg" }}/>
         </Tooltip>
       )
     }
@@ -191,14 +191,14 @@ const Employee_seatlayout = () => {
     if(seat_status[seat_no]==0){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
-        <img className={props.cname} src={onbookedseat} />
+        <img className={props.cname} src={onbookedseat} style={{ rotate: "270deg" }} />
         </Tooltip>
       )
     }
     if(seat_status[seat_no]==2){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
-        <img className={props.cname} src={onblockedseat}/>
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "270deg" }}/>
         </Tooltip>
       )
     }
@@ -226,14 +226,14 @@ const Employee_seatlayout = () => {
     if(seat_status[seat_no]==0){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow> 
-        <img className={props.cname} src={onbookedseat} />
+        <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
         </Tooltip>
       )
     }
     if(seat_status[seat_no]==2){
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
-        <img className={props.cname} src={onblockedseat}/>
+        <img className={props.cname} src={onblockedseat} style={{ rotate: "90deg" }}/>
         </Tooltip>
       )
     }
