@@ -4,7 +4,6 @@ import { Login } from "../components/Login";
 import UserManagementPage  from "../components/Admin/UserManagement/UserManagementPage";
 import AdminHomePage  from "../components/Admin/AdminHomePage/AdminHomePage";
 import ViewUserPage from "../components/Admin/ViewUserPage/ViewUserPage"
-import  BookSeatPage  from "../components/BookSeatPage/BookSeatPage";
 import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
@@ -21,7 +20,7 @@ import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
 
 
-import Page from "../components/Pages/Page";
+// import Page from "../components/Pages/Page";
 
 export const routes = [
   {
@@ -40,20 +39,6 @@ export const routes = [
       },
     ],
   },
-<<<<<<< HEAD
-  {
-    path: "/seatlayout",
-    component: Page,
-    routes: [
-      {
-        path: "/seatlayout",
-        exact: true,
-        component: Page,
-      },
-    ],
-  },
-=======
->>>>>>> 040cf89c61db6f80cdd16578065b6e1255633512
   {
     route: '*',
     component: DashboardLayout,
