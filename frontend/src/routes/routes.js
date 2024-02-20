@@ -10,12 +10,10 @@ import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
 
-import Page from "../components/Seats/Page"
-import Manager_seatlayout from "../components/Seats/Manager_seatlayout";
-import Employee_seatlayout from "../components/Seats/Employee-seatlayout";
-// import Page from "../components/SeatLayout/src/pages/Page";
-// import Manager_seatlayout from "../components/SeatLayout/src/pages/Manager_seatlayout";
-// import Employee_seatlayout from "../components/SeatLayout/src/pages/Employee-seatlayout";
+import Admin_seatlayout from "../components/Seats/AdminLayout/Admin_seatlayout"
+import Manager_seatlayout from "../components/Seats/ManagerLayout/Manager_seatlayout";
+import Employee_seatlayout from "../components/Seats/EmployeeLayout/Employee_seatlayout";
+
 
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
@@ -51,7 +49,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Page/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
+        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Admin_seatlayout/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
         // component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
       },
       {

@@ -61,7 +61,7 @@ exports.bookseat=(req,res,next)=>{
     seat.booked_for_name=req.body.associate_name,
     seat.seat_booking_status=1,
     seat.seat_status=0,
-    seat.seat_booked_by=req.body.associate_name,
+    seat.seat_booked_by=req.body.seat_booked_by,
     seat.save();
     console.log(`${seat.booked_for_name} booked the seat ${seat.seat_number} on ${seat.seat_selection_date}`)
     res.status(200).json({

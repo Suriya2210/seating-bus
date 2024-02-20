@@ -7,6 +7,7 @@ exports.generate = (req,res,next)=>{
     try{
         var {from_date,to_date}=req.body;
         var k=new Date(from_date),j=new Date(to_date);
+        console.log(k+" "+j);
         while(k<=j){
             for(let i=1;i<=160;i++){
                 var seat_no=i.toString();

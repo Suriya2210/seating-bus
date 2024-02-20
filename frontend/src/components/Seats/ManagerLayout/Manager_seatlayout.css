@@ -1503,17 +1503,22 @@
 .noc-room-rect {
   border: 0;
   outline: 0;
-  background-color: #d9d9d9;
-  top: 227px;
+  background-color: #ec0606;
+  top: 127px;
   width: 298px;
   height: 36px;
 }
 .noc-room {
   position: absolute;
   top: 231px;
-  left: 351px;
+  left: 291px;
   font-size: var(--font-size-5xl);
+  background-color: #ccc;
+  padding: 10px;
   font-weight: 800;
+  width: 250px;
+  border-radius: 5px;
+  text-align: center;
 }
 .armchair-3-1,
 .armchair-3-2,
@@ -2511,14 +2516,44 @@
   width: 78px;
   height: 160px;
 }
-.page {
-  width: 100%;
-  height: 1942px;
+.ManagerSeatLayout-page {
+  width: 95vw;
+  height: 700px;
   position: relative;
-  background-color: #fff;
-  overflow: hidden;
+  background-color: rgba(213, 171, 250, 0.572);
   text-align: left;
-  font-size: var(--font-size-lg);
-  color: #000000;
-  font-family: var(--font-inter);
+  overflow: scroll;
+  border: 2px solid black;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+
+.managerseat-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  position: fixed;
+  z-index: 1;
+  left: 550px;
+  top: 89%;
+}
+
+
+.manager-zoom-control
+{
+  position:relative;
+  left: 40px;
+  top: 70px;
+  z-index:1;
+}
+.manager-zoom-control button
+{
+  background-color: #000000;
+  color: white;
+}
+.manager-zoom-control button:hover
+{
+  background-color:rebeccapurple;
+  color: white;
 }
