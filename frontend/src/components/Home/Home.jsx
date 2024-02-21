@@ -1,32 +1,33 @@
-import React from "react";
-// import { Link } from "react-router-dom";
+
+
+import React, { useState,useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./Home.css";
-import SeatLayout from "../Seat_Booking/SeatLayout";
-import { useHistory } from 'react-router-dom';
+import { useTabContext } from "@material-ui/lab";
 
 const scrollToSection = (id) => {
   const section = document.getElementById(id);
   section.scrollIntoView({ behavior: "smooth" });
 };
 
-const date_pick={
-  width:200,
-  padding:10,
-}
+const HeroSection = ({ handleDateChange, pickedDate }) => {
 
+  
+  const [date,setdate]=useState('');
 
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    console.log(today)
+    setdate(today);
+  }, []);
 
-const HeroSection = () => {
-
-  const history = useHistory();
-
-  const handleclick=()=>{
-    history.push({
-      pathname: '/seatlayout',
-      state: { date: document.getElementById('date_picker').value }
-  });
-
+  const handlechange=(event)=>{
+    setdate(event.target.value);
   }
+
   return (
     <header className="userhome-hero">
       <div className="userhome-hero-content">
@@ -34,32 +35,28 @@ const HeroSection = () => {
         <p className="userhome-hero-subtitle">
           Make seat reservations simple and straightforward.
         </p>
-        <div>
-            <label htmlFor="date">Date:</label>
-            <input
-                type="date"
-                id="date_picker"
-                name="Date"
-                style={date_pick}
-            />
-        </div>
-        <br></br>
-
-        <div className="userhome-hero-button">
-          <button
-            onClick={handleclick}
-            className="HomePage-btn-1"
+        <div className="home-seatlayout-gad">
+          {/* <DatePicker
+            selected={pickedDate}
+            onChange={handleDateChange}
+            id="date_picker"
+            placeholderText="Select Date"
+            dateFormat="MM/dd/yyyy"
+            showYearDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={15}
+            className="date-picker"
+          /> */}
+          <input type="date" id="date_picker" className="date-picker" value={date} selected={pickedDate} onChange={handlechange} />
+          
+          <Link
+            to={{ pathname: "./seatlayout", state: { selecteddate:date }}
+            }
+            className="book-seat-link"
           >
-            Book Your Seat
-          </button>
-        </div>
-        <div id="wrapper">
-          <div id="wrapper-inner">
-            <div id="scroll-down">
-              <span class="arrow-down"></span>
-              <span id="scroll-title">Scroll down</span>
-            </div>
-          </div>
+            Book Seat
+          </Link>
+          
         </div>
       </div>
     </header>
@@ -67,13 +64,16 @@ const HeroSection = () => {
 };
 
 const Home = () => {
+  const [pickedDate, setPickedDate] = useState(null);
+  const history = useHistory();
+
+  const handleDateChange = (date) => {
+    setPickedDate(date);
+  };
+
   return (
     <div className="content whole-body-home">
-      <HeroSection />
-      <div id="user-bookseatsection" className="section-bookseat">
-        <h2 className="section-title">Book Your Seat!!</h2>
-        <SeatLayout /> {/* Render SeatLayout component here */}
-      </div>
+      <HeroSection handleDateChange={handleDateChange} pickedDate={pickedDate} />
     </div>
   );
 };

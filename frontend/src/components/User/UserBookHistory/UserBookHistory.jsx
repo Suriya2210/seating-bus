@@ -13,7 +13,7 @@ const UserBookHistory = () => {
  
   const fetchBookings = () => {
     // Fetch bookings data from the API for the associate with id 102
-    axios.get(`http://localhost:3000/get-bookings/1234`)
+    axios.get("http://localhost:3000/get-bookings/102")
       .then(response => {
         if (response.data.stats === "success") {
           const allBookings = response.data.data.user;
@@ -126,4 +126,3 @@ const UserBookHistory = () => {
 };
  
 export default UserBookHistory;
- 

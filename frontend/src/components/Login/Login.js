@@ -4,6 +4,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { LoginForm } from "../LoginForm";
 import { Page } from "../Page";
+// Import your background image
+import backgroundImage from "./login-heropage.jpg"; // Replace "your-background-image.jpg" with the path to your image file
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     padding: theme.spacing(6, 2),
+    // backgroundImage: `url(${backgroundImage})`, // Set the background image
+    // backgroundSize: "cover", // Ensure the image covers the entire container
+    // zIndex:0
   },
   loginForm: {
     marginTop: theme.spacing(3),

@@ -1653,4 +1653,3 @@ const Admin_seatlayout = () => {
 };
 
 export default Admin_seatlayout;
-

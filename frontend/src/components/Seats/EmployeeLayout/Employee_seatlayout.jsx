@@ -10,13 +10,10 @@ import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/armchair-6-1@2x.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
-import { useLocation } from 'react-router-dom';
  
 const Employee_seatlayout = () => {
-
-  const location = useLocation();
  
-  const [date, setdate] = useState(location.state.date)
+  const [date, setdate] = useState("2024-02-16")
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
   const [seat_status, set_seat_status] = useState([]);

@@ -1,7 +1,7 @@
 .userhome-hero {
     position: relative;
     background: url('./home-heropage.jpg') center/cover no-repeat;
-    height: 92vh;
+    height: 90.5vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,8 +20,6 @@
     z-index: 1;
     /* Ensure the overlay is behind the content */
 }
-
-
 
 .userhome-hero-content {
     text-align: center;
@@ -42,16 +40,20 @@
     animation: fadeInUp 1s ease-in-out 0.5s;
 }
 
-.HomePage-btn-1
-{
-    background-color: rebeccapurple;
-    padding:20px auto;
-    font-size: 1.3em;
+
+.home-seatlayout-btn a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #6ab04c;
+    color: #fff;
+    border-radius: 5px;
+    /* transition: background-color 0.5s; */
+    transition: 0.3s ease-in;
 }
 
-.HomePage-btn-1:hover{
-    background-color: rgb(9, 34, 88);
-    box-shadow: 0px 10px 10px rgb(51, 111, 241);
+.home-seatlayout-btn a:hover {
+    background-color: rebeccapurple;
+    box-shadow: 0px 10px 10px rebeccapurple;
 }
 
 @keyframes fadeInUp {
@@ -378,3 +380,30 @@
 
 /* SEAT BOOKING LAYOUT CSS ENDS  */
 
+/* Home.css */
+
+/* Style for the date picker */
+.date-picker {
+    margin-right: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 10px;
+    /* Adjust margin as needed */
+}
+
+/* Style for the "Book Seat" link */
+.book-seat-link {
+    text-decoration: none;
+    background-color: #3183f0;
+    /* Example background color */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.home-seatlayout-gad {
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 30%;
+  }

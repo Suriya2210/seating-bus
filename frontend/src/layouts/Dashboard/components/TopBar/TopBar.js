@@ -63,7 +63,7 @@ function TopBar(props) {
         <div className={classes.flexGrow} />
         <Menu open={Boolean(anchorEl)} onClose={handleMenuClose} anchorEl={anchorEl}>
           <MenuItem><Link to="/user/userprofile" className={classes.userprofile}>Profile</Link></MenuItem>
-          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.removeItem("user");}} className={classes.userlogout}> Logout</Link></MenuItem>
+          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.removeItem("user");localStorage.removeItem("jwt_token")}} className={classes.userlogout}> Logout</Link></MenuItem>
         </Menu>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={openMenu}>

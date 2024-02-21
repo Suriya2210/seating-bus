@@ -4,7 +4,6 @@ import "./UserManagementPage.css";
 import axios from "axios";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
-
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,9 +15,16 @@ const UserManagementPage = () => {
   const [userToDelete, setUserToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
+  const token = localStorage.getItem("jwt_token");
+  console.log("JWT TOKEN "+token);
+
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/get-users")
+      .get("http://localhost:3000/admin/get-users",{
+        headers: {
+          Authorization: token.toString()
+        }
+      })
       .then((response) => {
         setUsers(response.data.data.users);
       })
@@ -78,7 +84,11 @@ const UserManagementPage = () => {
   var confirmDelete = () => {
     // Make a DELETE request to delete the user using the API
     axios
-      .delete(`http://localhost:3000/admin/delete-user/${userToDelete.associate_id}`)
+      .delete(`http://localhost:3000/admin/delete-user/${userToDelete.associate_id}`,{
+        headers: {
+          Authorization: token.toString()
+        }}
+      )
       .then(() => {
         // If the request is successful, remove the user from the local state
         setUsers((prevUsers) => prevUsers.filter((u) => u.id !== userToDelete.id));
@@ -96,93 +106,96 @@ const UserManagementPage = () => {
   
 
   // Other event handlers (handleEditUser, handleSaveUser, handleDeleteUser, etc.)
+  
+  
+
 
   return (
     <div className="user-management-container">
-      <h2 className="ump-h2">User Management</h2>
-      <div className="filter-container">
-        <div className="search-container">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearch}
-            placeholder="Search..."
-          />
-          <button onClick={clearSearch}>Clear</button>
-        </div>
-        <div className="add-new-user-btn">
-          <Link to="./addnewuser">Add New User</Link>
-        </div>
+    <h2 className="ump-h2">User Management</h2>
+    <div className="filter-container">
+      <div className="search-container">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search..."
+        />
+        <button onClick={clearSearch}>Clear</button>
       </div>
-      <table className="content-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Associate ID</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Manager Name</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentUsers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.associate_id}</td>
-              <td>{user.associate_name}</td>
-              <td>{user.email}</td>
-              <td>{user.manager_name}</td>
-              <td className="action-column">
-                <Link to={`/admin/viewuser/${user.associate_id}`}>
-                  <VisibilityIcon />
-                </Link>
-                <button onClick={() => handleDeleteUser(user)}>
-                  <DeleteIcon />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Pagination */}
-      <div className="pagination">
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        {/* Render page numbers */}
-        {Array.from({
-          length: Math.ceil(filteredUsers.length / itemsPerPage),
-        }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => paginate(index + 1)}
-            className={currentPage === index + 1 ? "active" : ""}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button
-          onClick={nextPage}
-          disabled={
-            currentPage === Math.ceil(filteredUsers.length / itemsPerPage)
-          }
-        >
-          Next
-        </button>
+      <div className="add-new-user-btn">
+        <Link to="./addnewuser">Add New User</Link>
       </div>
-
-      {/* Render delete confirmation popup if showDeleteConfirmation is true */}
-      {showDeleteConfirmation && (
-        <div className="delete-confirmation">
-          <p>Are you sure you want to delete this user?</p>
-          <button onClick={confirmDelete}>Yes</button>
-          <button onClick={cancelDelete}>No</button>
-        </div>
-      )}
     </div>
-  );
+    <table className="content-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Associate ID</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Manager Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {currentUsers.map((user) => (
+          <tr key={user.id}>
+            <td>{user.id}</td>
+            <td>{user.associate_id}</td>
+            <td>{user.associate_name}</td>
+            <td>{user.email}</td>
+            <td>{user.manager_name}</td>
+            <td className="action-column">
+              <Link to={`/admin/viewuser/${user.associate_id}`}>
+                <VisibilityIcon />
+              </Link>
+              <button onClick={() => handleDeleteUser(user)}>
+                <DeleteIcon />
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    {/* Pagination */}
+    <div className="pagination">
+      <button onClick={prevPage} disabled={currentPage === 1}>
+        Previous
+      </button>
+      {/* Render page numbers */}
+      {Array.from({
+        length: Math.ceil(filteredUsers.length / itemsPerPage),
+      }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => paginate(index + 1)}
+          className={currentPage === index + 1 ? "active" : ""}
+        >
+          {index + 1}
+        </button>
+      ))}
+      <button
+        onClick={nextPage}
+        disabled={
+          currentPage === Math.ceil(filteredUsers.length / itemsPerPage)
+        }
+      >
+        Next
+      </button>
+    </div>
+
+    {/* Render delete confirmation popup if showDeleteConfirmation is true */}
+    {showDeleteConfirmation && (
+      <div className="delete-confirmation">
+        <p>Are you sure you want to delete this user?</p>
+        <button onClick={confirmDelete}>Yes</button>
+        <button onClick={cancelDelete}>No</button>
+      </div>
+    )}
+  </div>
+);
 };
 
 export default UserManagementPage;

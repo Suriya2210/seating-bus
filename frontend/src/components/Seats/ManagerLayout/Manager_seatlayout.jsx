@@ -23,14 +23,14 @@ const Manager_seatlayout = () => {
     const location = useLocation();
     
     
-    const [date,setdate]=useState(location.state.date)
+    const [date,setdate]=useState(location.state.selecteddate)
     const [seat_info,set_seat_info]=useState();
     const [loading,setloading]=useState(true);
     const [seat_status,set_seat_status] =useState([]);
     const [max_seat,set_max_seat]=useState(0);
     const [loading_associate_details,set_loading_associate_details]=useState(null);
     
-
+    var option_names=[];
     var count_selected=0
     
   
@@ -58,9 +58,6 @@ const Manager_seatlayout = () => {
 
     useEffect(()=>{
       console.log(associate_info)
-      const temp={
-        booked_for_id:77
-      }
       if(seat_info){
         seat_info.forEach(element => {
           if(element.booked_for_id)
@@ -113,59 +110,6 @@ const Manager_seatlayout = () => {
       fetchdata();
       
     },[])
-  
-    const blockSeat=async()=>{
-  
-  
-      var seat_numbers=[]
-  
-      selectedseat.forEach(element => {
-        
-        var seatno=element.toString();
-        while(seatno.length<3){
-          seatno='0'+seatno;
-        }
-        seatno='WKS'+seatno;
-        seat_numbers.push(seatno);
-      });
-  
-      const json_body={
-        date:date,
-        seat_numbers:seat_numbers
-      }
-      console.log(json_body);
-      var response=await axios.post('http://localhost:3000/generate_seat/block-seats',json_body);
-      response=response.data;
-      console.log(response);
-      console.log(`${seat_numbers} are successfully blocked`);
-      window.location.reload()
-  
-    }
-  
-    const unblockSeat=async()=>{
-      var seat_numbers=[]
-  
-      selected_blockedSeat.forEach(element => {
-        
-        var seatno=element.toString();
-        while(seatno.length<3){
-          seatno='0'+seatno;
-        }
-        seatno='WKS'+seatno;
-        seat_numbers.push(seatno);
-      });
-  
-      const json_body={
-        date:date,
-        seat_numbers:seat_numbers
-      }
-      console.log(json_body);
-      var response=await axios.post('http://localhost:3000/generate_seat/unblock-seats',json_body);
-      response=response.data;
-      console.log(response);
-      console.log(`${seat_numbers} are successfully unblocked`);
-      window.location.reload()
-    }
   
     const deleteSeat=(seatno)=>{
       var t=[];
@@ -473,11 +417,12 @@ const Manager_seatlayout = () => {
   }
 
   const Options=()=>{
-
+    
     const opt=[];
 
     console.log("Options")
-    console.log(associate_info)
+    console.log(associate_info);
+    console.log(option_names);
 
     for(let i=0;i<associate_info.length;i++){
       opt.push(<option value={associate_info[i].name}>{associate_info[i].name}</option>)
@@ -489,7 +434,16 @@ const Manager_seatlayout = () => {
 
   }
 
+  
+
   const Renderinput=()=>{
+
+    const names=[];
+    associate_info.forEach(element => {
+      names.push(element.name);
+    });
+    names.push(trim_manager_name(localStorage.getItem('user')));
+    option_names=names;
 
     console.log("renderinput")
     console.log(associate_info);
@@ -499,26 +453,22 @@ const Manager_seatlayout = () => {
     for(let i=0;i<selectedseat.length;i++){
       divs.push(
         <div>
-                <span>
-                    <label for="seat_number">Seat Number:</label>
-                    <input type="text" id={changenumbertoseat(selectedseat[i])} value={changenumbertoseat(selectedseat[i])}/>
-                </span>
-                <span>
-                    <label for="booked_by">Booked By:</label>
-                    <input type="text" id="booked_by" value={trim_manager_name(localStorage.getItem('user'))} />
-                </span>
-                <span>
-                    <label for="Associate_name">Associate_name:</label>
-                    <select id={selectedseat[i]} name="status">
-                        <Options/>
-                    </select>
-                </span>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
+          <div className="selectedseat-comp-container">
+            <div className="input-container">
+              <label htmlFor="seat_number">Seat Number:</label>
+              <input type="text" id={changenumbertoseat(selectedseat[i])} value={changenumbertoseat(selectedseat[i])} />
+            </div>
+        
+            <div className="input-container">
+              <label htmlFor="Associate_name">Associate Name:</label>
+              <select id={selectedseat[i]} name="status">
+                <Options/>
+              </select>
+            </div>
+          </div>
         </div>
       )
+      
     }
       
       return (
@@ -535,6 +485,24 @@ const Manager_seatlayout = () => {
   // }
 
   const BookSeats=()=>{
+
+   
+    let flag=true;
+    const no_duplicates=[];
+    selectedseat.forEach(element => {
+       if(no_duplicates.includes(document.getElementById(element).value)){
+         alert("Duplicate Associates found!!!")
+         flag=false;
+         return;
+       }
+       else{
+        no_duplicates.push(document.getElementById(element).value);
+       }
+    });
+    if(!flag) return;
+    console.log("Success!!");
+    return;
+
     
     selectedseat.forEach(element => {
 

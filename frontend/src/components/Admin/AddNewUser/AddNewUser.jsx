@@ -43,11 +43,15 @@ const AddNewUser = () => {
     setLoading(true); // Set loading to true when submitting the form
     console.log(formData);
     axios
-      .post("http://localhost:3000/admin/add-user", formData)
+      .post("http://localhost:3000/admin/add-user", formData,{
+        headers: {
+          Authorization: localStorage.getItem("jwt_token")
+        }})
       .then((response) => {
         console.log("User data saved successfully:", response.data);
         setMessage("User added successfully!"); // Set success message
         // Clear input fields after successful submission
+        
         setFormData({
           associate_name: "",
           associate_id: "",
@@ -64,6 +68,7 @@ const AddNewUser = () => {
           company: "",
           OpCo: "",
         });
+        history.push('/admin/usermanagement')
       })
       .catch((error) => {
         console.log("Error saving user data:", error);
