@@ -2,7 +2,7 @@ const User = require('../models/user');
 const { hash: hashPassword, compare: comparePassword } = require('../utils/password');
 const { generate: generateToken, decode: decodeToken } = require('../utils/token');
 const book_seat = require('../models/seat_booking')
-
+const cancel_seat = require('../models/cancel_booking');
 
 exports.signin = (req, res) => {
   
@@ -90,6 +90,17 @@ exports.cancelseat=(req,res,next)=>{
     }
   })
   .then((seat)=>{
+
+    const cancel_data={
+      seat_number:req.body.seat_number,
+      seat_cancelled_by:req.body.cancelled_by,
+      seat_cancellation_date:req.body.date,
+      associate_id:req.body.associate_id,
+      status:1,
+      created_by:req.body.cancelled_by,
+      updated_by:req.body.cancelled_by
+    }
+
     temp_storingname=seat.booked_for_name,
     seat.booked_for_id=null,
     seat.booked_for_name=null,
@@ -98,6 +109,10 @@ exports.cancelseat=(req,res,next)=>{
     seat.seat_booked_by=null,
     seat.save();
     console.log(`${temp_storingname} cancelled the seat ${seat.seat_number} on ${seat.seat_selection_date}`)
+
+    
+    cancel_seat.create(cancel_data);
+
     res.status(200).json({
       status:"success",
       message:`${temp_storingname} cancelled the seat ${seat.seat_number} on ${seat.seat_selection_date}`,

@@ -501,7 +501,7 @@ const Manager_seatlayout = () => {
     });
     if(!flag) return;
     console.log("Success!!");
-    return;
+    // return;
 
     
     selectedseat.forEach(element => {
@@ -536,6 +536,7 @@ const Manager_seatlayout = () => {
       })
 
       alert("Seat Booking Success!!!");
+      window.location.reload();
 
     });
   }

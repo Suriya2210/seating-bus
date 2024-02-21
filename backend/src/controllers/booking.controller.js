@@ -33,15 +33,24 @@ exports.book_seat = (req,res,next)=>{
 
 };
 exports.get_booking = (req, res, next)=>{
-    const booking_id = req.body.booking_id;
-    seat_book.findByPk(booking_id).then(seat_book=>
-        res.status(200).send({
+    const associate_id = req.params.associate_id;
+    seat_book.findAll({
+        where:{
+            booked_for_id:associate_id
+        }
+    })
+    .then((data)=>{
+        res.status(200).json({
             status:"success",
-            data:{
-               booking:seat_book
-            }
+            datas:data
         })
-    )
+    })
+    .catch((err)=>{
+        res.status(400).json({
+            status:"failure",
+            message:err.message,
+        })
+    })
 };
 
 exports.deleteBooking = (req,res,next)=>{
@@ -95,31 +104,22 @@ exports.edit_booking = (req,res,next)=>{
 };
 
 exports.cancel_booking = (req,res,next)=>{
-    const reqBody = req.body;
-    const seat_number = reqBody.seat_number;
-    const booking_id = reqBody.booking_id;
-    const seat_cancellation_date = reqBody.seat_cancellation_date;
-    const seat_cancelled_by = reqBody.seat_cancelled_by;
-    const status = reqBody.status;
-    const created_by = reqBody.created_by;
-    const updated_by = reqBody.updated_by;
-    cancel_booking.create({
-        seat_number:seat_number,
-        booking_id:booking_id,
-        seat_cancellation_date:seat_cancellation_date,
-        seat_cancelled_by:seat_cancelled_by,
-        status:status,
-        seat_cancelled_by:seat_cancelled_by,
-        created_by:created_by,
-        updated_by:updated_by
-
-    }).then(result=>{console.log(result);
-    res.status(200).send({
-        status:"success",
-        data:{
-            result:result
+    associate_id = req.params.associate_id;
+    cancel_booking.findAll({
+        where:{
+            associate_id:associate_id,
         }
-    })}).catch(err=>{
-        console.log(err);
-    });
+    })
+    .then((data)=>{
+        res.status(200).json({
+            status:"success",
+            datas:data
+        })
+    })
+    .catch((err)=>{
+        res.status(400).json({
+            status:"failure",
+            message:err.message,
+        })
+    })
 };

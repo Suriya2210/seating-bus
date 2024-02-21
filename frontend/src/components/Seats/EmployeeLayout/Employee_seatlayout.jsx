@@ -5,6 +5,8 @@ import "./Employee_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
@@ -13,7 +15,9 @@ import onblockedseat from './public/armchair-7-1@2x.png'
  
 const Employee_seatlayout = () => {
  
-  const [date, setdate] = useState("2024-02-16")
+  const location = useLocation();
+
+  const [date, setdate] = useState(location.state.selecteddate)
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
   const [seat_status, set_seat_status] = useState([]);
@@ -92,12 +96,22 @@ const Employee_seatlayout = () => {
       console.log("Error in Employee seat booking EmployeeSeatlayout.jsx")
     }
   }
+
+  const trim=(str)=>{
+    var string='';
+    for(let i=1;i<str.length-1;i++){
+      string+=str[i];
+    }
+    return string;
+  }
  
   const cancelbooking = async () => {
     try {
       var json_body = {
         "date": date,
         "seat_number": alreadybooked,
+        "associate_id":localStorage.getItem('id'),
+        "cancelled_by":trim(localStorage.getItem('user'))
       }
       var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body);
       console.log(response.data.data);
