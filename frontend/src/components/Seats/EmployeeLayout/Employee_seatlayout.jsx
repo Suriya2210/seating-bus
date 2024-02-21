@@ -300,10 +300,10 @@ const Employee_seatlayout = () => {
     <>
       <h1><center>Employee Seatlayout Page</center></h1>
       {alreadybooked ? (
-        <div>
-          <h1><center>You have already booked a seat {alreadybooked} on {date}</center></h1>
-          <button style={bookseatcss} onClick={cancelbooking}>Cancel Seat</button>
-        </div>
+        <div className="emp-message-container">
+        <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
+        <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button>
+      </div>
       )
         : <button onClick={bookseat} className="empseat-book-button">Book Seat</button>}
  
@@ -317,6 +317,23 @@ const Employee_seatlayout = () => {
             <h1>Loading</h1>
           ) : (
             <>
+              
+                <div className="manager-legends">
+                <div className="seatgreen">
+                  <label>Selected Seat</label>
+                  <img src={seatup_imageselect} alt="" />
+                </div>
+                <div className="seatyellow">
+                  <label>Booked Seat</label>
+                  <img src={onblockedseat} alt="" />
+                </div>
+                <div className="seatred">
+                  <label>Blocked Seat</label>
+                  <img src={onbookedseat} alt="" />
+ 
+                </div>
+              </div>
+              
               <TableGroup />
  
               <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />

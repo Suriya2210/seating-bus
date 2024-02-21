@@ -19,3 +19,7 @@
 ::1 - - [21/Feb/2024:17:48:43 +0000] "GET /seat/get-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [21/Feb/2024:17:48:47 +0000] "GET /seat/get-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [21/Feb/2024:17:48:47 +0000] "GET /seat/get-cancel-booking/65 HTTP/1.1" 200 1027 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [21/Feb/2024:17:53:22 +0000] "GET /seat/get-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [21/Feb/2024:17:53:22 +0000] "GET /seat/get-cancel-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [21/Feb/2024:17:54:15 +0000] "GET /seat/get-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+::1 - - [21/Feb/2024:17:54:15 +0000] "GET /seat/get-cancel-booking/65 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"

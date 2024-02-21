@@ -3042,3 +3042,29 @@ row-1
 
 }
 
+.manager-legends {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  background-color: white;
+  padding: 10px 20px;
+  width:auto;
+  border-radius: 5px;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  top: 10px;
+  justify-content: space-evenly;
+}
+ 
+.manager-legends img {
+  rotate: 180deg;
+}
+ 
+.seatgreen,.seatyellow,.seatred {
+  display: flex;
+justify-content: space-evenly;
+  flex-direction: column;
+  margin: 20px;
+}
+ 

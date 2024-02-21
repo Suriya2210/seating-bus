@@ -561,6 +561,22 @@ const Manager_seatlayout = () => {
             <h1>Loading</h1>
           ) : (
             <>
+              
+                <div className="manager-legends">
+                <div className="seatgreen">
+                  <label>Selected Seat</label>
+                  <img src={seatup_imageselect} alt="" />
+                </div>
+                <div className="seatyellow">
+                  <label>Booked Seat</label>
+                  <img src={onblockedseat} alt="" />
+                </div>
+                <div className="seatred">
+                  <label>Blocked Seat</label>
+                  <img src={onbookedseat} alt="" />
+ 
+                </div>
+              </div>
               <TableGroup />
               <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />
               <SeatLeftComponent cname="seat-icon1" seat_id="WKS-139" />
