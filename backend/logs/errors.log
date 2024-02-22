@@ -28,3 +28,6 @@
 {"level":"error","message":"Connection lost: The server closed the connection."}
 {"level":"error","message":"Connection lost: The server closed the connection."}
 {"level":"error","message":"Connection lost: The server closed the connection."}
+{"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
+{"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
+{"level":"error","message":"ER_BAD_DB_ERROR: Unknown database 'seating_bus'"}
