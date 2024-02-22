@@ -20,11 +20,13 @@ const UserManagementPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/get-users",{
-        headers: {
-          Authorization: token.toString()
-        }
-      })
+      .get("http://localhost:3000/admin/get-users",
+      // {
+      //   headers: {
+      //     Authorization: token.toString()
+      //   }
+      // }
+      )
       .then((response) => {
         setUsers(response.data.data.users);
       })
@@ -84,10 +86,11 @@ const UserManagementPage = () => {
   var confirmDelete = () => {
     // Make a DELETE request to delete the user using the API
     axios
-      .delete(`http://localhost:3000/admin/delete-user/${userToDelete.associate_id}`,{
-        headers: {
-          Authorization: token.toString()
-        }}
+      .delete(`http://localhost:3000/admin/delete-user/${userToDelete.associate_id}`,
+      // {
+      //   headers: {
+      //     Authorization: token.toString()
+      //   }}
       )
       .then(() => {
         // If the request is successful, remove the user from the local state

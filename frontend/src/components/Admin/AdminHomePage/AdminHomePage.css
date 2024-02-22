@@ -2,7 +2,7 @@
 .adminhome-hero {
     position: relative;
     background: url('./adminhome-heroimage.jpg') center/cover no-repeat;
-    height: 92vh;
+    height: 93vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -51,6 +51,17 @@
 }
 
 .AdminHomePage-btn-1:hover {
+    background-color: rgb(9, 34, 88);
+    box-shadow: 0px 10px 10px rgb(51, 111, 241);
+}
+.AdminHomePage-btn-2 {
+    background-color: rebeccapurple;
+    padding: 10px 20px;
+    font-size: 1.3em;
+    margin-top: 30px;
+}
+
+.AdminHomePage-btn-2:hover {
     background-color: rgb(9, 34, 88);
     box-shadow: 0px 10px 10px rgb(51, 111, 241);
 }
@@ -382,13 +393,13 @@
 
 
 .section-managebooking {
-    height: 300px;
-    margin: 10px;
+    height: 40vh;
+    margin: 20px;
     border: 2px solid #030303;
     background-color: white;
     border-radius: 10px;
     width: auto;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 .section-managebooking h2 {
@@ -415,9 +426,10 @@
     align-items: center;
     justify-content: center;
     width: auto;
-    height: 400px;
     font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
+    position: relative;
+    top: 50%;
 }
 
 *,
@@ -514,7 +526,7 @@
     justify-content: center;
     width: auto;
     min-width: 197px;
-    height: 65px;
+    height: 71px;
     padding: 1px;
     padding-bottom: 2px;
     background: #09f;
@@ -524,7 +536,7 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    top: 20px;
+    top:9px;
 }
 
 .button-container:hover,
@@ -538,7 +550,7 @@
 .button-container .button {
     position: relative;
     width: 100%;
-    min-height: 63px;
+    min-height: 67px;
     height: auto;
     display: flex;
     align-items: center;

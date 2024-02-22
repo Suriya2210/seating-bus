@@ -2353,7 +2353,7 @@ row-1
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #000000;
+  background-color:beige;
   width: 34px;
   height: 48px;
 }
@@ -3045,9 +3045,10 @@ row-1
 .manager-legends {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
-  background-color: white;
-  padding: 10px 20px;
+  /* border: 1px solid black; */
+  /* background-color: white; */
+  color: white;
+  padding: 10px;
   width:auto;
   border-radius: 5px;
   align-items: center;

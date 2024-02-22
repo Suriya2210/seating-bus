@@ -25,7 +25,8 @@ const generate_FOW_table=async()=>{
     }
 }
 
-
+// Get today's date in the format "YYYY-MM-DD"
+const today = new Date().toISOString().split('T')[0];
 
 const HeroSection = () => {
     return (
@@ -63,6 +64,8 @@ const HeroSection = () => {
     );
 };
 
+
+
 const AdminHomePage = () => {
     return (
         <div className="content whole-body-AdminHomePage">
@@ -75,13 +78,13 @@ const AdminHomePage = () => {
                             <div class="static">
                                 <div class="input-container" id="date-picker-container">
                                     <label for="date-from">check-in</label>
-                                    <input type="date" id="date-checkin" class="date-field" name="date-from" />
+                                    <input type="date" id="date-checkin" class="date-field" name="date-from" min={today}/>
                                 </div>
                             </div>
                             <div class="flex">
                                 <div class="input-container" id="date-picker-container">
                                     <label for="date-from">check-out</label>
-                                    <input type="date" id="date-checkout" class="date-field" name="" />
+                                    <input type="date" id="date-checkout" class="date-field" name="date-to"  min={today}/>
                                 </div>
                                 <div class="button-container">
                                     <span class="button ok" onClick={generate_FOW_table}>Open Booking</span>
@@ -90,10 +93,6 @@ const AdminHomePage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="manage-seat" className="section-manageseat">
-                <h2 className="section-title">Manage Seat</h2>
-                {/* Your content for Manage Seat section */}
             </div>
         </div>
     );
