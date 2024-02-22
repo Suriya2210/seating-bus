@@ -822,9 +822,11 @@ import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/armchair-6-1@2x.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
+
 var selectedseat = [];
 var selected_blockedSeat = [];
 
+const token = localStorage.getItem("jwt_token");
 
 const Admin_seatlayout = () => {
 
@@ -852,7 +854,10 @@ const Admin_seatlayout = () => {
 
     const fetchdata = async () => {
       try {
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`, {
+          headers: {
+            Authorization: token.toString()
+          }});
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -900,7 +905,10 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body,{
+      headers: {
+        Authorization: token.toString()
+      }});
     response = response.data;
     console.log(response);
     console.log(`${seat_numbers} are successfully blocked`);
@@ -927,7 +935,10 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body,{
+      headers: {
+        Authorization: token.toString()
+      }});
     response = response.data;
     console.log(response);
     console.log(`${seat_numbers} are successfully unblocked`);

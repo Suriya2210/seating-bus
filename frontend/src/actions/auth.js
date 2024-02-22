@@ -11,8 +11,14 @@ function login(username, password) {
   return (dispatch) => {
     dispatch(request(username));
     authService.login(username, password).then(response => {
-        dispatch(success(response.user));
-        history.push('/');
+        dispatch(success({user_name:response.data.associate_name,user_email:response.data.email}));
+        const isAdmin = response.data.isAdmin;
+        if(isAdmin){
+          history.push('/admin/adminhome');
+        }else{
+          history.push('/');
+        }
+       
     })
     .catch(error => {
         if(error.response){
@@ -28,6 +34,7 @@ function login(username, password) {
     return { type: authConstants.LOGIN_REQUEST, user };
   }
   function success(user) {
+    console.log("Name from actions : "+user.user_name);
     return { type: authConstants.LOGIN_SUCCESS, user };
   }
   function failure(error) {

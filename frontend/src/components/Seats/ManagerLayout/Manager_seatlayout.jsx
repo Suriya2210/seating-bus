@@ -22,6 +22,7 @@ const Manager_seatlayout = () => {
 
     const location = useLocation();
     
+    const token = localStorage.getItem("jwt_token");
     
     const [date,setdate]=useState(location.state.selecteddate)
     const [seat_info,set_seat_info]=useState();
@@ -74,8 +75,13 @@ const Manager_seatlayout = () => {
       
       const fetchdata=async()=>{
         try{
-          const val=await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
-          var associates=await axios.get(`http://localhost:3000/associates/get-associates/${localStorage.getItem('id')}`);
+          const val=await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`,{
+            headers: {
+              Authorization: token.toString()
+            }});
+          var associates=await axios.get(`http://localhost:3000/associates/get-associates/${localStorage.getItem('id')}`,{ headers: {
+            Authorization: token.toString()
+          }});
           associates=associates.data.data.users;
 
           const array=[];
@@ -527,7 +533,9 @@ const Manager_seatlayout = () => {
       // console.log(document.getElementById(element).value);
       // console.log(json)
 
-      axios.post("http://localhost:3000/api/auth/bookseat",json)
+      axios.post("http://localhost:3000/api/auth/bookseat",json,{ headers: {
+        Authorization: token.toString()
+      }})
       .then((response)=>{
         console.log(response.data);
       })

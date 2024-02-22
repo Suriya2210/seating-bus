@@ -4,6 +4,7 @@ const { generate: generateToken, decode: decodeToken } = require('../utils/token
 const book_seat = require('../models/seat_booking')
 const cancel_seat = require('../models/cancel_booking');
 
+
 exports.signin = (req, res) => {
   
     const {email,password:pass}=req.body;
@@ -22,11 +23,13 @@ exports.signin = (req, res) => {
             });
           } else {
             var hashpass_db=data.password;
+            var jwt_token = generateToken(data.associate_id,data.email);
             if(comparePassword(pass,hashpass_db)){
                 return res.status(200).json({
                     status:"success",
                     message: "Logged In Successfully",
-                    data:data
+                    data:data,
+                    token:jwt_token
                   });
             }
             else{

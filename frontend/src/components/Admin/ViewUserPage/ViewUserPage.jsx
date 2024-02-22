@@ -20,9 +20,13 @@ const ViewUserPage = ({ onSave, onCancel }) => {
     company: '',
     OpCo: ''
   });
-
+  const token = localStorage.getItem("jwt_token")
   useEffect(() => {
-    axios.get(`http://localhost:3000/admin/get-user/${associate_id}`)
+    axios.get(`http://localhost:3000/admin/get-user/${associate_id}`, {
+      headers: {
+        Authorization: token.toString()
+      }
+    })
       .then(response => {
         console.log(response);
         const userData = response.data.data;
@@ -43,7 +47,11 @@ const ViewUserPage = ({ onSave, onCancel }) => {
   };
 
   const handleSave = () => {
-    axios.patch(`http://localhost:3000/admin/edit-user/${viewUser.associate_id}`, viewUser)
+    axios.patch(`http://localhost:3000/admin/edit-user/${viewUser.associate_id}`,viewUser, {
+      headers: {
+        Authorization: token.toString()
+      }
+    })
       .then(response => {
         onSave(viewUser);
       })

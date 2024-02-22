@@ -10,11 +10,12 @@ import { useLocation } from 'react-router-dom';
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
-import onbookedseat from './public/armchair-6-1@2x.png'
+import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
  
 const Employee_seatlayout = () => {
  
+  const token = localStorage.getItem("jwt_token");
   const location = useLocation();
 
   const [date, setdate] = useState(location.state.selecteddate)
@@ -39,9 +40,17 @@ const Employee_seatlayout = () => {
  
     const fetchdata = async () => {
       try {
-        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`)
+        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
+          headers: {
+            Authorization: token.toString()
+          }}
+          
+    )
         setuserdata(user.data.data);
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`,{
+          headers: {
+            Authorization: token.toString()
+          }});
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -113,7 +122,10 @@ const Employee_seatlayout = () => {
         "associate_id":localStorage.getItem('id'),
         "cancelled_by":trim(localStorage.getItem('user'))
       }
-      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body);
+      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body,{
+        headers: {
+          Authorization: token.toString()
+        }});
       console.log(response.data.data);
       console.log(response.data.message);
       window.location.reload()

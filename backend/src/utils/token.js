@@ -6,8 +6,6 @@ const generate = (id,email) => jwt.sign({ id:id,email:email }, JWT_SECRET_KEY, {
 
 const decode = (token) => {
     try {
-        console.log("decoded token-->"+token)
-        console.log("stringify decoded token-->"+JSON.stringify(token))
         return jwt.verify(token, JWT_SECRET_KEY)
     } catch (error) {
         logger.error(error);

@@ -15,12 +15,12 @@ const UserManagementPage = () => {
   const [userToDelete, setUserToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const token = localStorage.getItem("jwt_token");
-  console.log("JWT TOKEN "+token);
+  const token =localStorage.getItem("jwt_token");
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/get-users",{
+      .get("http://localhost:3000/admin/get-users",
+      {
         headers: {
           Authorization: token.toString()
         }

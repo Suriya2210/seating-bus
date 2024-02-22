@@ -26,6 +26,20 @@ const sequelize = require ('./utils/database')
 
 const app = express();
 
+//node-mailer
+const nodemailer = require('nodemailer');
+
+// Create a transporter object using SMTP details
+const transporter = nodemailer.createTransport({
+  host: 'email-smtp.eu-central-1.amazonaws.com',
+  port: 25,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: '',
+    pass: ''
+  }
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
@@ -39,6 +53,31 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.disable('x-powered-by');
+
+//Mail route
+app.post('/send-email', (req, res) => {
+    // Extract email data from request body
+    const { to, subject, text } = req.body;
+  
+    // Create email message
+    const mailOptions = {
+      from: 'seating_app@compliance.esko-saas.com',
+      to: to,
+      subject: subject,
+      text: text
+    };
+  
+    // Send email
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error('Error sending email:', error);
+        res.status(500).send('Error sending email');
+      } else {
+        console.log('Email sent:', info.response);
+        res.send('Email sent successfully');
+      }
+    });
+  });
 
 // Middleware to set Access-Control-Allow-Methods header
 app.use((req, res, next) => {

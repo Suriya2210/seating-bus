@@ -1,7 +1,7 @@
 import { authConstants } from "../constants";
 
 
-let user = localStorage.getItem("user");
+let user =null;
 const initialState = {
   user,
   loggedIn: user ? true : false,

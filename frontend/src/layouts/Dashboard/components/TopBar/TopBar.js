@@ -8,8 +8,6 @@ import BookIcon from '@material-ui/icons/Book';
 import HomeIcon from '@material-ui/icons/Home';
 import { useSelector } from "react-redux";
 import veraltoLogo from "./Veralto-logo.png"; // Import the image
-
-
 const useStyles = makeStyles({
   root: {
     boxShadow: "none",
@@ -33,6 +31,22 @@ const useStyles = makeStyles({
   {
     fontSize:15,
   },
+  iconButtonWithLabel: (props)=>({
+    position: 'relative',
+    '&:hover::after': {
+      content: `"${props.label}"`, // Add your label text here
+      position: 'absolute',
+      top: '100%',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      color: '#fff',
+      padding: '4px 8px',
+      borderRadius: '4px',
+      fontSize: '14px',
+      whiteSpace: 'nowrap',
+    },
+  }),
   userlogout:
   {
     fontSize:15,
@@ -42,6 +56,10 @@ const useStyles = makeStyles({
 function TopBar(props) {
   const { className, openMenu, ...rest } = props;
   const classes = useStyles();
+  const classHome = useStyles({label:"Home"});
+  const classUser = useStyles({label:"Manager users"});
+  const classBookHistory = useStyles({label:"Booking History"});
+
   const [anchorEl, setAnchorEl] = useState(null);
   const auth = useSelector(state => state.auth);
 
@@ -71,17 +89,17 @@ function TopBar(props) {
           </IconButton>
         </Hidden>
         <Hidden mdDown>
-          <IconButton color="inherit" component={Link} to="/">
+          <IconButton color="inherit" component={Link} to="/" aria-label="Home" className={classHome.iconButtonWithLabel}>
             <HomeIcon />
           </IconButton>
-          <IconButton color="inherit" component={Link} to="/admin/usermanagement">
+          <IconButton color="inherit" component={Link} to="/admin/usermanagement" className={classUser.iconButtonWithLabel}>
             <PeopleAltIcon />
           </IconButton>
-          <IconButton color="inherit" component={Link} to="/user/userbookhistory">
+          <IconButton color="inherit" component={Link} to="/user/userbookhistory" className={classBookHistory.iconButtonWithLabel}>
             <BookIcon  />
           </IconButton>
           <IconButton onClick={handleMenuOpen}>
-            <p className={classes.authuser}>{auth.user}</p>
+            <p className={classes.authuser}>{auth.user?auth.user.user_name:"Not Loaded"}</p>
           </IconButton>
         </Hidden>
       </Toolbar>
