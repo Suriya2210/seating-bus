@@ -13,7 +13,10 @@ function login(username, password) {
     authService.login(username, password).then(response => {
         dispatch(success({user_name:response.data.associate_name,user_email:response.data.email}));
         const isAdmin = response.data.isAdmin;
-        if(isAdmin){
+        const isManager = response.data.isManager;
+        if(isAdmin && isManager ){
+          history.push('/admin/adminhome');
+        }else if(isAdmin){
           history.push('/admin/adminhome');
         }else{
           history.push('/');

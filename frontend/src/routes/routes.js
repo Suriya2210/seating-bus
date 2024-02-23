@@ -46,14 +46,16 @@ export const routes = [
       {
         path: "/home",
         exact: true,
-        component: (props) => {return props.isAuthenticated ? <Home /> : <Redirect to="/auth/login" />}
+        component: (props) => {
+          console.log("Props from routes : "+JSON.stringify(props));
+          return props.isAuthenticated ? <Home /> : <Redirect to="/auth/login" />}
           ,
       },
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Admin_seatlayout/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
-        // component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
+        component: (props) => {return props.isAuthenticated ? localStorage.getItem('id')==102? <Admin_seatlayout/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> : <Redirect to="/auth/login" /> }
+   
       },
       {
         path: "/admin/usermanagement",

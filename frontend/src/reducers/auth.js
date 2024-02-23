@@ -1,18 +1,15 @@
 import { authConstants } from "../constants";
-
-
-let user =null;
-const initialState = {
-  user,
-  loggedIn: user ? true : false,
+let initialState;
+  initialState={
+  user:null,
+  loggedIn:false,
   error: null,
-};
-
+  }
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case authConstants.LOGIN_REQUEST:
       return {
-        loggingIn: true,
+        loggedIn: true,
         user: action.user,
       };
     case authConstants.LOGIN_SUCCESS:
@@ -25,7 +22,10 @@ export const authReducer = (state = initialState, action) => {
         error: action.error
       };
     case authConstants.LOGOUT:
-      return {};
+      return {
+        user:null,
+        loggedIn:false
+      };
     default:
       return state;
   }

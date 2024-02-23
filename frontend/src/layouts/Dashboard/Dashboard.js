@@ -60,9 +60,11 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.loggedIn,
-  };
+  console.log("Map State To Props "+JSON.stringify(state));
+  let isAuthenticated;
+return {
+  isAuthenticated:state.auth.loggedIn,
+};
 };
 
 export default connect(mapStateToProps)(Dashboard);

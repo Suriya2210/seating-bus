@@ -9,14 +9,13 @@ const loggerMiddleware = createLogger();
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
-
-export const store = createStore(
+const store = createStore(
   persistedReducer,
   applyMiddleware(thunkMiddleware, loggerMiddleware)
 );
-
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+export {store,persistor};
