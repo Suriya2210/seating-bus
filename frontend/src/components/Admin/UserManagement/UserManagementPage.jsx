@@ -20,11 +20,7 @@ const UserManagementPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin/get-users",{
-        headers: {
-          Authorization: token.toString()
-        }
-      })
+      .get("http://localhost:3000/admin/get-users")
       .then((response) => {
         setUsers(response.data.data.users);
       })

@@ -19,7 +19,7 @@ exports.getAssociate = (req,res,next)=>{
         associate_id:req.params.associate_id
     }}).then(user=>{
         console.log(user);
-        req.status(200).send({
+        res.status(200).send({
             stats:"success",
             data:{
                 user:user
