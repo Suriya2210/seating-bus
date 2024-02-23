@@ -12,13 +12,14 @@ import DashboardLayout from '../layouts/Dashboard';
 import Admin_seatlayout from "../components/Seats/AdminLayout/Admin_seatlayout"
 import Manager_seatlayout from "../components/Seats/ManagerLayout/Manager_seatlayout";
 import Employee_seatlayout from "../components/Seats/EmployeeLayout/Employee_seatlayout";
+
 // import Page from "../components/SeatLayout/src/pages/Page";
 // import Manager_seatlayout from "../components/SeatLayout/src/pages/Manager_seatlayout";
 // import Employee_seatlayout from "../components/SeatLayout/src/pages/Employee-seatlayout";
 
 import UserProfile from "../components/User/UserProfilePage/UserProfile";
 import UserBookHistory from "../components/User/UserBookHistory/UserBookHistory";
-
+import SetPassword from "../components/User/UserSetPassword/UserSetPassword";
 
 // import Page from "../components/Pages/Page";
 
@@ -50,6 +51,11 @@ export const routes = [
           console.log("Props from routes : "+JSON.stringify(props));
           return props.isAuthenticated ? <Home /> : <Redirect to="/auth/login" />}
           ,
+      },
+      {
+        path:"/resetpass",
+        exact:true,
+        component:SetPassword
       },
       {
         path: "/seatlayout",

@@ -111,6 +111,7 @@ exports.editUser = (req, res, next)=>{
     const OpCo = req.body.OpCo;
     const password = req.body.pasword;
 
+
     User.findOne({
         where:{
             associate_id:associate_id

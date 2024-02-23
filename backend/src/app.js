@@ -13,11 +13,13 @@ const adminRoute = require('./routes/admin.route');
 
 const bookSeatRoute = require('./routes/book-seat.route');
 
-const seat_info_route= require('./routes/seats_info.route')
+const seat_info_route= require('./routes/seats_info.route');
 
-const generate_seat_route=require('./routes/generate_seat.route')
+const generate_seat_route=require('./routes/generate_seat.route');
 
 const associatesinfo = require('./routes/associatesinfo.route');
+
+const mail_route = require('./routes/email.route');
 
 const { httpLogStream } = require('./utils/logger');
 
@@ -27,18 +29,18 @@ const sequelize = require ('./utils/database')
 const app = express();
 
 //node-mailer
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 
 // Create a transporter object using SMTP details
-const transporter = nodemailer.createTransport({
-  host: 'email-smtp.eu-central-1.amazonaws.com',
-  port: 25,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: '',
-    pass: ''
-  }
-});
+// const transporter = nodemailer.createTransport({
+//   host: 'email-smtp.eu-central-1.amazonaws.com',
+//   port: 25,
+//   secure: false, // true for 465, false for other ports
+//   auth: {
+//     user: '',
+//     pass: ''
+//   }
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -55,29 +57,7 @@ app.use(cors(corsOptions));
 app.disable('x-powered-by');
 
 //Mail route
-app.post('/send-email', (req, res) => {
-    // Extract email data from request body
-    const { to, subject, text } = req.body;
-  
-    // Create email message
-    const mailOptions = {
-      from: 'seating_app@compliance.esko-saas.com',
-      to: to,
-      subject: subject,
-      text: text
-    };
-  
-    // Send email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending email:', error);
-        res.status(500).send('Error sending email');
-      } else {
-        console.log('Email sent:', info.response);
-        res.send('Email sent successfully');
-      }
-    });
-  });
+// app.post('/send-email', );
 
 // Middleware to set Access-Control-Allow-Methods header
 app.use((req, res, next) => {
@@ -101,6 +81,7 @@ app.use('/api/auth', authRoute);
 app.use('/seats_info',seat_info_route);
 app.use('/generate_seat',generate_seat_route);
 app.use('/associates',associatesinfo);
+app.use(mail_route);
 
 
 app.get('/', (req, res) => {

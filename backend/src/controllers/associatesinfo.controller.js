@@ -1,3 +1,4 @@
+const {hash} = require('../utils/password')
 const {Sequelize} = require('sequelize');
 const User = require('../models/user');
 exports.getAssociates = (req, res, next)=>{
@@ -26,4 +27,19 @@ exports.getAssociate = (req,res,next)=>{
             }
         });
     })
+}
+
+exports.setAssociatePass = (req,res,next)=>{
+    User.findOne({where:{
+        associate_id:req.params.associate_id
+    }}).then(user=>{
+        console.log("Found user : "+JSON.stringify(user));
+        user.password = hash(req.body.password);
+        user.save();
+    }).then(result=>{
+        res.status(200).send({
+           "status":"success",
+           "result":result
+        })
+    }).catch(err=>console.log("Something went wrong while updating password"));
 }

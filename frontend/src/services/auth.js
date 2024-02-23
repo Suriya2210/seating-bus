@@ -15,8 +15,8 @@ function login(username, password) {
     })
     .then(response => {
       console.log("working fine")
-      localStorage.setItem("user", JSON.stringify(response.data.data.associate_name));
-      localStorage.setItem("id", JSON.stringify(response.data.data.associate_id));
+      // localStorage.setItem("user", JSON.stringify(response.data.data.associate_name));
+      // localStorage.setItem("id", JSON.stringify(response.data.data.associate_id));
       localStorage.setItem("jwt_token",response.data.token);
       return response.data;
     });
