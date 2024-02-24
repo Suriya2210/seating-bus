@@ -151,6 +151,8 @@ function TopBar(props) {
   const classBookHistory = useStyles({label:"Booking History"});
 
   const [anchorEl, setAnchorEl] = useState(null);
+
+  
   const auth = useSelector(state => state.auth);
   
   const handleMenuClose = () => {
@@ -201,7 +203,7 @@ function TopBar(props) {
           </Tooltip>
           <IconButton onClick={handleMenuOpen}>
             <Tooltip title="User" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
-              <p className={classes.authuser}>{auth.user}</p>
+              <p className={classes.authuser}>{auth.user?auth.user.user_name:"Not loaded"}</p>
             </Tooltip>
           </IconButton>
         </Hidden>
