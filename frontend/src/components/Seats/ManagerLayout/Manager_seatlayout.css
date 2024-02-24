@@ -1,11 +1,4 @@
-.select-seat-btn
-{
-  position: relative;
-  top: 25%;
-}
-
-
-.seat-icon93,
+row-1 .seat-icon93,
 .seat-icon94,
 .seat-icon95,
 .seat-icon96,
@@ -2359,7 +2352,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #000000;
+  background-color: beige;
   width: 34px;
   height: 48px;
 }
@@ -2963,20 +2956,15 @@
 .selectedseat-comp-container {
   display: flex;
   flex-direction: row;
-  /* border: 1px solid black; */
   height: 110px;
-  margin: 10px;
-  border-radius: 10px;
   justify-content: space-evenly;
-  background-color: white;
+  border-radius: 10px;
   width: 70%;
   position: relative;
   left: 15%;
 }
 
-.input-container {
-  margin-bottom: 20px;
-}
+
 
 .input-container label {
   font-weight: bold;
@@ -3013,15 +3001,16 @@
 .input-container input:hover,
 .input-container select:hover {
   border-color: #3183f0;
-  /* Blue border color on hover */
 }
 
+.input-container:hover {
+  box-shadow: 0px 0px 10px #3183f0;
+  cursor: pointer;
+}
 
 .loader {
   border: 16px solid #f3f3f3;
-  /* Light grey */
   border-top: 16px solid #3498db;
-  /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -3041,7 +3030,6 @@
   }
 }
 
-
 .ss-disable-section {
   text-align: center;
   color: red;
@@ -3058,10 +3046,11 @@
 .manager-legends {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
-  background-color: white;
-  padding: 10px 20px;
-  width:auto;
+  /* border: 1px solid black; */
+  /* background-color: white; */
+  color: white;
+  padding: 10px;
+  width: auto;
   border-radius: 5px;
   align-items: center;
   position: fixed;
@@ -3069,15 +3058,16 @@
   top: 10px;
   justify-content: space-evenly;
 }
- 
+
 .manager-legends img {
   rotate: 180deg;
 }
- 
-.seatgreen,.seatyellow,.seatred {
+
+.seatgreen,
+.seatyellow,
+.seatred {
   display: flex;
-justify-content: space-evenly;
+  justify-content: space-evenly;
   flex-direction: column;
   margin: 20px;
 }
- 

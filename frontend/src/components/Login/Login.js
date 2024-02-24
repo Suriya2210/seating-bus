@@ -34,7 +34,7 @@ function Login() {
   const auth = useSelector((state) => state.auth);
 
   return (
-    <Page title="Veralto | Book Your Seat" className={classes.root}>
+    <Page title="Book Your Seat" className={classes.root}>
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h3">

@@ -99,7 +99,9 @@ exports.cancelseat=(req,res,next)=>{
       status:1,
       remarks:req.body.remarks,
       created_by:req.body.cancelled_by,
-      updated_by:req.body.cancelled_by
+      updated_by:req.body.cancelled_by,
+      booked_by:req.body.booked_by,
+      remarks:req.body.remarks
     }
 
     temp_storingname=seat.booked_for_name,

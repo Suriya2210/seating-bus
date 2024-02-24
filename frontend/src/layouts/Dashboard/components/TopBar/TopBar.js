@@ -103,7 +103,9 @@ import EventIcon from '@material-ui/icons/Event';
 import BookIcon from '@material-ui/icons/Book';
 import HomeIcon from '@material-ui/icons/Home';
 import { useSelector } from "react-redux";
-import veraltoLogo from "./Veralto-logo.png"; // Import the image fo veralto
+import veraltoLogo from "./Veralto-logo.png"; // I
+
+{/* <script src="https://kit.fontawesome.com/133e57e9f3.js" crossorigin="anonymous"></script> */}
 
 const useStyles = makeStyles({
   root: {
@@ -181,12 +183,12 @@ function TopBar(props) {
               <PeopleAltIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Manage Bookings" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
+          <Tooltip title="Manage FOW" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
             <IconButton color="inherit" component={Link} to="/adminmanagebooking">
               <EventIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Book History" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
+          <Tooltip title="My Bookings" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
             <IconButton color="inherit" component={Link} to="/userbookhistory">
               <BookIcon />
             </IconButton>

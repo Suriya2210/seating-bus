@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ::1 - - [24/Feb/2024:08:56:54 +0000] "GET /generate_seat/get-seat-info/2024-03-01 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [24/Feb/2024:08:57:27 +0000] "GET /generate_seat/get-seat-info/2024-03-01 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [24/Feb/2024:08:57:46 +0000] "OPTIONS /generate_seat/block-seat-forguest HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
@@ -204,3 +205,5 @@
 ::1 - - [24/Feb/2024:10:40:45 +0000] "GET /associates/get-associates/100 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
 ::1 - - [24/Feb/2024:10:42:07 +0000] "GET /generate_seat/get-seat-info/2024-03-01 HTTP/1.1" 200 54885 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
 ::1 - - [24/Feb/2024:10:42:08 +0000] "GET /associates/get-associates/100 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"
+=======
+>>>>>>> 49f73a63f157d5b4be4515de3ffa8ce17dc6a935

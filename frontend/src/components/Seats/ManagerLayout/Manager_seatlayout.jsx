@@ -46,6 +46,20 @@ var count_selected = 0;
 const Manager_seatlayout = () => {
   const location = useLocation();
 
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      window.location.reload(); // Refresh the page after 3 seconds
+    }, 3000);
+  };
+
   const [date, setdate] = useState(location.state.selecteddate);
 
   const [seat_info, set_seat_info] = useState();
@@ -683,15 +697,15 @@ const Manager_seatlayout = () => {
           console.log(err);
         });
 
-      //  triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
+      triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
     });
-    alert("Seat Booking Success!!!");
-    window.location.reload();
+    // alert("Seat Booking Success!!!");
+    // window.location.reload();
   };
 
   return (
     <>
-      {/* {showToast && <ToastMessage message={toastMessage} />}  Show toast message when state is true */}
+      {showToast && <ToastMessage message={toastMessage} />}
 
       <h1>
         <center>Manager Seatlayout Page</center>
