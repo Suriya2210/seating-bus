@@ -106,6 +106,29 @@ const Admin_seatlayout = () => {
     window.location.reload()
 
   }
+  
+  const handleBlockSeatWithGuest = async () => {
+    
+    var sn=selectedseat[0].toString();
+    
+    while (sn.length < 3) {
+      sn = '0' + sn;
+    }
+    sn = 'WKS' + sn;
+    const json_body = {
+      date: date,
+      seat_number: sn,
+      booked_for_name: guestName,
+      guest_email: guestEmail,
+      is_guest:true,
+    }
+    console.log(json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
+    console.log(response);
+    console.log(`${sn} is blocked for guest ${guestname}`);
+    window.location.reload()
+    
+  };
 
   const unblockSeat = async () => {
     var seat_numbers = []
@@ -138,15 +161,15 @@ const Admin_seatlayout = () => {
     selectedseat.forEach(element => {
       if (element != seatno) t.push(element)
     });
-    return t;
-  }
+  return t;
+}
 
-  const removefromblockedseat = (seatno) => {
+const removefromblockedseat = (seatno) => {
     var t = [];
     selected_blockedSeat.forEach(element => {
       if (element != seatno) t.push(element)
     });
-    return t;
+  return t;
   }
 
   const str_seat_to_int=(seatno)=>{
@@ -460,27 +483,6 @@ const Admin_seatlayout = () => {
     setShowPopup(false);
   };
   // Function to handle blocking the seat with guest details
-  const handleBlockSeatWithGuest = async () => {
-    const guestname=guestName;
-    const guestemail=guestEmail;
-    var sn=selectedseat[0].toString();
-    
-    while (sn.length < 3) {
-      sn = '0' + sn;
-    }
-    sn = 'WKS' + sn;
-    const json_body = {
-      date: date,
-      seat_number: sn,
-      booked_for_name: `${guestName}(` + guestemail + `)`
-    }
-    console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
-    console.log(response);
-    console.log(`${sn} is blocked for guest ${guestname}`);
-    window.location.reload()
-    
- };
 
   return (
     <>

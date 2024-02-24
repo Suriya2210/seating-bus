@@ -1,4 +1,10 @@
-row-1
+.select-seat-btn
+{
+  position: relative;
+  top: 25%;
+}
+
+
 .seat-icon93,
 .seat-icon94,
 .seat-icon95,
