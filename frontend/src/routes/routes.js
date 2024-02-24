@@ -69,7 +69,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return props.isAuthenticated ? role==="Admin"? <Admin_seatlayout/> :  role==="Manager" ? <Manager_seatlayout/> : <Employee_seatlayout/> : <Redirect to="/auth/login" /> }
+        component:(props) => {return props.isAuthenticated ? role==="Admin"? <Admin_seatlayout/> :  role==="Manager" ? <Manager_seatlayout/> : <Employee_seatlayout/> : <Redirect to="/auth/login" /> }
    
       },
       {

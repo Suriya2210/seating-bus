@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     fontSize:15,
   }
 });
-let role = await getAccessLevel(localStorage.getItem("uid"));
+// let role = await getAccessLevel(localStorage.getItem("uid"));
 function TopBar(props) {
   const { className, openMenu, ...rest } = props;
   const classes = useStyles();
@@ -86,7 +86,7 @@ function TopBar(props) {
         <div className={classes.flexGrow} />
         <Menu open={Boolean(anchorEl)} onClose={handleMenuClose} anchorEl={anchorEl}>
           <MenuItem><Link to="/user/userprofile" className={classes.userprofile}>Profile</Link></MenuItem>
-          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.clear()}} className={classes.userlogout}> Logout</Link></MenuItem>
+          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.removeItem("jwt_token");localStorage.removeItem("uid")}} className={classes.userlogout}> Logout</Link></MenuItem>
         </Menu>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={openMenu}>
@@ -104,7 +104,7 @@ function TopBar(props) {
             <BookIcon  />
           </IconButton>
           <IconButton onClick={handleMenuOpen}>
-            <p className={classes.authuser}>{auth.user.user_name+" ("+role+")"}</p>
+            <p className={classes.authuser}>{auth.user.user_name}</p>
           </IconButton>
         </Hidden>
       </Toolbar>

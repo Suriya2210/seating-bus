@@ -48,11 +48,11 @@ function Login() {
           <Typography gutterBottom variant="h3">
             Sign In
           </Typography>
-          {auth.error && (
+          {/* {auth.error && (
             <Alert severity="error" className={classes.alert}>
               {auth.error.message || auth.error}
             </Alert>
-          )}
+          )} */}
 
           <LoginForm className={classes.loginForm} />
           

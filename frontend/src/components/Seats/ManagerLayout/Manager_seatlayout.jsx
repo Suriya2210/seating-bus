@@ -25,26 +25,9 @@ for(let k=0;k<161;k++){
 
 const Manager_seatlayout = () => {
 
-<<<<<<< HEAD
-    const location = useLocation();
-    
-    const token = localStorage.getItem("jwt_token");
-    
-    const [date,setdate]=useState(location.state.selecteddate)
-    const [seat_info,set_seat_info]=useState();
-    const [loading,setloading]=useState(true);
-    const [seat_status,set_seat_status] =useState([]);
-    const [max_seat,set_max_seat]=useState(0);
-    const [loading_associate_details,set_loading_associate_details]=useState(null);
-    
-    var option_names=[];
-    var count_selected=0
-    
-=======
->>>>>>> 7439b5253bd56829568fe1d767091329486073c6
   
   const location = useLocation();
-  
+  const token = localStorage.getItem("jwt_token");
   
   const [date,setdate]=useState(location.state.selecteddate)
   const [seat_info,set_seat_info]=useState();
