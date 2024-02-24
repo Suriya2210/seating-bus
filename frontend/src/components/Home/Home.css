@@ -394,11 +394,16 @@
 /* Style for the "Book Seat" link */
 .book-seat-link {
     text-decoration: none;
-    background-color: #3183f0;
+    background-color: rebeccapurple;
     /* Example background color */
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
+}
+
+.book-seat-link:hover
+{
+    background-color: #aabb11;
 }
 
 .home-seatlayout-gad {
@@ -406,4 +411,18 @@
     align-items: center;
     position: relative;
     left: 30%;
-  }
+}
+
+@media only screen and (max-width: 600px) {
+    .home-seatlayout-gad {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        left: 0%;
+    }
+    .home-seatlayout-gad input
+    {
+        margin-bottom: 10px;
+    }
+}

@@ -1,11 +1,10 @@
-
-
 import TableGroup from "../TableGroup";
 import "./Employee_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import ToastMessage from '../ToastMessage'; // Import Toast Message 
 
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -13,17 +12,19 @@ import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
-var seat_booked_by=[];
+var seat_booked_by = [];
 
-for(let k=0;k<161;k++){
+for (let k = 0; k < 161; k++) {
   seat_booked_by.push('varsa');
 }
- 
+
+
 const Employee_seatlayout = () => {
  
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
-  
+
+
   const [date, setdate] = useState(location.state.selecteddate)
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
@@ -31,7 +32,6 @@ const Employee_seatlayout = () => {
   const [employee_seat, setemployee_seat] = useState(null)
   const [userdata, setuserdata] = useState(null);
   const [alreadybooked, setalreadybooked] = useState(null);
-  
   useEffect(() => {
     if (seat_info) {
       seat_info.forEach(element => {
@@ -41,14 +41,14 @@ const Employee_seatlayout = () => {
       });
     }
   }, [seat_info])
-  
-    const str_seat_to_int=(seatno)=>{
-      var str=seatno[4]+seatno[5]+seatno[6];
-      return parseInt(str);
-    }
-    
+
+  const str_seat_to_int = (seatno) => {
+    var str = seatno[4] + seatno[5] + seatno[6];
+    return parseInt(str);
+  }
+
   useEffect(() => {
-    
+
     const fetchdata = async () => {
       try {
         const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
@@ -70,13 +70,13 @@ const Employee_seatlayout = () => {
           const no = parseInt(element.seat_number.match(/\d+/g)[0]);
           const status = element.seat_status;
           array[no] = status;
-          seat_booked_by[no]=element.booked_for_name;
+          seat_booked_by[no] = element.booked_for_name;
         });
- 
+
         set_seat_status(array);
         set_seat_info(val.data.datas);
         setloading(false);
- 
+
       }
       catch (err) {
         setloading(false);
@@ -86,15 +86,15 @@ const Employee_seatlayout = () => {
     fetchdata();
     console.log(employee_seat);
   }, [])
- 
+
   const bookseatcss = {
     padding: '20px',
     position: 'absolute',
     top: '90px',
     left: '1300px'
   }
- 
- 
+
+
   const bookseat = async () => {
     try {
       if (!employee_seat) console.log("No seat is selected!!!!");
@@ -107,9 +107,10 @@ const Employee_seatlayout = () => {
           "seat_booked_by": userdata.associate_name
         }
         var response = await axios.post('http://localhost:3000/api/auth/bookseat', json_body);
-        console.log(response.data.data);
-        console.log(response.data.message);
-        window.location.reload()
+        triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
+        // console.log(response.data.data);
+        // console.log(response.data.message);
+        // window.location.reload()
       }
     }
     catch (err) {
@@ -118,21 +119,21 @@ const Employee_seatlayout = () => {
     }
   }
 
-  const trim=(str)=>{
-    var string='';
-    for(let i=1;i<str.length-1;i++){
-      string+=str[i];
+  const trim = (str) => {
+    var string = '';
+    for (let i = 1; i < str.length - 1; i++) {
+      string += str[i];
     }
     return string;
   }
- 
+
   const cancelbooking = async () => {
     try {
       var json_body = {
         "date": date,
         "seat_number": alreadybooked,
-        "associate_id":localStorage.getItem('id'),
-        "cancelled_by":trim(localStorage.getItem('user'))
+        "associate_id": localStorage.getItem('id'),
+        "cancelled_by": trim(localStorage.getItem('user'))
       }
       var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body,{
         headers: {
@@ -147,12 +148,12 @@ const Employee_seatlayout = () => {
       console.log("Error in Employee seat Cancellation EmployeeSeatlayout.jsx")
     }
   }
- 
+
   function SeatUpComponent(props) {
- 
+
     const [hover, setHover] = useState(false);
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
- 
+
     if (seat_status[seat_no] == 0) {
       return (
         <Tooltip placement="top" title={
@@ -160,7 +161,7 @@ const Employee_seatlayout = () => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} />
         </Tooltip>
       )
@@ -173,26 +174,26 @@ const Employee_seatlayout = () => {
       )
     }
     else {
- 
+
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = hover ? imgSrc_hover : seatup;
- 
+
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
             setemployee_seat(props.seat_id)
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} />
         </Tooltip>
- 
+
       );
     }
   }
- 
+
   function SeatDownComponent(props) {
- 
+
     const [hover, setHover] = React.useState(false);
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
- 
+
     if (seat_status[seat_no] == 0) {
       return (
         <Tooltip placement="top" title={
@@ -200,7 +201,7 @@ const Employee_seatlayout = () => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "180deg" }} />
         </Tooltip>
       )
@@ -213,26 +214,26 @@ const Employee_seatlayout = () => {
       )
     }
     else {
- 
+
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = hover ? imgSrc_hover : seatup;
- 
+
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
             setemployee_seat(props.seat_id)
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "180deg" }} />
         </Tooltip>
- 
+
       );
     }
   }
- 
+
   function SeatLeftComponent(props) {
- 
+
     const [hover, setHover] = React.useState(false);
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
- 
+
     if (seat_status[seat_no] == 0) {
       return (
         <Tooltip placement="top" title={
@@ -240,7 +241,7 @@ const Employee_seatlayout = () => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "270deg" }} />
         </Tooltip>
       )
@@ -253,26 +254,26 @@ const Employee_seatlayout = () => {
       )
     }
     else {
- 
+
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = hover ? imgSrc_hover : seatup;
- 
+
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
             setemployee_seat(props.seat_id)
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "270deg" }} />
         </Tooltip>
- 
+
       );
     }
   }
- 
+
   function SeatRightComponent(props) {
- 
+
     const [hover, setHover] = React.useState(false);
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
- 
+
     if (seat_status[seat_no] == 0) {
       return (
         <Tooltip placement="top" title={
@@ -280,7 +281,7 @@ const Employee_seatlayout = () => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
         </Tooltip>
       )
@@ -293,64 +294,66 @@ const Employee_seatlayout = () => {
       )
     }
     else {
- 
+
       const imgSrc_hover = seatup_imagehover;
       const imgsrc = hover ? imgSrc_hover : seatup;
- 
+
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
             setemployee_seat(props.seat_id)
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "90deg" }} />
         </Tooltip>
- 
+
       );
     }
   }
- 
+
   const [scale, setScale] = useState(1);
   const [minScale, setMinScale] = useState(1);
   const layoutRef = useRef(null);
- 
+
   // Calculate the minimum scale factor based on the dimensions of the layout content and the container
   useEffect(() => {
     const layoutWidth = layoutRef.current.offsetWidth;
     const layoutHeight = layoutRef.current.offsetHeight;
     const containerWidth = layoutRef.current.parentElement.offsetWidth;
     const containerHeight = layoutRef.current.parentElement.offsetHeight;
- 
+
     // Calculate both horizontal and vertical scale factors
     const minScaleWidth = containerWidth / layoutWidth;
     const minScaleHeight = containerHeight / layoutHeight;
- 
+
     // Choose the smaller scale factor to ensure both dimensions fit within the container
     const calculatedMinScale = Math.min(minScaleWidth, minScaleHeight);
     setMinScale(calculatedMinScale);
     setScale(calculatedMinScale); // Initialize scale with minimum scale
   }, []);
- 
+
   const handleZoomIn = () => {
     setScale(scale + 0.1);
   };
- 
+
   const handleZoomOut = () => {
     setScale(scale - 0.1);
     // if (scale > minScale) {
     //   setScale(scale - 0.1);
     // }
   };
- 
+
   return (
     <>
+      {showToast && <ToastMessage message={toastMessage} />}
       <h1><center>Employee Seatlayout Page</center></h1>
       {alreadybooked ? (
         <div className="emp-message-container">
-        <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
-        <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button>
-      </div>
+          <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
+          <h1 className="emp-message-title">Visit My Bookings to Cancel Booking</h1>
+          {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
+        </div>
       )
         : <button onClick={bookseat} className="empseat-book-button">Book Seat</button>}
- 
+
       <div className="admin-zoom-control">
         <button onClick={handleZoomIn}>+</button> {/* Zoom In */}
         <button onClick={handleZoomOut}>-</button> {/* Zoom Out */}
@@ -358,11 +361,11 @@ const Employee_seatlayout = () => {
       <div className="EmpSeatlayout-page">
         <div className="empseatinnerframe" style={{ transform: `scale(${scale})` }} ref={layoutRef}>
           {loading ? (
-            <h1>Loading</h1>
+            <div className="loader"></div>
           ) : (
             <>
-              
-                <div className="manager-legends">
+
+              <div className="manager-legends">
                 <div className="seatgreen">
                   <label>Selected Seat</label>
                   <img src={seatup_imageselect} alt="" />
@@ -374,12 +377,12 @@ const Employee_seatlayout = () => {
                 <div className="seatred">
                   <label>Blocked Seat</label>
                   <img src={onbookedseat} alt="" />
- 
+
                 </div>
               </div>
-              
+
               <TableGroup />
- 
+
               <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />
               <SeatLeftComponent cname="seat-icon1" seat_id="WKS-139" />
               <SeatLeftComponent cname="seat-icon2" seat_id="WKS-138" />
@@ -419,7 +422,7 @@ const Employee_seatlayout = () => {
               <SeatLeftComponent cname="seat-icon132" seat_id="WKS-158" />
               <SeatLeftComponent cname="seat-icon133" seat_id="WKS-157" />
               <SeatLeftComponent cname="seat-icon134" seat_id="WKS-156" />
- 
+
               <SeatRightComponent cname="seat-icon3" seat_id="WKS-141" />
               <SeatRightComponent cname="seat-icon4" seat_id="WKS-143" />
               <SeatRightComponent cname="seat-icon7" seat_id="WKS-147" />
@@ -455,7 +458,7 @@ const Employee_seatlayout = () => {
               <SeatRightComponent cname="seat-icon131" seat_id="WKS-155" />
               <SeatRightComponent cname="seat-icon135" seat_id="WKS-159" />
               <SeatRightComponent cname="seat-icon136" seat_id="WKS-160" />
- 
+
               <SeatUpComponent cname="seat-icon53" seat_id="WKS-068"></SeatUpComponent>
               <SeatUpComponent cname="seat-icon54" seat_id="WKS-069"></SeatUpComponent>
               <SeatUpComponent cname="seat-icon55" seat_id="WKS-070"></SeatUpComponent>
@@ -501,7 +504,7 @@ const Employee_seatlayout = () => {
               <SeatUpComponent cname="seat-icon110" seat_id="WKS-082"></SeatUpComponent>
               <SeatUpComponent cname="seat-icon111" seat_id="WKS-083"></SeatUpComponent>
               <SeatUpComponent cname="seat-icon112" seat_id="WKS-084"></SeatUpComponent>
- 
+
               <SeatDownComponent cname="seat-icon59" seat_id="WKS-067" />
               <SeatDownComponent cname="seat-icon60" seat_id="WKS-066" />
               <SeatDownComponent cname="seat-icon61" seat_id="WKS-065" />
@@ -541,7 +544,7 @@ const Employee_seatlayout = () => {
               <SeatDownComponent cname="seat-icon115" seat_id="WKS-076" />
               <SeatDownComponent cname="seat-icon116" seat_id="WKS-075" />
               <SeatDownComponent cname="seat-icon117" seat_id="WKS-074" />
- 
+
               <div className="table-group">
                 <div className="table-158" />
                 <div className="table-157" />
@@ -549,8 +552,8 @@ const Employee_seatlayout = () => {
                 <div className="table-155" />
                 <div className="table-154" />
               </div>
- 
- 
+
+
               <div className="table-group1">
                 <div className="table-153" />
                 <div className="table-152" />
@@ -558,8 +561,8 @@ const Employee_seatlayout = () => {
                 <div className="table-150" />
                 <div className="table-149" />
               </div>
- 
- 
+
+
               <div className="table-group2">
                 <div className="table-129" />
                 <div className="table-128" />
@@ -570,8 +573,8 @@ const Employee_seatlayout = () => {
                 <div className="table-123" />
                 <div className="table-122" />
               </div>
- 
- 
+
+
               <div className="table-group3">
                 <div className="table-121" />
                 <div className="table-120" />
@@ -582,8 +585,8 @@ const Employee_seatlayout = () => {
                 <div className="table-115" />
                 <div className="table-114" />
               </div>
- 
- 
+
+
               <div className="table-group4">
                 <div className="table-113" />
                 <div className="table-112" />
@@ -594,24 +597,24 @@ const Employee_seatlayout = () => {
                 <div className="table-107" />
                 <div className="table-106" />
               </div>
- 
- 
+
+
               <div className="table-group5">
                 <div className="table-105" />
                 <div className="table-104" />
                 <div className="table-103" />
                 <div className="table-102" />
               </div>
- 
- 
+
+
               <div className="table-group6">
                 <div className="table-101" />
                 <div className="table-100" />
                 <div className="table-99" />
               </div>
- 
- 
- 
+
+
+
               <div className="table-group7">
                 <div className="table-92" />
                 <div className="table-91" />
@@ -620,9 +623,9 @@ const Employee_seatlayout = () => {
                 <div className="table-88" />
                 <div className="table-87" />
               </div>
- 
- 
- 
+
+
+
               <div className="table-group8">
                 <div className="table-921" />
                 <div className="table-911" />
@@ -631,7 +634,7 @@ const Employee_seatlayout = () => {
                 <div className="table-881" />
                 <div className="table-871" />
               </div>
- 
+
               <div className="table-group9">
                 <div className="table-73" />
                 <div className="table-72" />
@@ -646,7 +649,7 @@ const Employee_seatlayout = () => {
                 <div className="table-63" />
                 <div className="table-62" />
               </div>
- 
+
               <div className="table-group10">
                 <div className="table-61" />
                 <div className="table-60" />
@@ -661,7 +664,7 @@ const Employee_seatlayout = () => {
                 <div className="table-51" />
                 <div className="table-50" />
               </div>
- 
+
               <div className="table-group11">
                 <div className="table-49" />
                 <div className="table-48" />
@@ -676,8 +679,8 @@ const Employee_seatlayout = () => {
                 <div className="table-39" />
                 <div className="table-38" />
               </div>
- 
- 
+
+
               <div className="n-o-c-room-marker">
                 <div className="table-6" />
                 <div className="table-5" />
@@ -686,11 +689,8 @@ const Employee_seatlayout = () => {
                 <div className="table-2" />
                 <div className="table-1" />
               </div>
-              <input className="noc-room-rect" type="text" />
               <div className="noc-room">NOC ROOM</div>
- 
- 
- 
+
               <div className="table-group12">
                 <div className="table-26" />
                 <div className="table-25" />
@@ -703,7 +703,7 @@ const Employee_seatlayout = () => {
                 <div className="table-18" />
                 <div className="table-17" />
               </div>
- 
+
               <div className="table-group13">
                 <div className="table-16" />
                 <div className="table-15" />
@@ -716,7 +716,7 @@ const Employee_seatlayout = () => {
                 <div className="table-8" />
                 <div className="table-7" />
               </div>
- 
+
               <div className="table-group14">
                 <div className="table-37" />
                 <div className="table-36" />
@@ -730,12 +730,12 @@ const Employee_seatlayout = () => {
                 <div className="table-28" />
                 <div className="table-27" />
               </div>
- 
+
               <div className="table-group15">
                 <div className="rectangle-pair" />
                 <div className="rectangle-pair1" />
               </div>
- 
+
               <div className="table-group16">
                 <div className="table-84" />
                 <div className="table-83" />
@@ -749,7 +749,7 @@ const Employee_seatlayout = () => {
                 <div className="table-75" />
                 <div className="table-74" />
               </div>
- 
+
               <div className="table-group17">
                 <div className="table-137" />
                 <div className="table-136" />
@@ -760,7 +760,7 @@ const Employee_seatlayout = () => {
                 <div className="table-131" />
                 <div className="table-130" />
               </div>
- 
+
               <div className="table-group18">
                 <div className="table-148" />
                 <div className="table-147" />
@@ -769,8 +769,8 @@ const Employee_seatlayout = () => {
                 <div className="table-144" />
                 <div className="table-143" />
               </div>
- 
- 
+
+
               <div className="inner-tables">
                 <div className="table-142" />
                 <div className="table-141" />
@@ -785,6 +785,5 @@ const Employee_seatlayout = () => {
     </>
   );
 };
- 
+
 export default Employee_seatlayout;
- 

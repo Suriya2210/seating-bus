@@ -1,3 +1,4 @@
+
 import TableGroup from "../TableGroup";
 
 import "./Manager_seatlayout.css";
@@ -42,6 +43,16 @@ var associate_info = [
 ];
 
 var count_selected = 0;
+var seat_booked_by = [];
+
+for (let k = 0; k < 161; k++) {
+  seat_booked_by.push('varsa');
+}
+
+const str_seat_to_int = (seatno) => {
+  var str = seatno[4] + seatno[5] + seatno[6];
+  return parseInt(str);
+}
 
 const Manager_seatlayout = () => {
   const location = useLocation();
@@ -137,6 +148,7 @@ const Manager_seatlayout = () => {
           const status = element.seat_status;
 
           array[no] = status;
+          seat_booked_by[no] = element.booked_for_name;
         });
 
         associates.forEach((element) => {
@@ -193,7 +205,12 @@ const Manager_seatlayout = () => {
 
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+        } arrow>
           <img className={props.cname} src={onbookedseat} />
         </Tooltip>
       );
@@ -273,7 +290,12 @@ const Manager_seatlayout = () => {
 
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+        } arrow>
           <img
             className={props.cname}
             src={onbookedseat}
@@ -352,7 +374,12 @@ const Manager_seatlayout = () => {
 
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+        } arrow>
           <img
             className={props.cname}
             src={onbookedseat}
@@ -431,7 +458,12 @@ const Manager_seatlayout = () => {
 
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+        } arrow>
           <img
             className={props.cname}
             src={onbookedseat}

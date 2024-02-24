@@ -191,12 +191,12 @@ function TopBar(props) {
               <PeopleAltIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Manage Bookings" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
+          <Tooltip title="Manage FOW" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
             <IconButton color="inherit" component={Link} to="/adminmanagebooking">
               <EventIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Book History" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
+          <Tooltip title="My Bookings" arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}>
             <IconButton color="inherit" component={Link} to="/userbookhistory">
               <BookIcon />
             </IconButton>

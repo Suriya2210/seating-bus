@@ -6,9 +6,9 @@
     position: relative;
     top: 5%;
     background-image: url("./cubes_veralto.png");
-  }
-  
-  @media (max-width: 991px) {
+}
+
+@media (max-width: 991px) {
     .div {
         padding: 0 20px;
     }
@@ -33,9 +33,9 @@
     position: relative;
     top:40px;
     height: 71vh;
-  }
-  
-  @media (max-width: 991px) {
+}
+
+@media (max-width: 991px) {
     .div-2 {
         margin-top: 40px;
         padding: 0 20px;
@@ -81,40 +81,40 @@
     width: 100%;
     margin: auto 0;
     padding: 46px 35px;
-  }
-  
-  .div-6 input
-  {
+}
+
+.div-6 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  .div-8 input
-  {
+}
+.div-8 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  .div-12 input
-  {
+}
+.div-12 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  .div-14 input
-  {
+}
+.div-14 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  .div-17 input
-  {
+}
+.div-17 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  .div-19 input
-  {
+}
+.div-19 input
+{
     padding: 10px;
     border-radius: 5px;
-  }
-  
-  @media (max-width: 991px) {
+}
+
+@media (max-width: 991px) {
     .div-4 {
         margin-top: 40px;
         padding: 0 20px;

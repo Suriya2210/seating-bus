@@ -1,9 +1,10 @@
-
 import "./Admin_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import ToastMessage from '../ToastMessage'; // Import Toast Message 
+
 import TableGroup from "../TableGroup";
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -14,9 +15,9 @@ import onblockedseat from './public/armchair-7-1@2x.png'
 
 var selectedseat = [];
 var selected_blockedSeat = [];
-var seat_booked_by=[];
+var seat_booked_by = [];
 
-for(let k=0;k<161;k++){
+for (let k = 0; k < 161; k++) {
   seat_booked_by.push('varsa');
 }
 
@@ -24,6 +25,20 @@ for(let k=0;k<161;k++){
 const token = localStorage.getItem("jwt_token");
 
 const Admin_seatlayout = () => {
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      window.location.reload(); // Refresh the page after 3 seconds
+    }, 1000);
+  };
 
   const location = useLocation();
 
@@ -66,7 +81,7 @@ const Admin_seatlayout = () => {
           const no = parseInt(element.seat_number.match(/\d+/g)[0]);
           const status = element.seat_status;
           array[no] = status;
-          seat_booked_by[no]=element.booked_for_name;
+          seat_booked_by[no] = element.booked_for_name;
         });
 
         set_seat_status(array);
@@ -110,16 +125,17 @@ const Admin_seatlayout = () => {
         Authorization: token.toString()
       }});
     response = response.data;
+    triggerToast("Seat Blocked Successfully!"); // Trigger toast message
     console.log(response);
     console.log(`${seat_numbers} are successfully blocked`);
-    window.location.reload()
+    // window.location.reload()
 
   }
-  
+
   const handleBlockSeatWithGuest = async () => {
-    
-    var sn=selectedseat[0].toString();
-    
+
+    var sn = selectedseat[0].toString();
+
     while (sn.length < 3) {
       sn = '0' + sn;
     }
@@ -129,14 +145,14 @@ const Admin_seatlayout = () => {
       seat_number: sn,
       booked_for_name: guestName,
       guest_email: guestEmail,
-      is_guest:true,
+      is_guest: true,
     }
     console.log(json_body);
     var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
     console.log(response);
     console.log(`${sn} is blocked for guest ${guestname}`);
     window.location.reload()
-    
+
   };
 
   const unblockSeat = async () => {
@@ -162,10 +178,10 @@ const Admin_seatlayout = () => {
       headers: {
         Authorization: token.toString()
       }});
+    triggerToast("Seat Un-Blocked Successfully!");
     response = response.data;
     console.log(response);
     console.log(`${seat_numbers} are successfully unblocked`);
-    window.location.reload()
   }
 
   const deleteSeat = (seatno) => {
@@ -173,19 +189,19 @@ const Admin_seatlayout = () => {
     selectedseat.forEach(element => {
       if (element != seatno) t.push(element)
     });
-  return t;
-}
+    return t;
+  }
 
-const removefromblockedseat = (seatno) => {
+  const removefromblockedseat = (seatno) => {
     var t = [];
     selected_blockedSeat.forEach(element => {
       if (element != seatno) t.push(element)
     });
-  return t;
+    return t;
   }
 
-  const str_seat_to_int=(seatno)=>{
-    var str=seatno[4]+seatno[5]+seatno[6];
+  const str_seat_to_int = (seatno) => {
+    var str = seatno[4] + seatno[5] + seatno[6];
     return parseInt(str);
   }
 
@@ -206,7 +222,7 @@ const removefromblockedseat = (seatno) => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} />
         </Tooltip>
       )
@@ -273,7 +289,7 @@ const removefromblockedseat = (seatno) => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "180deg" }} />
         </Tooltip>
       )
@@ -338,7 +354,7 @@ const removefromblockedseat = (seatno) => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          } arrow>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "270deg" }} />
         </Tooltip>
       )
@@ -398,14 +414,14 @@ const removefromblockedseat = (seatno) => {
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
     // console.log(seat_no); 
     if (seat_status[seat_no] == 0) {
-        
+
       return (
         <Tooltip placement="top" title={
-                    <div>
-                      <div>{props.seat_id}</div>
-                      <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
-                    </div>
-                    } arrow>
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+        } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
         </Tooltip>
       )
@@ -498,7 +514,7 @@ const removefromblockedseat = (seatno) => {
 
   return (
     <>
-
+      {showToast && <ToastMessage message={toastMessage} />}  {/* Show toast message when state is true */}
       <h1><center>Admin Seatlayout Page</center></h1>
       <div className="adminseat-buttons">
         <button onClick={blockSeat}>Block Seat</button>
@@ -534,7 +550,7 @@ const removefromblockedseat = (seatno) => {
                 </div>
               </div>
               <TableGroup />
-              <SeatLeftComponent cname="seat-icon" seat_id="WKS-140"  />
+              <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />
               <SeatLeftComponent cname="seat-icon1" seat_id="WKS-139" />
               <SeatLeftComponent cname="seat-icon2" seat_id="WKS-138" />
               <SeatLeftComponent cname="seat-icon5" seat_id="WKS-146" />
@@ -704,7 +720,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-154" />
               </div>
 
-
               <div className="table-group1">
                 <div className="table-153" />
                 <div className="table-152" />
@@ -712,7 +727,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-150" />
                 <div className="table-149" />
               </div>
-
 
               <div className="table-group2">
                 <div className="table-129" />
@@ -725,7 +739,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-122" />
               </div>
 
-
               <div className="table-group3">
                 <div className="table-121" />
                 <div className="table-120" />
@@ -736,7 +749,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-115" />
                 <div className="table-114" />
               </div>
-
 
               <div className="table-group4">
                 <div className="table-113" />
@@ -749,7 +761,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-106" />
               </div>
 
-
               <div className="table-group5">
                 <div className="table-105" />
                 <div className="table-104" />
@@ -757,14 +768,11 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-102" />
               </div>
 
-
               <div className="table-group6">
                 <div className="table-101" />
                 <div className="table-100" />
                 <div className="table-99" />
               </div>
-
-
 
               <div className="table-group7">
                 <div className="table-92" />
@@ -774,8 +782,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-88" />
                 <div className="table-87" />
               </div>
-
-
 
               <div className="table-group8">
                 <div className="table-921" />
@@ -830,7 +836,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-39" />
                 <div className="table-38" />
               </div>
-
 
               <div className="n-o-c-room-marker">
                 <div className="table-6" />
@@ -922,7 +927,6 @@ const removefromblockedseat = (seatno) => {
                 <div className="table-143" />
               </div>
 
-
               <div className="inner-tables">
                 <div className="table-142" />
                 <div className="table-141" />
@@ -964,5 +968,4 @@ const removefromblockedseat = (seatno) => {
 };
 
 export default Admin_seatlayout;
-
 

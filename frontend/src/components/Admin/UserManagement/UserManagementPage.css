@@ -80,8 +80,8 @@
   }
   
   tr:nth-child(even) {
-    background-color: #10e17c0e;
-    color: #009879;
+    background-color: #e4e7e592;
+    color: #93c611;
   }
   
   tr:hover {

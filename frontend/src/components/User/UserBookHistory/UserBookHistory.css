@@ -1,9 +1,8 @@
-[11:30 AM] Venkatraman, Sriram
 .ubh-h {
     text-align: center;
     margin-bottom: 20px;
 }
- 
+
 .bookings-container {
     padding: 20px;
     margin-left: 10px;
@@ -14,14 +13,14 @@
     height: 100vh;
     justify-content: space-between;
 }
- 
+
 .booking {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
 }
- 
- 
+
+
 .lf-section {
     border: 1px solid #ccc;
     padding: 20px;
@@ -31,27 +30,26 @@
     height: 450px;
     margin-bottom: 10px;
 }
- 
+
 .lf-h {
     color: #f8f7ff;
     top: -10px;
     position: relative;
 }
- 
+
 .pb-h {
     color: #f8f7ff;
     top: -10px;
     position: relative;
 }
- 
 .cb-h {
     color: #f8f7ff;
     top: -10px;
     position: relative;
 }
- 
- 
- 
+
+
+
 .pb-section {
     border: 1px solid #ccc;
     padding: 20px;
@@ -62,7 +60,6 @@
     margin-bottom: 20px;
     margin-top: 20px;
 }
- 
 .cb-section {
     border: 1px solid #ccc;
     padding: 20px;
@@ -71,16 +68,16 @@
     height: 450px;
     background-color: #b8b8ff;
 }
- 
- 
+
+
 .separator {
     width: 2px;
     height: 35px;
     background-color: #080000;
     margin: 5px 0;
 }
- 
- 
+
+
 .lf-table,
 .cb-table,
 .pb-table {
@@ -91,7 +88,7 @@
     cursor: pointer;
     /* border: 1px solid #ddd; */
 }
- 
+
 .lf-table th,
 .cb-table th,
 .pb-table th {
@@ -99,9 +96,9 @@
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    position:sticky;
+    position: sticky;
 }
- 
+
 .lf-table td,
 .pb-table td,
 .cb-table td {
@@ -109,21 +106,20 @@
     border-bottom: 1px solid #ddd;
     text-align: center;
 }
- 
- 
+
+
 .lf-table tbody tr:last-of-type {
     border-bottom: 2px solid rgb(113, 47, 145);
 }
- 
+
 .pb-table tbody tr:last-of-type {
     border-bottom: 2px solid rgb(113, 47, 145);
 }
- 
+
 .cb-table tbody tr:last-of-type {
     border-bottom: 2px solid rgb(113, 47, 145);
 }
- 
- 
+
 .popup-container {
     position: fixed;
     top: 0;
@@ -136,7 +132,6 @@
     justify-content: center;
     align-items: center;
 }
- 
 .popup {
     background-color: white;
     padding: 20px;
@@ -147,41 +142,37 @@
     justify-content: space-evenly;
     height: 50vh;
 }
- 
-.popup h2 {
-    margin-bottom: 10px;
-}
- 
- 
+
 .popup input[type="radio"]+label {
-    display:inline-block;
+    display: inline-block;
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 5px;
     background-color: #f0f0f0;
     color: #333;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
- 
- 
-.popup label{
-    margin-left: 20px;
-}
- 
-/* Hover effect */
-.popup input[type="radio"]+label:hover {
-    background-color: #e0e0e0;
-}
- 
-/* Selected effect */
+
 .popup input[type="radio"]:checked+label {
-    background-color: #8cc9ec;
-    border: 5px solid #007bff;
-    /* Your selected background color */
+    background-color: rebeccapurple;
+    /* Change background color for selected option */
     color: white;
-    /* Text color for selected option */
+    /* Change text color for selected option */
+    border: 5px solid #54088e;
+    /* Add border for selected option */
 }
- 
+
+.popup input[type="radio"]:not(:checked)+label:hover {
+    background-color: #ddd;
+    /* Change background color on hover for non-selected options */
+}
+
+
+.popup h2 {
+    margin-bottom: 10px;
+}
+
 .popup textarea {
     width: 100%;
     margin-top: 5px;
@@ -189,23 +180,58 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-    height:100px;
+    height: 100px;
 }
- 
+
 .popup-button {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
 }
- 
 .confirm-btn {
     background-color: green;
     color: white;
     margin-right: 20px;
+    margin-left: 20px;
 }
- 
+
 .cancel-btn {
     background-color: red;
     color: white;
     margin-left: 50px;
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 9999;
+    animation: slideIn 0.5s ease-in-out, fadeOut 0.5s 2.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
