@@ -34,7 +34,7 @@ const Admin_seatlayout = () => {
       setShowToast(false);
       setToastMessage('');
       window.location.reload(); // Refresh the page after 3 seconds
-    }, 3000);
+    }, 1000);
   };
 
   const location = useLocation();
