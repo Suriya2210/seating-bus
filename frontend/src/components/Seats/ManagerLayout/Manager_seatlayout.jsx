@@ -23,15 +23,15 @@ import onbookedseat from "./public/armchair-6-1@2x.png";
 
 import onblockedseat from "./public/armchair-7-1@2x.png";
 
+import ToastMessage from '../ToastMessage'; 
+
 var selectedseat = [];
 
 var selected_blockedSeat = [];
 
 const trim_manager_name = (name) => {
   let str = "";
-
   for (let i = 1; i < name.length - 1; i++) str += name[i];
-
   return str;
 };
 
@@ -73,6 +73,22 @@ const Manager_seatlayout = () => {
     useState(null);
 
   var option_names = [];
+
+
+  //Configuring toast
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      // window.location.reload(); // Refresh the page after 3 seconds
+    }, 1000);
+  };
 
   const bookbuttoncss = {
     padding: "10px",
@@ -247,26 +263,26 @@ const Manager_seatlayout = () => {
             className={props.cname}
             src={imgsrc}
             onClick={() => {
-              if (count_selected == max_seat) {
-                alert(
-                  "You have already chosen the greatest number of seats available."
-                );
+              if (count_selected == max_seat) {          
+                if(selected){
+                  count_selected-=1;
+                  deleteSeat(seat_no);
+                  setSelected(!selected);
+                }else{
+                  alert("Reached maximux seat selection limit");
+                }
               } else if (!selected) {
                 count_selected += 1;
-
                 selectedseat.push(seat_no);
-
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
-
                 selectedseat = deleteSeat(seat_no);
-
                 setSelected(!selected);
               }
+             
 
               // console.log("no of selected seats " + count_selected)
-
               // console.log(selectedseat);
             }}
             onMouseOver={() => setHover(true)}
@@ -330,21 +346,21 @@ const Manager_seatlayout = () => {
             className={props.cname}
             src={imgsrc}
             onClick={() => {
-              if (count_selected == max_seat) {
-                alert(
-                  "You have already chosen the greatest number of seats available."
-                );
+              if (count_selected == max_seat) {          
+                if(selected){
+                  count_selected-=1;
+                  deleteSeat(seat_no);
+                  setSelected(!selected);
+                }else{
+                  alert("Reached maximux seat selection limit");
+                }
               } else if (!selected) {
                 count_selected += 1;
-
                 selectedseat.push(seat_no);
-
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
-
                 selectedseat = deleteSeat(seat_no);
-
                 setSelected(!selected);
               }
 
@@ -414,24 +430,23 @@ const Manager_seatlayout = () => {
             className={props.cname}
             src={imgsrc}
             onClick={() => {
-              if (count_selected == max_seat) {
-                alert(
-                  "You have already chosen the greatest number of seats available."
-                );
+              if (count_selected == max_seat) {          
+                if(selected){
+                  count_selected-=1;
+                  deleteSeat(seat_no);
+                  setSelected(!selected);
+                }else{
+                  alert("Reached maximux seat selection limit");
+                }
               } else if (!selected) {
                 count_selected += 1;
-
                 selectedseat.push(seat_no);
-
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
-
                 selectedseat = deleteSeat(seat_no);
-
                 setSelected(!selected);
               }
-
               // console.log(selectedseat);
 
               // console.log("no of selected seats " + count_selected)
@@ -498,21 +513,21 @@ const Manager_seatlayout = () => {
             className={props.cname}
             src={imgsrc}
             onClick={() => {
-              if (count_selected == max_seat) {
-                alert(
-                  "You have already chosen the greatest number of seats available."
-                );
+              if (count_selected == max_seat) {          
+                if(selected){
+                  count_selected-=1;
+                  deleteSeat(seat_no);
+                  setSelected(!selected);
+                }else{
+                  alert("Reached maximux seat selection limit");
+                }
               } else if (!selected) {
                 count_selected += 1;
-
                 selectedseat.push(seat_no);
-
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
-
                 selectedseat = deleteSeat(seat_no);
-
                 setSelected(!selected);
               }
 
@@ -726,10 +741,10 @@ const Manager_seatlayout = () => {
 
   return (
     <>
-      {/* {showToast && <ToastMessage message={toastMessage} />}  Show toast message when state is true */}
+      {showToast && <ToastMessage message={toastMessage} />}  Show toast message when state is true
 
       <h1>
-        <center>Manager Seatlayout Page</center>
+        <center>Manager Seat Booking /{date}/</center>
       </h1>
 
       <button onClick={associatedetails} className="select-seat-btn">

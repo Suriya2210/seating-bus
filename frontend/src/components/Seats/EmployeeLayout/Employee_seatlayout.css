@@ -2887,6 +2887,12 @@
   border-radius: 10px;
 }
 
+.empseat-book-button[disabled] {
+  /* Styles for the button when disabled */
+  background-color: #ccc; /* Grey background */
+  color: #666; /* Darker text color */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
 .empseat-book-button {
   justify-content: center;
   padding: 10px;

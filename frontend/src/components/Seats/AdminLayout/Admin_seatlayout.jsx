@@ -72,7 +72,8 @@ const Admin_seatlayout = () => {
         const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`, {
           headers: {
             Authorization: token.toString()
-          }});
+          }
+        });
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -120,10 +121,11 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body,{
+    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body, {
       headers: {
         Authorization: token.toString()
-      }});
+      }
+    });
     response = response.data;
     triggerToast("Seat Blocked Successfully!"); // Trigger toast message
     console.log(response);
@@ -174,10 +176,11 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body,{
+    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body, {
       headers: {
         Authorization: token.toString()
-      }});
+      }
+    });
     triggerToast("Seat Un-Blocked Successfully!");
     response = response.data;
     console.log(response);
@@ -540,11 +543,11 @@ const Admin_seatlayout = () => {
                   <img src={seatup_imageselect} alt="" />
                 </div>
                 <div className="seatyellow">
-                  <label>Booked Seat</label>
+                  <label>Blocked by Admin</label>
                   <img src={onblockedseat} alt="" />
                 </div>
                 <div className="seatred">
-                  <label>Blocked Seat</label>
+                  <label>Booked seat</label>
                   <img src={onbookedseat} alt="" />
 
                 </div>

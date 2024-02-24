@@ -2581,6 +2581,8 @@
   display: flex;
 justify-content: space-evenly;
   flex-direction: column;
+  color: #000000;
+  font-weight: bold;
   margin: 20px;
 }
  
