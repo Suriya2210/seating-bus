@@ -12,12 +12,18 @@ import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
+
+var seat_booked_by=[];
+
+for(let k=0;k<161;k++){
+  seat_booked_by.push('varsa');
+}
  
 const Employee_seatlayout = () => {
  
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
-
+  
   const [date, setdate] = useState(location.state.selecteddate)
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
@@ -25,7 +31,7 @@ const Employee_seatlayout = () => {
   const [employee_seat, setemployee_seat] = useState(null)
   const [userdata, setuserdata] = useState(null);
   const [alreadybooked, setalreadybooked] = useState(null);
- 
+  
   useEffect(() => {
     if (seat_info) {
       seat_info.forEach(element => {
@@ -35,9 +41,14 @@ const Employee_seatlayout = () => {
       });
     }
   }, [seat_info])
- 
+  
+    const str_seat_to_int=(seatno)=>{
+      var str=seatno[4]+seatno[5]+seatno[6];
+      return parseInt(str);
+    }
+    
   useEffect(() => {
- 
+    
     const fetchdata = async () => {
       try {
         const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
@@ -59,6 +70,7 @@ const Employee_seatlayout = () => {
           const no = parseInt(element.seat_number.match(/\d+/g)[0]);
           const status = element.seat_status;
           array[no] = status;
+          seat_booked_by[no]=element.booked_for_name;
         });
  
         set_seat_status(array);
@@ -143,7 +155,12 @@ const Employee_seatlayout = () => {
  
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+          } arrow>
           <img className={props.cname} src={onbookedseat} />
         </Tooltip>
       )
@@ -178,7 +195,12 @@ const Employee_seatlayout = () => {
  
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+          } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "180deg" }} />
         </Tooltip>
       )
@@ -213,7 +235,12 @@ const Employee_seatlayout = () => {
  
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+          } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "270deg" }} />
         </Tooltip>
       )
@@ -248,7 +275,12 @@ const Employee_seatlayout = () => {
  
     if (seat_status[seat_no] == 0) {
       return (
-        <Tooltip placement="top" title={props.seat_id} arrow>
+        <Tooltip placement="top" title={
+          <div>
+            <div>{props.seat_id}</div>
+            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+          </div>
+          } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
         </Tooltip>
       )

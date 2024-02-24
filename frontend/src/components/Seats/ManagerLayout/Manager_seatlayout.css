@@ -2921,6 +2921,13 @@ row-1
   top: 700px;
 }
 
+.autoassign_seat_btn {
+  position: relative;
+  z-index: 1;
+  left: 70%;
+  /* top: 700px; */
+}
+
 .finalbook-seat-btn {
   position: relative;
   z-index: 1;

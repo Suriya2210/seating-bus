@@ -17,9 +17,15 @@ var selectedseat = [];
 var selected_blockedSeat = [];
 var associate_info=[]
 
+var seat_booked_by=[];
+
+for(let k=0;k<161;k++){
+  seat_booked_by.push('varsa');
+}
 
 const Manager_seatlayout = () => {
 
+<<<<<<< HEAD
     const location = useLocation();
     
     const token = localStorage.getItem("jwt_token");
@@ -34,21 +40,42 @@ const Manager_seatlayout = () => {
     var option_names=[];
     var count_selected=0
     
+=======
+>>>>>>> 7439b5253bd56829568fe1d767091329486073c6
   
-    const bookbuttoncss={
-      padding:'10px',
-      position:'absolute',
-      top:'110px',
-      left:'750px'
-    }
+  const location = useLocation();
   
-    const unblock={
-      padding:'20px',
-      position:'absolute',
-      top:'100px',
-      left:'1000px'
+  
+  const [date,setdate]=useState(location.state.selecteddate)
+  const [seat_info,set_seat_info]=useState();
+  const [loading,setloading]=useState(true);
+  const [seat_status,set_seat_status] =useState([]);
+  const [max_seat,set_max_seat]=useState(0);
+  const [loading_associate_details,set_loading_associate_details]=useState(null);
+  
+  var option_names=[];
+  var count_selected=0
+  
+  
+  const bookbuttoncss={
+    padding:'10px',
+    position:'absolute',
+    top:'110px',
+    left:'750px'
+  }
+  
+  const unblock={
+    padding:'20px',
+    position:'absolute',
+    top:'100px',
+    left:'1000px'
+  }
+  
+    const str_seat_to_int=(seatno)=>{
+      var str=seatno[4]+seatno[5]+seatno[6];
+      return parseInt(str);
     }
-
+    
     const filter_implementation=(id)=>{
       var t=[];
       associate_info.forEach(element => {
@@ -92,6 +119,7 @@ const Manager_seatlayout = () => {
             const no = parseInt(element.seat_number.match(/\d+/g)[0]);
             const status=element.seat_status;
             array[no]=status;
+            seat_booked_by[no]=element.booked_for_name;
           });
           associates.forEach(element => {
             associate_info.push({
@@ -146,7 +174,12 @@ const Manager_seatlayout = () => {
       
       if(seat_status[seat_no]==0){
         return (
-          <Tooltip placement="top" title={props.seat_id} arrow> 
+          <Tooltip placement="top" title={
+            <div>
+              <div>{props.seat_id}</div>
+              <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+            </div>
+            } arrow> 
           <img className={props.cname} src={onbookedseat} />
           </Tooltip>
         )
@@ -213,7 +246,12 @@ const Manager_seatlayout = () => {
       // console.log(seat_no); 
       if(seat_status[seat_no]==0){
         return (
-          <Tooltip placement="top" title={props.seat_id} arrow>
+          <Tooltip placement="top" title={
+            <div>
+              <div>{props.seat_id}</div>
+              <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+            </div>
+            } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "180deg" }} />
           </Tooltip>
         )
@@ -268,7 +306,12 @@ const Manager_seatlayout = () => {
       // console.log(seat_no); 
       if(seat_status[seat_no]==0){
         return (
-          <Tooltip placement="top" title={props.seat_id} arrow>
+          <Tooltip placement="top" title={
+            <div>
+              <div>{props.seat_id}</div>
+              <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+            </div>
+            } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "270deg" }}/>
           </Tooltip>
         )
@@ -324,7 +367,12 @@ const Manager_seatlayout = () => {
       // console.log(seat_no); 
       if(seat_status[seat_no]==0){
         return (
-          <Tooltip placement="top" title={props.seat_id} arrow> 
+          <Tooltip placement="top" title={
+            <div>
+              <div>{props.seat_id}</div>
+              <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+            </div>
+            } arrow> 
           <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
           </Tooltip>
         )
@@ -553,6 +601,7 @@ const Manager_seatlayout = () => {
     <>
 
       <h1><center>Manager Seatlayout Page</center></h1>
+      <button className="autoassign_seat_btn">Auto Assign seat</button>
       <button style={bookbuttoncss} onClick={associatedetails}>Select Seats</button>
       <div className="managerseat-buttons">
         <button onClick={BookSeats}>Book Seat</button>
