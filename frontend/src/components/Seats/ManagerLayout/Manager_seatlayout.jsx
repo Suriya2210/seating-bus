@@ -78,7 +78,7 @@ const Manager_seatlayout = () => {
         });
       }
       console.log(associate_info);
-      set_max_seat(associate_info.length+1);
+      set_max_seat(associate_info.length);
     },[max_seat])
     
     useEffect(()=>{
@@ -87,8 +87,10 @@ const Manager_seatlayout = () => {
         try{
           const val=await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
           var associates=await axios.get(`http://localhost:3000/associates/get-associates/${localStorage.getItem('id')}`);
+          var my_info=await axios.get(`http://localhost:3000/associates/get-associate/${localStorage.getItem('id')}`);
+          // console.log(my_info);
           associates=associates.data.data.users;
-
+          
           const array=[];
           for(let i=0;i<161;i++){
             array.push(-4);
@@ -105,10 +107,15 @@ const Manager_seatlayout = () => {
               id:element.associate_id,
             })
           });
+
+          associate_info.push({
+            name:my_info.data.data.user.associate_name,
+            id:my_info.data.data.user.associate_id,
+          })
           
           set_seat_status(array);
           set_seat_info(val.data.datas);
-          set_max_seat(associates.length+1);
+          set_max_seat(associates.length);
           setloading(false);
           
         }
@@ -460,8 +467,6 @@ const Manager_seatlayout = () => {
       opt.push(<option value={associate_info[i].name}>{associate_info[i].name}</option>)
     }
 
-    opt.push(<option value={trim_manager_name(localStorage.getItem('user'))}>{trim_manager_name(localStorage.getItem('user'))}</option>)
-
     return opt;
 
   }
@@ -474,7 +479,7 @@ const Manager_seatlayout = () => {
     associate_info.forEach(element => {
       names.push(element.name);
     });
-    names.push(trim_manager_name(localStorage.getItem('user')));
+  
     option_names=names;
 
     console.log("renderinput")
@@ -577,7 +582,7 @@ const Manager_seatlayout = () => {
     <>
 
       <h1><center>Manager Seatlayout Page</center></h1>
-      <button className="autoassign_seat_btn">Auto Assign seat</button>
+     
       <button style={bookbuttoncss} onClick={associatedetails}>Select Seats</button>
       <div className="managerseat-buttons">
         <button onClick={BookSeats}>Book Seat</button>

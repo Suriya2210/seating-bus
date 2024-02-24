@@ -17,6 +17,7 @@ const CancelBooking = sequelize.define('cancel_booking',{
     seat_cancelled_by:Sequelize.STRING,
     seat_cancellation_date:Sequelize.STRING,
     status:Sequelize.INTEGER,
+    remarks:Sequelize.STRING,
     created_by:Sequelize.STRING,
     updated_by:Sequelize.STRING,
 });
