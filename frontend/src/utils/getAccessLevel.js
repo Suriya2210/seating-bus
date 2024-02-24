@@ -4,8 +4,6 @@ export async function getAccessLevel(id) {
     const response = await fetch(`http://localhost:3000/associates/get-associate/${id}`);
     const data = await response.json();
     //Logic to deduce the role/previllege
-
-
     console.log("From access level "+JSON.stringify(data));
     let isManager = data.data.user.ismanager;
     let isAdmin = data.data.user.isAdmin;
