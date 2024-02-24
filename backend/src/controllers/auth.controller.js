@@ -100,6 +100,7 @@ exports.cancelseat=(req,res,next)=>{
       seat_cancellation_date:req.body.date,
       associate_id:req.body.associate_id,
       status:1,
+      remarks:req.body.remarks,
       created_by:req.body.cancelled_by,
       updated_by:req.body.cancelled_by,
       booked_by:req.body.booked_by,

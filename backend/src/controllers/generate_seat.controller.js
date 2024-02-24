@@ -93,6 +93,38 @@ exports.block_seats=(req,res,next)=>{
     }
 }
 
+exports.block_seat_forguest=(req,res,next)=>{
+    try{
+        const {date,seat_number,booked_for_name}= req.body
+        console.log(date,seat_number,booked_for_name);
+        book_seat.findOne({
+            where:{
+                seat_selection_date:date,
+                seat_number:seat_number,
+            }
+        })
+        .then((val)=>{
+            val.seat_status=2;
+            val.booked_for_name=booked_for_name;
+            val.save();
+        })
+        .catch((err)=>{
+            res.status(400).json({
+                status:"Failure",
+                message:"Failed in blocking the seat for guest",
+                error:err
+            })
+        })
+    }
+    catch(err){
+        res.status(400).json({
+            status:"Failure",
+            message:"Failed in blocking the seat for guest",
+            error:err
+        })
+    }
+}
+
 exports.unblock_seats=(req,res,next)=>{
     try{
         const {date,seat_numbers}= req.body
@@ -105,6 +137,7 @@ exports.unblock_seats=(req,res,next)=>{
             })
             .then((val)=>{
                 val.seat_status=1;
+                val.booked_for_name=null,
                 val.save();
             })  
         }

@@ -1,12 +1,10 @@
 
-import TableGroup from "../TableGroup";
 import "./Admin_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
-
-
+import TableGroup from "../TableGroup";
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
@@ -33,6 +31,9 @@ const Admin_seatlayout = () => {
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
   const [seat_status, set_seat_status] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [guestEmail, setGuestEmail] = useState(''); // Define guestEmail state variable
+  const [guestName, setGuestName] = useState(''); // Define guestEmail state variable
 
 
   const block = {
@@ -70,7 +71,6 @@ const Admin_seatlayout = () => {
 
         set_seat_status(array);
         set_seat_info(val.data.datas);
-
         setloading(false);
 
       }
@@ -175,7 +175,7 @@ const Admin_seatlayout = () => {
     // console.log("Value of key "+props.seat_id)
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
 
-    console.log(seat_booked_by); 
+    // console.log(seat_no); 
     if (seat_status[seat_no] == 0) {
       return (
         <Tooltip placement="top" title={
@@ -183,14 +183,14 @@ const Admin_seatlayout = () => {
             <div>{props.seat_id}</div>
             <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
           </div>
-          }  arrow>
+          } arrow>
           <img className={props.cname} src={onbookedseat} />
         </Tooltip>
       )
     }
     if (seat_status[seat_no] == 2) {
-      return (
 
+      return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={onblockedseat} onClick={() => {
             if (!(selected_blockedSeat.includes(seat_no))) {
@@ -375,13 +375,14 @@ const Admin_seatlayout = () => {
     const seat_no = parseInt(props.seat_id.match(/\d+/g)[0]);
     // console.log(seat_no); 
     if (seat_status[seat_no] == 0) {
+        
       return (
         <Tooltip placement="top" title={
-          <div>
-            <div>{props.seat_id}</div>
-            <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
-          </div>
-          } arrow>
+                    <div>
+                      <div>{props.seat_id}</div>
+                      <div>{seat_booked_by[str_seat_to_int(props.seat_id)]}</div>
+                    </div>
+                    } arrow>
           <img className={props.cname} src={onbookedseat} style={{ rotate: "90deg" }} />
         </Tooltip>
       )
@@ -463,12 +464,43 @@ const Admin_seatlayout = () => {
     // }
   };
 
+  // Function to handle when the "Guest Block" button is clicked
+  const handleGuestBlock = () => {
+    setShowPopup(true);
+  };
+  const handleGuestBlockClose = () => {
+    setShowPopup(false);
+  };
+  // Function to handle blocking the seat with guest details
+  const handleBlockSeatWithGuest = async () => {
+    const guestname=guestName;
+    const guestemail=guestEmail;
+    var sn=selectedseat[0].toString();
+    
+    while (sn.length < 3) {
+      sn = '0' + sn;
+    }
+    sn = 'WKS' + sn;
+    const json_body = {
+      date: date,
+      seat_number: sn,
+      booked_for_name: `${guestName}(` + guestemail + `)`
+    }
+    console.log(json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
+    console.log(response);
+    console.log(`${sn} is blocked for guest ${guestname}`);
+    window.location.reload()
+    
+ };
+
   return (
     <>
 
       <h1><center>Admin Seatlayout Page</center></h1>
       <div className="adminseat-buttons">
         <button onClick={blockSeat}>Block Seat</button>
+        <button onClick={handleGuestBlock}>Book For Guest</button>
         <button onClick={unblockSeat}>UnBlock Seat</button>
       </div>
 
@@ -480,10 +512,11 @@ const Admin_seatlayout = () => {
         <div className="adminseatinnerframe" style={{ transform: `scale(${scale})` }} ref={layoutRef}>
 
           {loading ? (
-            <h1>Loading</h1>
+            <div className="loader"></div>
           ) : (
             <>
-                <div className="manager-legends">
+
+              <div className="manager-legends">
                 <div className="seatgreen">
                   <label>Selected Seat</label>
                   <img src={seatup_imageselect} alt="" />
@@ -495,11 +528,11 @@ const Admin_seatlayout = () => {
                 <div className="seatred">
                   <label>Blocked Seat</label>
                   <img src={onbookedseat} alt="" />
- 
+
                 </div>
               </div>
               <TableGroup />
-              <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />
+              <SeatLeftComponent cname="seat-icon" seat_id="WKS-140"  />
               <SeatLeftComponent cname="seat-icon1" seat_id="WKS-139" />
               <SeatLeftComponent cname="seat-icon2" seat_id="WKS-138" />
               <SeatLeftComponent cname="seat-icon5" seat_id="WKS-146" />
@@ -895,12 +928,39 @@ const Admin_seatlayout = () => {
                 <div className="table-139" />
                 <div className="table-138" />
               </div>
+
             </>
           )}
         </div>
+        {/* BELOW IS THE CODE FOR POP-UP */}
+        {showPopup && (
+          <div className="popup">
+            <div className="popup-content">
+              <h2>Block Seats</h2>
+              <input
+                type="text"
+                placeholder="Enter Guest Name"
+                value={guestName}
+                onChange={(e) => setGuestName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Enter Guest Email"
+                value={guestEmail}
+                onChange={(e) => setGuestEmail(e.target.value)}
+              />
+              <div className="guestblockmanagebtns">
+                <button onClick={handleBlockSeatWithGuest} class>Book Seat</button>
+                <button onClick={handleGuestBlockClose}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
 export default Admin_seatlayout;
+
+

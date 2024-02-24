@@ -42,44 +42,44 @@ const AddNewUser = () => {
     e.preventDefault();
     setLoading(true); // Set loading to true when submitting the form
     console.log(formData);
-    axios
-      .post("http://localhost:3000/admin/add-user", formData,{
-        headers: {
-          Authorization: localStorage.getItem("jwt_token")
-        }})
-      .then((response) => {
-        console.log("User data saved successfully:", response.data);
-        setMessage("User added successfully!"); // Set success message
-        // Clear input fields after successful submission
+    // axios
+    //   .post("http://localhost:3000/admin/add-user", formData,{
+    //     headers: {
+    //       Authorization: localStorage.getItem("jwt_token")
+    //     }})
+    //   .then((response) => {
+    //     console.log("User data saved successfully:", response.data);
+    //     setMessage("User added successfully!"); // Set success message
+    //     // Clear input fields after successful submission
         
-        setFormData({
-          associate_name: "",
-          associate_id: "",
-          localsystemid: "",
-          email: "",
-          manager_id: "",
-          password:"",
-          isAdmin:false,
-          ismanager:false,
-          manager_email: "",
-          manager_name: "",
-          mobile_no: "",
-          direct_reports: "",
-          company: "",
-          OpCo: "",
-        });
-        history.push('/admin/usermanagement')
-      })
-      .catch((error) => {
-        console.log("Error saving user data:", error);
-        setMessage("Error adding user. Please try again."); // Set error message
-      })
-      .finally(() => {
-        setLoading(false); // Set loading back to false after submission
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
-      });
+    //     setFormData({
+    //       associate_name: "",
+    //       associate_id: "",
+    //       localsystemid: "",
+    //       email: "",
+    //       manager_id: "",
+    //       password:"",
+    //       isAdmin:false,
+    //       ismanager:false,
+    //       manager_email: "",
+    //       manager_name: "",
+    //       mobile_no: "",
+    //       direct_reports: "",
+    //       company: "",
+    //       OpCo: "",
+    //     });
+    //     history.push('/admin/usermanagement')
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error saving user data:", error);
+    //     setMessage("Error adding user. Please try again."); // Set error message
+    //   })
+    //   .finally(() => {
+    //     setLoading(false); // Set loading back to false after submission
+    //     setTimeout(() => {
+    //       setMessage("");
+    //     }, 3000);
+    //   });
   };
 
   useEffect(() => {
