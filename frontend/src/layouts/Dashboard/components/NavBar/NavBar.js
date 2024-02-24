@@ -11,10 +11,10 @@ import {
 import { Home } from "@material-ui/icons";
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import EventSeatIcon from '@material-ui/icons/EventSeat';
+import AppsIcon from "@material-ui/icons/Apps";
 import clsx from "clsx";
 import React from "react";
 import { Fragment } from "react";
-import AppsIcon from "@material-ui/icons/Apps";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation hook
 
 const useStyles = makeStyles((theme) => ({
@@ -31,13 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     transition: "background-color 0.3s, box-shadow 0.3s",
-    color:"black",
+    color: "black",
   },
   activeListItem: {
     backgroundColor: "rgb(113, 47, 145)",
-    color:"white",
+    color: "white",
   },
-  
+
   listItemHover: {
     "&:hover": {
       backgroundColor: "rgb(170, 187, 17)",
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  
+
 }));
 
 function NavBar(props) {
@@ -135,6 +135,7 @@ function NavBar(props) {
         </Paper>
       </Hidden>
     </Fragment>
+
   );
 }
 

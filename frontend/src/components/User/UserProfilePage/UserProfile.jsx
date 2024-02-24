@@ -71,8 +71,8 @@ const UserProfile = () => {
                       <input type="text" value={user_info.manager_id} readOnly />
                     </div>
                     <div className="div-18">MANAGER NAME:</div>
-                    <input type="text" value={user_info.manager_name} readOnly />
                     <div className="div-19">
+                    <input type="text" value={user_info.manager_name} readOnly />
                     </div>
                   </div>
                 </div>

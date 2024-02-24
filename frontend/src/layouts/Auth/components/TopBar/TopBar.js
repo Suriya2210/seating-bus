@@ -3,7 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import veraltoLogo from "./Veralto-logo.png"; // Import the image
 
-
 const useStyles = makeStyles({
   logo: {
     width: 100, // Adjust the width as needed
@@ -27,7 +26,7 @@ function TopBar() {
           color="inherit"
           style={{ paddingLeft: "10px" }}
         >
-          Veralto | Book Your Seat
+        Book Your Seat
         </Typography>
       </Toolbar>
     </AppBar>

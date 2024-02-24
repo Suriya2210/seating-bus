@@ -1,8 +1,7 @@
-
 .adminhome-hero {
     position: relative;
     background: url('./adminhome-heroimage.jpg') center/cover no-repeat;
-    height: 93vh;
+    height: 90.5vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -27,7 +26,7 @@
     color: #fff;
     z-index: 2;
     position: relative;
-    top: 50px;
+    top:0px;
     /* Ensure the content is on top of the overlay */
 }
 
@@ -35,6 +34,7 @@
     font-size: 3em;
     margin-bottom: 20px;
     animation: fadeInUp 1s ease-in-out;
+    text-decoration: underline;
 }
 
 .adminhome-hero-subtitle {
@@ -43,6 +43,13 @@
     animation: fadeInUp 1s ease-in-out 0.5s;
 }
 
+.adminhome-hero-buttons
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .AdminHomePage-btn-1 {
     background-color: rebeccapurple;
     padding: 10px 20px;
@@ -54,11 +61,14 @@
     background-color: rgb(9, 34, 88);
     box-shadow: 0px 10px 10px rgb(51, 111, 241);
 }
+
 .AdminHomePage-btn-2 {
     background-color: rebeccapurple;
-    padding: 10px 20px;
+    padding: 10px 40px;
+    border-radius: 4px;
     font-size: 1.3em;
     margin-top: 30px;
+    color: white;
 }
 
 .AdminHomePage-btn-2:hover {
@@ -519,6 +529,12 @@
     margin-left: 0px;
 }
 
+.section-title {
+    margin-top: 10px;
+    text-decoration: underline;
+    color:#09f;
+}
+
 /* BUTTON CONTAINER */
 .button-container {
     display: flex;
@@ -536,7 +552,7 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    top:9px;
+    top: 19px;
 }
 
 .button-container:hover,

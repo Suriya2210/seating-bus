@@ -8,7 +8,7 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
-
+import AdminManageBooking from '../components/Admin/AdminManageBooking/AdminManageBooking'
 import Admin_seatlayout from "../components/Seats/AdminLayout/Admin_seatlayout"
 import Manager_seatlayout from "../components/Seats/ManagerLayout/Manager_seatlayout";
 import Employee_seatlayout from "../components/Seats/EmployeeLayout/Employee_seatlayout";
@@ -52,7 +52,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')==7 ? <Admin_seatlayout/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
+        component: (props) => {return !props.isAuthenticated ? <Redirect to="/auth/login" /> : localStorage.getItem('id')== 1 ? <Admin_seatlayout/> :  localStorage.getItem('id')==100 ? <Manager_seatlayout/> : <Employee_seatlayout/> }
         // component: (props) => {return props.isAuthenticated ? <Page /> : <Redirect to="/auth/login" />}
       },
       {
@@ -61,19 +61,24 @@ export const routes = [
         component: (props) => {return props.isAuthenticated ? <UserManagementPage /> : <Redirect to="/auth/login" />}
       },
       {
-        path: "/user/userprofile",
+        path: "/adminmanagebooking",
+        exact: true,
+        component: (props) => {return props.isAuthenticated ? <AdminManageBooking /> : <Redirect to="/auth/login" />}
+      },
+      {
+        path: "/userprofile",
         exact: true,
         component: (props) => {return props.isAuthenticated ? <UserProfile /> : <Redirect to="/auth/login" />}
           ,
       },
       {
-        path: "/user/userbookhistory",
+        path: "/userbookhistory",
         exact: true,
         component: (props) => {return props.isAuthenticated ?  <UserBookHistory /> : <Redirect to="/auth/login" />}
           ,
       },
       {
-        path: "/admin/adminhome",
+        path: "/adminhome",
         exact: true,
         component: (props) => {return props.isAuthenticated ? <AdminHomePage /> : <Redirect to="/auth/login" />}
           ,

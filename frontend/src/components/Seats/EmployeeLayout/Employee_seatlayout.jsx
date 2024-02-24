@@ -1,11 +1,10 @@
-
-
 import TableGroup from "../TableGroup";
 import "./Employee_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import ToastMessage from '../ToastMessage'; // Import Toast Message 
 
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -14,6 +13,21 @@ import onbookedseat from './public/armchair-6-1@2x.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
 const Employee_seatlayout = () => {
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      window.location.reload(); // Refresh the page after 3 seconds
+    }, 3000);
+  };
+
 
   const location = useLocation();
 
@@ -86,9 +100,10 @@ const Employee_seatlayout = () => {
           "seat_booked_by": userdata.associate_name
         }
         var response = await axios.post('http://localhost:3000/api/auth/bookseat', json_body);
-        console.log(response.data.data);
-        console.log(response.data.message);
-        window.location.reload()
+        triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
+        // console.log(response.data.data);
+        // console.log(response.data.message);
+        // window.location.reload()
       }
     }
     catch (err) {
@@ -298,11 +313,13 @@ const Employee_seatlayout = () => {
 
   return (
     <>
+      {showToast && <ToastMessage message={toastMessage} />}
       <h1><center>Employee Seatlayout Page</center></h1>
       {alreadybooked ? (
         <div className="emp-message-container">
           <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
-          <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button>
+          <h1 className="emp-message-title">Visit My Bookings to Cancel Booking</h1>
+          {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
         </div>
       )
         : <button onClick={bookseat} className="empseat-book-button">Book Seat</button>}
@@ -314,7 +331,7 @@ const Employee_seatlayout = () => {
       <div className="EmpSeatlayout-page">
         <div className="empseatinnerframe" style={{ transform: `scale(${scale})` }} ref={layoutRef}>
           {loading ? (
-            <h1>Loading</h1>
+            <div className="loader"></div>
           ) : (
             <>
 

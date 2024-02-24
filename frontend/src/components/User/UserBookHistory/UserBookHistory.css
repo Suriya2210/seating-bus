@@ -98,6 +98,7 @@
     padding: 8px;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    position: sticky;
 }
 
 .lf-table td,
@@ -120,7 +121,6 @@
 .cb-table tbody tr:last-of-type {
     border-bottom: 2px solid rgb(113, 47, 145);
 }
-
 
 .popup-container {
     position: fixed;
@@ -146,37 +146,34 @@
     height: 50vh;
 }
 
-.popup h2 {
-    margin-bottom: 10px;
-}
-
-
 .popup input[type="radio"]+label {
-    display:inline-block;
+    display: inline-block;
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 5px;
     background-color: #f0f0f0;
     color: #333;
     margin-bottom: 5px;
+    margin-left: 10px;
 }
 
-
-.popup label{
-    margin-left: 20px;
-}
-
-/* Hover effect */
-.popup input[type="radio"]+label:hover {
-    background-color: #e0e0e0;
-}
-
-/* Selected effect */
 .popup input[type="radio"]:checked+label {
-    background-color: #007bff;
-    /* Your selected background color */
+    background-color: rebeccapurple;
+    /* Change background color for selected option */
     color: white;
-    /* Text color for selected option */
+    /* Change text color for selected option */
+    border: 5px solid #54088e;
+    /* Add border for selected option */
+}
+
+.popup input[type="radio"]:not(:checked)+label:hover {
+    background-color: #ddd;
+    /* Change background color on hover for non-selected options */
+}
+
+
+.popup h2 {
+    margin-bottom: 10px;
 }
 
 .popup textarea {
@@ -186,7 +183,7 @@
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px;
-    height:100px;
+    height: 100px;
 }
 
 .popup-button {
@@ -199,10 +196,46 @@
     background-color: green;
     color: white;
     margin-right: 20px;
+    margin-left: 20px;
 }
 
 .cancel-btn {
     background-color: red;
     color: white;
     margin-left: 50px;
+}
+
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 9999;
+    animation: slideIn 0.5s ease-in-out, fadeOut 0.5s 2.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

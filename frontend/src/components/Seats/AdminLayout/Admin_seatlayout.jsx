@@ -1,10 +1,11 @@
-import TableGroup from "../TableGroup";
 import "./Admin_seatlayout.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import axios from "axios";
+import { useLocation } from 'react-router-dom';
+import ToastMessage from '../ToastMessage'; // Import Toast Message 
 
-
+import TableGroup from "../TableGroup";
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
@@ -17,10 +18,29 @@ var selected_blockedSeat = [];
 
 const Admin_seatlayout = () => {
 
-  const [date, setdate] = useState("2024-02-16")
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      window.location.reload(); // Refresh the page after 3 seconds
+    }, 3000);
+  };
+
+  const location = useLocation();
+
+  const [date, setdate] = useState(location.state.selecteddate)
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
   const [seat_status, set_seat_status] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [guestEmail, setGuestEmail] = useState(''); // Define guestEmail state variable
+  const [guestName, setGuestName] = useState(''); // Define guestEmail state variable
 
 
   const block = {
@@ -54,7 +74,6 @@ const Admin_seatlayout = () => {
 
         set_seat_status(array);
         set_seat_info(val.data.datas);
-
         setloading(false);
 
       }
@@ -91,9 +110,10 @@ const Admin_seatlayout = () => {
     console.log(json_body);
     var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body);
     response = response.data;
+    triggerToast("Seat Blocked Successfully!"); // Trigger toast message
     console.log(response);
     console.log(`${seat_numbers} are successfully blocked`);
-    window.location.reload()
+    // window.location.reload()
 
   }
 
@@ -117,10 +137,10 @@ const Admin_seatlayout = () => {
     }
     console.log(json_body);
     var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body);
+    triggerToast("Seat Un-Blocked Successfully!"); 
     response = response.data;
     console.log(response);
     console.log(`${seat_numbers} are successfully unblocked`);
-    window.location.reload()
   }
 
   const deleteSeat = (seatno) => {
@@ -416,12 +436,57 @@ const Admin_seatlayout = () => {
     // }
   };
 
+  // Function to handle when the "Guest Block" button is clicked
+  const handleGuestBlock = () => {
+    setShowPopup(true);
+  };
+  const handleGuestBlockClose = () => {
+    setShowPopup(false);
+  };
+  // Function to handle blocking the seat with guest details
+  const handleBlockSeatWithGuest = async () => {
+    try {
+      // Validate if guest email and name are provided
+      if (!guestEmail || !guestName) {
+        console.log("Please provide guest email and name");
+        return;
+      }
+
+      // Make the API call to book the seat with guest details
+      const seat_numbers = selectedseat.map(seat_no => {
+        let seatno = seat_no.toString().padStart(3, '0');
+        return 'WKS' + seatno;
+      });
+
+      const json_body = {
+        date: date,
+        seat_numbers: seat_numbers,
+        associate_id: userdata.associate_id,
+        associate_name: userdata.associate_name,
+        seat_booked_by: userdata.associate_name,
+        guest_email: guestEmail,
+        guest_name: guestName
+      };
+
+      const response = await axios.post('http://localhost:3000/generate_seat/bookseat', json_body);
+      console.log(response.data.data);
+      console.log(response.data.message);
+
+      // Close the popup after action
+      setShowPopup(false);
+      window.location.reload(); // Reload the page after booking
+    } catch (err) {
+      console.log("Error in blocking seat with guest:", err);
+    }
+  };
+
   return (
     <>
-
+      {showToast && <ToastMessage message={toastMessage} />}  {/* Show toast message when state is true */}
       <h1><center>Admin Seatlayout Page</center></h1>
       <div className="adminseat-buttons">
         <button onClick={blockSeat}>Block Seat</button>
+        <button onClick={handleGuestBlock}>Book For Guest</button>
         <button onClick={unblockSeat}>UnBlock Seat</button>
       </div>
 
@@ -433,11 +498,11 @@ const Admin_seatlayout = () => {
         <div className="adminseatinnerframe" style={{ transform: `scale(${scale})` }} ref={layoutRef}>
 
           {loading ? (
-            <h1>Loading</h1>
+            <div className="loader"></div>
           ) : (
             <>
-            
-                <div className="manager-legends">
+
+              <div className="manager-legends">
                 <div className="seatgreen">
                   <label>Selected Seat</label>
                   <img src={seatup_imageselect} alt="" />
@@ -449,7 +514,7 @@ const Admin_seatlayout = () => {
                 <div className="seatred">
                   <label>Blocked Seat</label>
                   <img src={onbookedseat} alt="" />
- 
+
                 </div>
               </div>
               <TableGroup />
@@ -623,7 +688,6 @@ const Admin_seatlayout = () => {
                 <div className="table-154" />
               </div>
 
-
               <div className="table-group1">
                 <div className="table-153" />
                 <div className="table-152" />
@@ -631,7 +695,6 @@ const Admin_seatlayout = () => {
                 <div className="table-150" />
                 <div className="table-149" />
               </div>
-
 
               <div className="table-group2">
                 <div className="table-129" />
@@ -644,7 +707,6 @@ const Admin_seatlayout = () => {
                 <div className="table-122" />
               </div>
 
-
               <div className="table-group3">
                 <div className="table-121" />
                 <div className="table-120" />
@@ -655,7 +717,6 @@ const Admin_seatlayout = () => {
                 <div className="table-115" />
                 <div className="table-114" />
               </div>
-
 
               <div className="table-group4">
                 <div className="table-113" />
@@ -668,7 +729,6 @@ const Admin_seatlayout = () => {
                 <div className="table-106" />
               </div>
 
-
               <div className="table-group5">
                 <div className="table-105" />
                 <div className="table-104" />
@@ -676,14 +736,11 @@ const Admin_seatlayout = () => {
                 <div className="table-102" />
               </div>
 
-
               <div className="table-group6">
                 <div className="table-101" />
                 <div className="table-100" />
                 <div className="table-99" />
               </div>
-
-
 
               <div className="table-group7">
                 <div className="table-92" />
@@ -693,8 +750,6 @@ const Admin_seatlayout = () => {
                 <div className="table-88" />
                 <div className="table-87" />
               </div>
-
-
 
               <div className="table-group8">
                 <div className="table-921" />
@@ -749,7 +804,6 @@ const Admin_seatlayout = () => {
                 <div className="table-39" />
                 <div className="table-38" />
               </div>
-
 
               <div className="n-o-c-room-marker">
                 <div className="table-6" />
@@ -841,7 +895,6 @@ const Admin_seatlayout = () => {
                 <div className="table-143" />
               </div>
 
-
               <div className="inner-tables">
                 <div className="table-142" />
                 <div className="table-141" />
@@ -849,12 +902,38 @@ const Admin_seatlayout = () => {
                 <div className="table-139" />
                 <div className="table-138" />
               </div>
+
             </>
           )}
         </div>
+        {/* BELOW IS THE CODE FOR POP-UP */}
+        {showPopup && (
+          <div className="popup">
+            <div className="popup-content">
+              <h2>Block Seats</h2>
+              <input
+                type="text"
+                placeholder="Enter Guest Name"
+                value={guestName}
+                onChange={(e) => setGuestName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Enter Guest Email"
+                value={guestEmail}
+                onChange={(e) => setGuestEmail(e.target.value)}
+              />
+              <div className="guestblockmanagebtns">
+                <button onClick={handleBlockSeatWithGuest} class>Book Seat</button>
+                <button onClick={handleGuestBlockClose}>Cancel</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
 export default Admin_seatlayout;
+
