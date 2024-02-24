@@ -11,7 +11,9 @@ function login(username, password) {
   return (dispatch) => {
     dispatch(request(username));
     authService.login(username, password).then(response => {
-        dispatch(success({user_name:response.data.associate_name,user_email:response.data.email}));
+
+        localStorage.setItem("uid",response.data.associate_id);
+        dispatch(success({user_name:response.data.associate_name,user_email:response.data.email,user_id:response.data.associate_id}));
         const isAdmin = response.data.isAdmin;
         const isManager = response.data.isManager;
         if(isAdmin && isManager ){
@@ -46,6 +48,5 @@ function login(username, password) {
 }
 
 function logout() {
-  authService.logout();
   return { type: authConstants.LOGOUT };
 }

@@ -23,6 +23,15 @@ import SetPassword from "../components/User/UserSetPassword/UserSetPassword";
 
 // import Page from "../components/Pages/Page";
 
+
+import {store} from '../store/store';
+
+import {getAccessLevel} from "../utils/getAccessLevel.js";
+
+
+let uid = localStorage.getItem("uid");
+let role =await getAccessLevel(uid);
+console.log("Role from routes "+role);
 export const routes = [
   {
     path: "/",
@@ -60,7 +69,7 @@ export const routes = [
       {
         path: "/seatlayout",
         exact: true,
-        component: (props) => {return props.isAuthenticated ? localStorage.getItem('id')==102? <Admin_seatlayout/> :  localStorage.getItem('id')==1234 ? <Manager_seatlayout/> : <Employee_seatlayout/> : <Redirect to="/auth/login" /> }
+        component: (props) => {return props.isAuthenticated ? role==="Admin"? <Admin_seatlayout/> :  role==="Manager" ? <Manager_seatlayout/> : <Employee_seatlayout/> : <Redirect to="/auth/login" /> }
    
       },
       {

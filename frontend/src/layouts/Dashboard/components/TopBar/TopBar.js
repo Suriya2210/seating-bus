@@ -8,6 +8,11 @@ import BookIcon from '@material-ui/icons/Book';
 import HomeIcon from '@material-ui/icons/Home';
 import { useSelector } from "react-redux";
 import veraltoLogo from "./Veralto-logo.png"; // Import the image
+
+import {getAccessLevel} from "../../../../utils/getAccessLevel";
+
+
+
 const useStyles = makeStyles({
   root: {
     boxShadow: "none",
@@ -52,7 +57,7 @@ const useStyles = makeStyles({
     fontSize:15,
   }
 });
-
+let role = await getAccessLevel(localStorage.getItem("uid"));
 function TopBar(props) {
   const { className, openMenu, ...rest } = props;
   const classes = useStyles();
@@ -62,7 +67,7 @@ function TopBar(props) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const auth = useSelector(state => state.auth);
-
+  
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
@@ -81,7 +86,7 @@ function TopBar(props) {
         <div className={classes.flexGrow} />
         <Menu open={Boolean(anchorEl)} onClose={handleMenuClose} anchorEl={anchorEl}>
           <MenuItem><Link to="/user/userprofile" className={classes.userprofile}>Profile</Link></MenuItem>
-          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.removeItem("user");localStorage.removeItem("jwt_token")}} className={classes.userlogout}> Logout</Link></MenuItem>
+          <MenuItem><Link to="/auth/login" onClick={() => {localStorage.clear()}} className={classes.userlogout}> Logout</Link></MenuItem>
         </Menu>
         <Hidden lgUp>
           <IconButton color="inherit" onClick={openMenu}>
@@ -99,7 +104,7 @@ function TopBar(props) {
             <BookIcon  />
           </IconButton>
           <IconButton onClick={handleMenuOpen}>
-            <p className={classes.authuser}>{auth.user?auth.user.user_name:"Not Loaded"}</p>
+            <p className={classes.authuser}>{auth.user.user_name+" ("+role+")"}</p>
           </IconButton>
         </Hidden>
       </Toolbar>
