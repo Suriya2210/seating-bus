@@ -110,6 +110,7 @@ const Manager_seatlayout = () => {
   }, [max_seat]);
 
   useEffect(() => {
+    console.log("Date selected "+date);
     const fetchdata = async () => {
       try {
         const val = await axios.get(
@@ -121,7 +122,7 @@ const Manager_seatlayout = () => {
             "id"
           )}`
         );
-
+        console.log("Manager associates : "+JSON.stringify(associates));
         associates = associates.data.data.users;
 
         const array = [];

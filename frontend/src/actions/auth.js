@@ -19,7 +19,7 @@ function login(username, password) {
         if(isAdmin && isManager ){
           history.push('/admin/adminhome');
         }else if(isAdmin){
-          history.push('/admin/adminhome');
+          history.push('/adminhome');
         }else{
           history.push('/');
         }
