@@ -95,7 +95,7 @@ exports.block_seats=(req,res,next)=>{
 
 exports.block_seat_forguest=(req,res,next)=>{
     try{
-        const {date,seat_number,booked_for_name}= req.body
+        const {date,seat_number,booked_for_name,guest_email}= req.body
         console.log(date,seat_number,booked_for_name);
         book_seat.findOne({
             where:{
@@ -106,6 +106,8 @@ exports.block_seat_forguest=(req,res,next)=>{
         .then((val)=>{
             val.seat_status=2;
             val.booked_for_name=booked_for_name;
+            val.guest_email=guest_email,
+            val.is_guest=true,
             val.save();
         })
         .catch((err)=>{

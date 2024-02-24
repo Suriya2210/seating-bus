@@ -31,6 +31,14 @@ const BookSeat = sequelize.define('book_seat',{
         type:Sequelize.STRING,
         default:null
     },
+    guest_email:{
+        type:Sequelize.STRING,
+        default:null
+    },
+    is_guest:{
+        type:Sequelize.BOOLEAN,
+        default:false
+    },
     created_by:{
         type:Sequelize.STRING,
         default:null

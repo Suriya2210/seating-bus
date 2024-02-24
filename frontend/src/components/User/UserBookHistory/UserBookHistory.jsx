@@ -225,10 +225,10 @@ const UserBookHistory = () => {
           const allBookings = responseCurrent.data.datas;
           const currentDate = new Date().toISOString().split('T')[0];
           const current = allBookings.filter(
-            (booking) => new Date(booking.seat_selection_date).toISOString().split('T')[0] >= currentDate
+            (booking) => new Date(booking.seat_selection_date).toISOString().split('T')[0] > currentDate
           );
           const past = allBookings.filter(
-            (booking) => new Date(booking.seat_selection_date).toISOString().split('T')[0] < currentDate
+            (booking) => new Date(booking.seat_selection_date).toISOString().split('T')[0] <= currentDate
           );
 
           setCurrentBookings(current);
