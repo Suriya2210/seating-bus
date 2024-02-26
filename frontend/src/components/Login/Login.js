@@ -9,7 +9,7 @@ import { Page } from "../Page";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // backgroundImage:`url(https://i.ibb.co/3CZv0S1/purple-Petal.jpg)`,
+    backgroundImage:`url(https://i.ibb.co/3CZv0S1/purple-Petal.jpg)`,
     height: "100%",
     display: "flex",
     alignItems: "center", 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   card: {
-    background: 'rgba(255, 255, 255, 0.2)', // Transparent white background
+    background: 'rgba(255, 255, 255, 0.5)', // Transparent white background
     boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )', // Box shadow for glassy effect
     backdropFilter: 'blur(10px)', // Blur effect for glassy effect
     borderRadius: '10px', // Rounded corners
@@ -43,7 +43,7 @@ function Login() {
 
   return (
     <Page title="Book Your Seat" className={classes.root}>
-      <Card>
+      <Card className={classes.card}>
         <CardContent >
           <Typography gutterBottom variant="h3">
             Sign In

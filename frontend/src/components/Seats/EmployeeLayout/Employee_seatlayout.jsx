@@ -126,7 +126,10 @@ const Employee_seatlayout = () => {
         var response = await axios.post('http://localhost:3000/api/auth/bookseat', json_body);
         triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
         setSeatBooked(true);
-        // console.log(response.data.data);
+        console.log("Booking details :"+JSON.stringify(response.data.data));
+        if(response){
+          var response = await axios.post('http://localhost:3000/booking-success',response.data.data);
+        }
         // console.log(response.data.message);
         // window.location.reload()
       }
