@@ -138,7 +138,7 @@ import {store} from '../store/store';
 import {getAccessLevel} from "../utils/getAccessLevel.js";
 
 
-let uid = localStorage.getItem("uid");
+let uid = localStorage.getItem("id");
 let role =await getAccessLevel(uid);
 console.log("Role from routes "+role);
 export const routes = [

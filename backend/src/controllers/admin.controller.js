@@ -95,6 +95,8 @@ exports.getUser = async(req, res, next)=>{
 
 exports.editUser = (req, res, next)=>{
 
+    var hashpass = hashPassword(req.body.password);
+
     const associate_id = req.params.id;
     
     const associate_name = req.body.associate_name;
@@ -109,7 +111,7 @@ exports.editUser = (req, res, next)=>{
     const direct_reports = req.body.direct_reports;
     const company = req.body.company;
     const OpCo = req.body.OpCo;
-    const password = req.body.pasword;
+    const password = hashpass;
 
 
     User.findOne({

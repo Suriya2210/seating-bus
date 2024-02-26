@@ -85,6 +85,8 @@ const AddNewUser = () => {
           company: "",
           OpCo: "",
         });
+         // Send email to the user
+         sendEmail(formData.associate_id);
       })
       .catch((error) => {
         console.log("Error saving user data:", error);
@@ -96,6 +98,17 @@ const AddNewUser = () => {
         history.push('/admin/usermanagement')
       });
   };
+
+    // Function to send email to the user
+    const sendEmail = (uid) => {
+      axios.post(`http://localhost:3000/send-mail/${uid}`)
+        .then((response) => {
+          console.log("Email sent successfully:", response.data);
+        })
+        .catch((error) => {
+          console.log("Error sending email:", error);
+        });
+    };
 
   useEffect(() => {
     if (message === "User added successfully!") {
@@ -114,7 +127,7 @@ const AddNewUser = () => {
 
   return (
     <>
-      {showToast && <ToastMessage message={toastMessage} />}
+      {showToast && <AdminToastMessage message={toastMessage} />}
       <div className="add-user-page">
         <h2 className="add-user-header">Add New User</h2>
         <form onSubmit={handleSubmit} className="add-user-form">
@@ -165,15 +178,15 @@ const AddNewUser = () => {
                   required
                 />
               </div>
-              <div className="addnewuser-group">
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                onChange={handleChange}
-                required
-              /> 
-            </div>
+              {/* <div className="addnewuser-group">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter Password"
+                  onChange={handleChange}
+                  required
+                />
+              </div> */}
             </div>
             <div className="right-column">
               <div className="addnewuser-group">
