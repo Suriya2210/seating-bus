@@ -9,11 +9,9 @@ import { Tooltip } from "@material-ui/core";
 
 import axios from "axios";
 
-import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
-
 import { useLocation } from "react-router-dom";
 
-// import ToastMessage from '../ToastMessage'; // Import Toast Message
+import ToastMessage from '../ToastMessage'; // Import Toast Message
 
 import seatup from "./public/seat-53@2x.png";
 
@@ -23,24 +21,22 @@ import seatup_imageselect from "./public/armchair-5-1@2x.png";
 
 import onbookedseat from "./public/armchair-6-1@2x.png";
 
-import onblockedseat from "./public/armchair-7-1@2x.png";
 
-import ToastMessage from '../ToastMessage';
+import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
+import onblockedseat from "./public/armchair-7-1@2x.png";
 
 var selectedseat = [];
 
 var selected_blockedSeat = [];
 
-
-//Trimming the name of manager
 const trim_manager_name = (name) => {
   let str = "";
+
   for (let i = 1; i < name.length - 1; i++) str += name[i];
+
   return str;
 };
 
-
-//Info of the logged in user
 var associate_info = [
   {
     name: trim_manager_name(localStorage.getItem("user")),
@@ -52,7 +48,7 @@ var count_selected = 0;
 var seat_booked_by = [];
 
 for (let k = 0; k < 161; k++) {
-  seat_booked_by.push(trim_manager_name);
+  seat_booked_by.push('varsa');
 }
 
 const str_seat_to_int = (seatno) => {
@@ -61,10 +57,7 @@ const str_seat_to_int = (seatno) => {
 }
 
 const Manager_seatlayout = () => {
-
   const location = useLocation();
-
-  const token = localStorage.getItem("jwt_token");
 
   const [date, setdate] = useState(location.state.selecteddate);
 
@@ -79,26 +72,7 @@ const Manager_seatlayout = () => {
   const [loading_associate_details, set_loading_associate_details] =
     useState(null);
 
-  const [confirmSeats, setConfirmSeats] = useState(false);
-
   var option_names = [];
-
-
-  //Configuring toast
-
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-
-  // Function to trigger toast message
-  const triggerToast = (message) => {
-    setToastMessage(message);
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-      setToastMessage('');
-      // window.location.reload(); // Refresh the page after 3 seconds
-    }, 1000);
-  };
 
   const bookbuttoncss = {
     padding: "10px",
@@ -146,35 +120,27 @@ const Manager_seatlayout = () => {
     set_max_seat(associate_info.length);
   }, [max_seat]);
 
-
-  
   useEffect(() => {
-    //Runs only on the inital rendering...
-    console.log("Date selected " + date);
-
-    //Fetching the data about the date from book-seats table
     const fetchdata = async () => {
       try {
         const val = await axios.get(
           `http://localhost:3000/generate_seat/get-seat-info/${date}`
         );
-    //Fetching the data for the associates of the manager
+
         var associates = await axios.get(
           `http://localhost:3000/associates/get-associates/${localStorage.getItem(
-            "uid"
+            "id"
           )}`
         );
-        console.log("Manager associates : " + JSON.stringify(associates));
+
         associates = associates.data.data.users;
 
         const array = [];
 
-        //Initializing the seat array with default state
         for (let i = 0; i < 161; i++) {
           array.push(-4);
         }
 
-        //Getting the status from the db and setting it to the array
         val.data.datas.forEach((element) => {
           const no = parseInt(element.seat_number.match(/\d+/g)[0]);
 
@@ -183,8 +149,6 @@ const Manager_seatlayout = () => {
           array[no] = status;
           seat_booked_by[no] = element.booked_for_name;
         });
-
-        //For setting the options for the associate dropdown
 
         associates.forEach((element) => {
           associate_info.push({
@@ -212,7 +176,7 @@ const Manager_seatlayout = () => {
   }, []);
 
   const deleteSeat = (seatno) => {
-    var t = []; 
+    var t = [];
 
     selectedseat.forEach((element) => {
       if (element != seatno) t.push(element);
@@ -251,7 +215,7 @@ const Manager_seatlayout = () => {
       );
     }
 
-    else if (seat_status[seat_no] == 2) {
+    if (seat_status[seat_no] == 2) {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img
@@ -283,25 +247,25 @@ const Manager_seatlayout = () => {
             src={imgsrc}
             onClick={() => {
               if (count_selected == max_seat) {
-                if (selected) {
-                  count_selected -= 1;
-                  deleteSeat(seat_no);
-                  setSelected(!selected);
-                } else {
-                  alert("Reached maximux seat selection limit");
-                }
+                alert(
+                  "You have already chosen the greatest number of seats available."
+                );
               } else if (!selected) {
                 count_selected += 1;
+
                 selectedseat.push(seat_no);
+
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
+
                 selectedseat = deleteSeat(seat_no);
+
                 setSelected(!selected);
               }
 
-
               // console.log("no of selected seats " + count_selected)
+
               // console.log(selectedseat);
             }}
             onMouseOver={() => setHover(true)}
@@ -340,7 +304,7 @@ const Manager_seatlayout = () => {
       );
     }
 
-    else if (seat_status[seat_no] == 2) {
+    if (seat_status[seat_no] == 2) {
       // console.log("seat-no")
 
       return (
@@ -366,20 +330,20 @@ const Manager_seatlayout = () => {
             src={imgsrc}
             onClick={() => {
               if (count_selected == max_seat) {
-                if (selected) {
-                  count_selected -= 1;
-                  selectedseat=deleteSeat(seat_no);
-                  setSelected(!selected);
-                } else {
-                  alert("Reached maximux seat selection limit");
-                }
+                alert(
+                  "You have already chosen the greatest number of seats available."
+                );
               } else if (!selected) {
                 count_selected += 1;
+
                 selectedseat.push(seat_no);
+
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
+
                 selectedseat = deleteSeat(seat_no);
+
                 setSelected(!selected);
               }
 
@@ -424,7 +388,7 @@ const Manager_seatlayout = () => {
       );
     }
 
-    else if (seat_status[seat_no] == 2) {
+    if (seat_status[seat_no] == 2) {
       // console.log("seat-no")
 
       return (
@@ -450,22 +414,23 @@ const Manager_seatlayout = () => {
             src={imgsrc}
             onClick={() => {
               if (count_selected == max_seat) {
-                if (selected) {
-                  count_selected -= 1;
-                  selectedseat=deleteSeat(seat_no);
-                  setSelected(!selected);
-                } else {
-                  alert("Reached maximux seat selection limit");
-                }
+                alert(
+                  "You have already chosen the greatest number of seats available."
+                );
               } else if (!selected) {
                 count_selected += 1;
+
                 selectedseat.push(seat_no);
+
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
+
                 selectedseat = deleteSeat(seat_no);
+
                 setSelected(!selected);
               }
+
               // console.log(selectedseat);
 
               // console.log("no of selected seats " + count_selected)
@@ -507,7 +472,7 @@ const Manager_seatlayout = () => {
       );
     }
 
-   else if (seat_status[seat_no] == 2) {
+    if (seat_status[seat_no] == 2) {
       // console.log("seat-no")
 
       return (
@@ -533,22 +498,23 @@ const Manager_seatlayout = () => {
             src={imgsrc}
             onClick={() => {
               if (count_selected == max_seat) {
-                if (selected) {
-                  count_selected -= 1;
-                  selectedseat=deleteSeat(seat_no);
-                  setSelected(!selected);
-                } else {
-                  alert("Reached maximux seat selection limit");
-                }
+                alert(
+                  "You have already chosen the greatest number of seats available."
+                );
               } else if (!selected) {
                 count_selected += 1;
+
                 selectedseat.push(seat_no);
+
                 setSelected(!selected);
               } else {
                 count_selected -= 1;
+
                 selectedseat = deleteSeat(seat_no);
+
                 setSelected(!selected);
               }
+
               // console.log(selectedseat);
 
               // console.log("no of selected seats " + count_selected)
@@ -611,8 +577,7 @@ const Manager_seatlayout = () => {
   const associatedetails = () => {
     console.log("result is " + count_selected);
 
-    // set_loading_associate_details(count_selected);
-    // setConfirmSeats(!confirmSeats);
+    set_loading_associate_details(count_selected);
   };
 
   const changenumbertoseat = (no) => {
@@ -647,19 +612,22 @@ const Manager_seatlayout = () => {
 
   const Renderinput = () => {
     const names = [];
-    if (confirmSeats) {
-      console.log("Rendered input");
-    }
+
     associate_info.forEach((element) => {
       names.push(element.name);
     });
+
     names.push(trim_manager_name(localStorage.getItem("user")));
+
     option_names = names;
+
+    console.log("renderinput");
+
     console.log(associate_info);
 
     var divs = [];
 
-    for (let i = 0; i < count_selected; i++) {
+    for (let i = 0; i < selectedseat.length; i++) {
       divs.push(
         <div>
           <div className="selectedseat-comp-container">
@@ -755,50 +723,42 @@ const Manager_seatlayout = () => {
     window.location.reload();
   };
 
-  const ConfirmButton = () => {
-    return <button onClick={associatedetails} className="select-seat-btn">
-      Confirm Seats
-    </button>
-
-  }
-
   return (
     <>
-      {showToast && <ToastMessage message={toastMessage} />}  
+           {/* {showToast && <ToastMessage message={toastMessage} />}   */}
 
-      <h1>
-        <center>Manager Seat Booking -- {date} </center>
-      </h1>
+<h1>
+  <center>Manager Seat Booking -- {date} </center>
+</h1>
 
-      <div className="manager-seat-legends">
-        <div className="seatgreen">
-          <div>
-            <label>Selected Seat</label>
-            <TrendingFlatIcon className="arrow-icon-red"/> 
-            <img src={seatup_imageselect} alt="" />
-          </div>
-        </div>
+<div className="manager-seat-legends">
+  <div className="seatgreen">
+    <div>
+      <label>Selected Seat</label>
+      <TrendingFlatIcon className="arrow-icon-red"/> 
+      <img src={seatup_imageselect} alt="" />
+    </div>
+  </div>
 
-        <div className="seatyellow">
-          <div>
-            <label>Booked Seat</label>
-            <TrendingFlatIcon className="arrow-icon-red"/> 
-            <img src={onblockedseat} alt="" />
-          </div>
-        </div>
+  <div className="seatyellow">
+    <div>
+      <label>Booked Seat</label>
+      <TrendingFlatIcon className="arrow-icon-red"/> 
+      <img src={onblockedseat} alt="" />
+    </div>
+  </div>
 
-        <div className="seatred">
-          <div>
-            <label>Blocked Seat </label> 
-            <TrendingFlatIcon className="arrow-icon-red"/> 
-            <img src={onbookedseat} alt=""  />
-          </div>
-        </div>
-      </div>
-      <ConfirmButton />
-      {/* <button onClick={associatedetails} className="select-seat-btn">
+  <div className="seatred">
+    <div>
+      <label>Blocked Seat </label> 
+      <TrendingFlatIcon className="arrow-icon-red"/> 
+      <img src={onbookedseat} alt=""  />
+    </div>
+  </div>
+</div>
+      <button onClick={associatedetails} className="select-seat-btn">
         Confirm Seats
-      </button> */}
+      </button>
 
       <div className="manager-zoom-control">
         <button onClick={handleZoomIn}>+</button> {/* Zoom In */}
@@ -815,25 +775,7 @@ const Manager_seatlayout = () => {
             <div className="loader"></div>
           ) : (
             <>
-              {/* <div className="manager-legends">
-                <div className="seatgreen">
-                  <label>Selected Seat</label>
-
-                  <img src={seatup_imageselect} alt="" />
-                </div>
-
-                <div className="seatyellow">
-                  <label>Booked Seat</label>
-
-                  <img src={onblockedseat} alt="" />
-                </div>
-
-                <div className="seatred">
-                  <label>Blocked Seat</label>
-
-                  <img src={onbookedseat} alt="" />
-                </div>
-              </div> */}
+          
 
               <TableGroup />
 

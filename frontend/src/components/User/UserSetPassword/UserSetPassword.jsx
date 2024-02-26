@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
+import axios from 'axios';
 const useStyles = makeStyles(theme => ({
   setPasswordContainer: {
     maxWidth: 400,
@@ -57,6 +58,7 @@ const SetPassword = () => {
   const [passwordError, setPasswordError] = useState('');
   const [confirmationError, setConfirmationError] = useState('');
 
+  const token = localStorage.getItem("jwt_token");
   const validatePassword = (value) => {
     // Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -89,7 +91,9 @@ const SetPassword = () => {
       // Password meets all requirements and confirmation matches
       try {
         const id = window.location.pathname.split('/').pop(); // Extract the user ID from the URL
-        const response = await axios.patch(`http://localhost:3000/setpass/:associate_id/${id}`, { "password":password }, {
+        console.log("Value of Id from UserSetPassword : "+id);
+        console.log(`http://localhost:3000/associates/setpass/${id}`);
+        const response = await axios.patch(`http://localhost:3000/associates/setpass/${id}`, { "password":password }, {
         // const response = await axios.patch(`http://localhost:3000/admin/edit-user/${id}`, { "password":password }, {
           headers: {
             Authorization: token.toString()

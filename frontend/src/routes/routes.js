@@ -171,7 +171,7 @@ export const routes = [
           ,
       },
       {
-        path:"/resetpass",
+        path:"/resetpass/:id",
         exact:true,
         component:SetPassword
       },

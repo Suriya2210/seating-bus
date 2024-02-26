@@ -1,6 +1,11 @@
 const {hash} = require('../utils/password')
 const {Sequelize} = require('sequelize');
 const User = require('../models/user');
+const {forgotPassMail} = require('./email.controller');
+
+
+const { generate: generateToken, decode: decodeToken } = require('../utils/token');
+
 exports.getAssociates = (req, res, next)=>{
     User.findAll({where:{
         manager_id:req.params.manager_id
@@ -30,6 +35,7 @@ exports.getAssociate = (req,res,next)=>{
 }
 
 exports.setAssociatePass = (req,res,next)=>{
+    const jwt_token = req.params.jwt_token;
     User.findOne({where:{
         associate_id:req.params.associate_id
     }}).then(user=>{
@@ -42,4 +48,11 @@ exports.setAssociatePass = (req,res,next)=>{
            "result":result
         })
     }).catch(err=>console.log("Something went wrong while updating password"));
+}
+
+
+exports.forgotPass = (req,res,next)=>{
+    const userMail = req.params.email;
+    forgotPassMail(userMail);
+
 }
