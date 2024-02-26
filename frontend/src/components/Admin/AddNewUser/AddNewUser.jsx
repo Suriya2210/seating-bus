@@ -1,11 +1,9 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddNewUser.css"; // Import CSS for AddNewUser page
 import { useHistory } from "react-router-dom"; // Import useHistory from react-router-dom
-import AdminToastMessage from '../Admin-ToastMessage'; // Import Toast Message 
-
-
-
+import AdminToastMessage from '../Admin-ToastMessage'; // Import Toast Message
 
 const AddNewUser = () => {
 
@@ -75,7 +73,7 @@ const AddNewUser = () => {
           localsystemid: "",
           email: "",
           manager_id: "",
-          password: "",
+          // password: "",
           isAdmin: false,
           ismanager: false,
           manager_email: "",
@@ -85,15 +83,28 @@ const AddNewUser = () => {
           company: "",
           OpCo: "",
         });
+        // Send email to the user
+        sendEmail(formData.associate_id);
       })
       .catch((error) => {
         console.log("Error saving user data:", error);
         setMessage("Error adding user. Please try again."); // Set error message
+      });
+    // .finally(() => {
+    //   setLoading(false); // Set loading back to false after submission
+    //   triggerToast("User Added successfully!"); // Trigger toast message on successful booking
+    //   history.push('/admin/usermanagement')
+    // });
+  };
+
+  // Function to send email to the user
+  const sendEmail = (uid) => {
+    axios.post(`http://localhost:3000/send-mail/${uid}`)
+      .then((response) => {
+        console.log("Email sent successfully:", response.data);
       })
-      .finally(() => {
-        setLoading(false); // Set loading back to false after submission
-        triggerToast("User Added successfully!"); // Trigger toast message on successful booking
-        history.push('/admin/usermanagement')
+      .catch((error) => {
+        console.log("Error sending email:", error);
       });
   };
 
@@ -114,7 +125,7 @@ const AddNewUser = () => {
 
   return (
     <>
-      {showToast && <ToastMessage message={toastMessage} />}
+      {showToast && <AdminToastMessage message={toastMessage} />}
       <div className="add-user-page">
         <h2 className="add-user-header">Add New User</h2>
         <form onSubmit={handleSubmit} className="add-user-form">
@@ -166,14 +177,23 @@ const AddNewUser = () => {
                 />
               </div>
               <div className="addnewuser-group">
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                onChange={handleChange}
-                required
-              /> 
-            </div>
+                <input
+                  type="text"
+                  name="OpCo"
+                  placeholder="Opco"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              {/* <div className="addnewuser-group">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter Password"
+                  onChange={handleChange}
+                  required
+                />
+              </div> */}
             </div>
             <div className="right-column">
               <div className="addnewuser-group">
@@ -221,7 +241,7 @@ const AddNewUser = () => {
                   required
                 />
               </div>
-              <div className="addnewuser-group">
+              {/* <div className="addnewuser-group">
                 <input
                   type="text"
                   name="OpCo"
@@ -229,7 +249,7 @@ const AddNewUser = () => {
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="submit-row">

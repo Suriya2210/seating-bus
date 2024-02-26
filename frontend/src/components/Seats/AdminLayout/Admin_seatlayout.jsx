@@ -12,6 +12,7 @@ import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/armchair-6-1@2x.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
+
 var selectedseat = [];
 var selected_blockedSeat = [];
 var seat_booked_by = [];
@@ -20,6 +21,8 @@ for (let k = 0; k < 161; k++) {
   seat_booked_by.push('varsa');
 }
 
+
+const token = localStorage.getItem("jwt_token");
 
 const Admin_seatlayout = () => {
 
@@ -66,7 +69,11 @@ const Admin_seatlayout = () => {
 
     const fetchdata = async () => {
       try {
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`, {
+          headers: {
+            Authorization: token.toString()
+          }
+        });
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -114,7 +121,11 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/block-seats', json_body, {
+      headers: {
+        Authorization: token.toString()
+      }
+    });
     response = response.data;
     triggerToast("Seat Blocked Successfully!"); // Trigger toast message
     console.log(response);
@@ -165,7 +176,11 @@ const Admin_seatlayout = () => {
       seat_numbers: seat_numbers
     }
     console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body);
+    var response = await axios.post('http://localhost:3000/generate_seat/unblock-seats', json_body, {
+      headers: {
+        Authorization: token.toString()
+      }
+    });
     triggerToast("Seat Un-Blocked Successfully!");
     response = response.data;
     console.log(response);
@@ -528,11 +543,11 @@ const Admin_seatlayout = () => {
                   <img src={seatup_imageselect} alt="" />
                 </div>
                 <div className="seatyellow">
-                  <label>Booked Seat</label>
+                  <label>Blocked by Admin</label>
                   <img src={onblockedseat} alt="" />
                 </div>
                 <div className="seatred">
-                  <label>Blocked Seat</label>
+                  <label>Booked seat</label>
                   <img src={onbookedseat} alt="" />
 
                 </div>

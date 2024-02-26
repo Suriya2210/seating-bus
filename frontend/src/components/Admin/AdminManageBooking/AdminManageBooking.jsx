@@ -28,6 +28,19 @@ const AdminManageBooking = () => {
     const history = useHistory();
 
     useEffect(() => {
+        axios.post("http://localhost:3000/decodejwt", {
+            "jwttoken": localStorage.getItem("jwt_token"),
+        })
+            .then((data) => {
+                // consolelog(data);
+                if (!data.data.data.isadmin) {
+                    history.push("/home");
+                }
+            })
+            .catch((err) => {
+                console.log("Error in DecodeJWTToken");
+                console.log(err);
+            })
         const todayDate = new Date().toISOString().split('T')[0];
         setToday(todayDate);
     }, []);

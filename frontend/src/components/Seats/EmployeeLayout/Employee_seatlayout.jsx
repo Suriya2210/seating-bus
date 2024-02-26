@@ -9,7 +9,7 @@ import ToastMessage from '../ToastMessage'; // Import Toast Message
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
-import onbookedseat from './public/armchair-6-1@2x.png'
+import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
 var seat_booked_by = [];
@@ -21,6 +21,7 @@ for (let k = 0; k < 161; k++) {
 
 const Employee_seatlayout = () => {
 
+
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
@@ -31,11 +32,12 @@ const Employee_seatlayout = () => {
     setTimeout(() => {
       setShowToast(false);
       setToastMessage('');
-      window.location.reload(); // Refresh the page after 3 seconds
-    }, 3000);
+      // window.location.reload(); // Refresh the page after 3 seconds
+    }, 1000);
   };
 
-
+ 
+  const token = localStorage.getItem("jwt_token");
   const location = useLocation();
 
 
@@ -46,6 +48,7 @@ const Employee_seatlayout = () => {
   const [employee_seat, setemployee_seat] = useState(null)
   const [userdata, setuserdata] = useState(null);
   const [alreadybooked, setalreadybooked] = useState(null);
+  const [seatBooked,setSeatBooked] = useState(false);
   useEffect(() => {
     if (seat_info) {
       seat_info.forEach(element => {
@@ -65,9 +68,17 @@ const Employee_seatlayout = () => {
 
     const fetchdata = async () => {
       try {
-        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`)
+        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
+          headers: {
+            Authorization: token.toString()
+          }}
+          
+    )
         setuserdata(user.data.data);
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`);
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`,{
+          headers: {
+            Authorization: token.toString()
+          }});
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -91,7 +102,7 @@ const Employee_seatlayout = () => {
     }
     fetchdata();
     console.log(employee_seat);
-  }, [])
+  }, [seatBooked])
 
   const bookseatcss = {
     padding: '20px',
@@ -103,7 +114,7 @@ const Employee_seatlayout = () => {
 
   const bookseat = async () => {
     try {
-      if (!employee_seat) console.log("No seat is selected!!!!");
+      if (!employee_seat) alert('Please select a seat to book');
       else {
         var json_body = {
           "date": date,
@@ -114,6 +125,7 @@ const Employee_seatlayout = () => {
         }
         var response = await axios.post('http://localhost:3000/api/auth/bookseat', json_body);
         triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
+        setSeatBooked(true);
         // console.log(response.data.data);
         // console.log(response.data.message);
         // window.location.reload()
@@ -141,7 +153,10 @@ const Employee_seatlayout = () => {
         "associate_id": localStorage.getItem('id'),
         "cancelled_by": trim(localStorage.getItem('user'))
       }
-      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body);
+      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body,{
+        headers: {
+          Authorization: token.toString()
+        }});
       console.log(response.data.data);
       console.log(response.data.message);
       window.location.reload()
@@ -184,7 +199,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            setemployee_seat(props.seat_id)
+            if(employee_seat===props.seat_id){
+              setemployee_seat(null);
+            }else{
+            setemployee_seat(props.seat_id);
+            }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} />
         </Tooltip>
 
@@ -224,7 +243,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            setemployee_seat(props.seat_id)
+            if(employee_seat===props.seat_id){
+              setemployee_seat(null);
+            }else{
+            setemployee_seat(props.seat_id);
+            }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "180deg" }} />
         </Tooltip>
 
@@ -264,7 +287,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            setemployee_seat(props.seat_id)
+           if(employee_seat===props.seat_id){
+            setemployee_seat(null);
+          }else{
+          setemployee_seat(props.seat_id);
+          }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "270deg" }} />
         </Tooltip>
 
@@ -304,7 +331,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            setemployee_seat(props.seat_id)
+            if(employee_seat===props.seat_id){
+              setemployee_seat(null);
+            }else{
+            setemployee_seat(props.seat_id);
+            }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "90deg" }} />
         </Tooltip>
 
@@ -347,7 +378,7 @@ const Employee_seatlayout = () => {
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}
-      <h1><center>Employee Seatlayout Page</center></h1>
+      <h1><center>Associate seat booking for /{date}/</center></h1>
       {alreadybooked ? (
         <div className="emp-message-container">
           <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
@@ -355,7 +386,7 @@ const Employee_seatlayout = () => {
           {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
         </div>
       )
-        : <button onClick={bookseat} className="empseat-book-button">Book Seat</button>}
+        : <button onClick={bookseat} className="empseat-book-button" disabled={!employee_seat}>Book Seat</button>}
 
       <div className="admin-zoom-control">
         <button onClick={handleZoomIn}>+</button> {/* Zoom In */}

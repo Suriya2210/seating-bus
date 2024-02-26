@@ -4,6 +4,8 @@ import "./UserManagementPage.css";
 import axios from "axios";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useHistory } from "react-router-dom";
+
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,19 +16,42 @@ const UserManagementPage = () => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [temp, settemp] = useState(false);
 
   const token = localStorage.getItem("jwt_token");
-  console.log("JWT TOKEN " + token);
+  const history = useHistory();
 
   useEffect(() => {
+
+    axios.post("http://localhost:3000/decodejwt", {
+      "jwttoken": token,
+    })
+      .then((data) => {
+        // consolelog(data);
+        if (!data.data.data.isadmin) {
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        console.log("Error in DecodeJWTToken");
+        console.log(err);
+      })
+
     axios
-      .get("http://localhost:3000/admin/get-users")
+      .get("http://localhost:3000/admin/get-users",
+        {
+          headers: {
+            Authorization: token.toString()
+          }
+        })
       .then((response) => {
         setUsers(response.data.data.users);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
+
+    settemp(true);
   }, []);
 
   // Pagination functions
@@ -81,10 +106,11 @@ const UserManagementPage = () => {
     // Make a DELETE request to delete the user using the API
     axios
       .delete(`http://localhost:3000/admin/delete-user/${userToDelete.associate_id}`,
-        // {
-        //   headers: {
-        //     Authorization: token.toString()
-        //   }}
+        {
+          headers: {
+            Authorization: token.toString()
+          }
+        }
       )
       .then(() => {
         // If the request is successful, remove the user from the local state

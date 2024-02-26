@@ -35,12 +35,7 @@ const trim_manager_name = (name) => {
   return str;
 };
 
-var associate_info = [
-  {
-    name: trim_manager_name(localStorage.getItem("user")),
-    id: localStorage.getItem("id"),
-  },
-];
+var associate_info = [];
 
 var count_selected = 0;
 var seat_booked_by = [];
@@ -119,6 +114,24 @@ const Manager_seatlayout = () => {
   }, [max_seat]);
 
   useEffect(() => {
+
+    axios.post("http://localhost:3000/decodejwt", {
+      "jwttoken": localStorage.getItem("jwt_token"),
+    })
+      .then((data) => {
+        associate_info.push({
+          name: data.data.data.user,
+          id: data.data.data.id
+        })
+        console.log(associate_info);
+      })
+      .catch((err) => {
+        console.log("Error in DecodeJWTToken");
+        console.log(err);
+      })
+
+
+
     const fetchdata = async () => {
       try {
         const val = await axios.get(

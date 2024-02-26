@@ -7,6 +7,8 @@ import { Home, Apps as AppsIcon, PeopleAlt as PeopleAltIcon, EventSeat as EventS
 import { TopBar } from "./components/TopBar";
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import axios from "axios";
+import AdminTopBar from "./components/TopBar/AdminTopBar";
 
 const drawerWidth = 256;
 
@@ -61,6 +63,7 @@ function Dashboard(props) {
   const classes = useStyles();
   const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
   const location = useLocation();
+  const [role,setrole]=useState(null)
 
   const handleMenuClick = () => {
     setOpenNavBarMobile(!openNavBarMobile);
@@ -76,6 +79,26 @@ function Dashboard(props) {
     // Additional logout logic if needed
   };
 
+  axios.post("http://localhost:3000/decodejwt", {
+      "jwttoken": localStorage.getItem("jwt_token"),
+    })
+      .then((data) => {
+        // consolelog(data);
+        if (data.data.data.isadmin) {
+          setrole("admin")
+        }
+        else if (data.data.data.ismanager) {
+          setrole("manager")
+        }
+        else{
+          setrole("employee")
+        }
+      })
+      .catch((err) => {
+        console.log("Error in DecodeJWTToken");
+        console.log(err);
+      })
+
   const sidebarLinks = [
     { to: "/", text: "Home", icon: <Home /> },
     { to: "/userprofile", text: "Profile", icon: <AssignmentIndIcon /> },
@@ -86,7 +109,12 @@ function Dashboard(props) {
 
   return (
     <div className={classes.root}>
-      <TopBar className={classes.topBar} openMenu={handleMenuClick} />
+      {role=="admin" ? (
+<AdminTopBar className={classes.topBar} openMenu={handleMenuClick} /> 
+      ) : (
+<TopBar className={classes.topBar} openMenu={handleMenuClick} /> 
+      )}
+      {/* <TopBar className={classes.topBar} openMenu={handleMenuClick} /> */}
       <nav className={classes.drawer}>
         <Hidden lgUp implementation="css">
           <Drawer
@@ -129,9 +157,11 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.loggedIn,
-  };
+  console.log("Map State To Props "+JSON.stringify(state));
+  let isAuthenticated;
+return {
+  isAuthenticated:state.auth.loggedIn,
+};
 };
 
 export default connect(mapStateToProps)(Dashboard);

@@ -11,8 +11,19 @@ function login(username, password) {
   return (dispatch) => {
     dispatch(request(username));
     authService.login(username, password).then(response => {
-        dispatch(success(response.user));
-        history.push('/');
+
+        localStorage.setItem("uid",response.data.associate_id);
+        dispatch(success({user_name:response.data.associate_name,user_email:response.data.email,user_id:response.data.associate_id}));
+        const isAdmin = response.data.isAdmin;
+        const isManager = response.data.isManager;
+        if(isAdmin && isManager ){
+          history.push('/admin/adminhome');
+        }else if(isAdmin){
+          history.push('/adminhome');
+        }else{
+          history.push('/');
+        }
+       
     })
     .catch(error => {
         if(error.response){
@@ -28,6 +39,7 @@ function login(username, password) {
     return { type: authConstants.LOGIN_REQUEST, user };
   }
   function success(user) {
+    console.log("Name from actions : "+user.user_name);
     return { type: authConstants.LOGIN_SUCCESS, user };
   }
   function failure(error) {
@@ -36,6 +48,5 @@ function login(username, password) {
 }
 
 function logout() {
-  authService.logout();
   return { type: authConstants.LOGOUT };
 }

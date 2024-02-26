@@ -13,18 +13,36 @@ const adminRoute = require('./routes/admin.route');
 
 const bookSeatRoute = require('./routes/book-seat.route');
 
-const seat_info_route= require('./routes/seats_info.route')
+const seat_info_route= require('./routes/seats_info.route');
 
-const generate_seat_route=require('./routes/generate_seat.route')
+const generate_seat_route=require('./routes/generate_seat.route');
 
 const associatesinfo = require('./routes/associatesinfo.route');
 
+const mail_route = require('./routes/email.route');
+
 const { httpLogStream } = require('./utils/logger');
+
+const decodejwt=require('./routes/decodejwt');
 
 //Database
 const sequelize = require ('./utils/database')
 
 const app = express();
+
+//node-mailer
+// const nodemailer = require('nodemailer');
+
+// Create a transporter object using SMTP details
+// const transporter = nodemailer.createTransport({
+//   host: 'email-smtp.eu-central-1.amazonaws.com',
+//   port: 25,
+//   secure: false, // true for 465, false for other ports
+//   auth: {
+//     user: '',
+//     pass: ''
+//   }
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,6 +57,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.disable('x-powered-by');
+
+//Mail route
+// app.post('/send-email', );
 
 // Middleware to set Access-Control-Allow-Methods header
 app.use((req, res, next) => {
@@ -62,6 +83,8 @@ app.use('/api/auth', authRoute);
 app.use('/seats_info',seat_info_route);
 app.use('/generate_seat',generate_seat_route);
 app.use('/associates',associatesinfo);
+app.use('/decodejwt',decodejwt);
+app.use(mail_route);
 
 
 app.get('/', (req, res) => {

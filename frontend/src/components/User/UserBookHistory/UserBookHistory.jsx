@@ -276,6 +276,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserBookHistory.css"; // Import CSS for styling
+import ToastMessage from '../ToastMessage'; // Import Toast Message 
 
 const trim = (str) => {
   var string = "";
@@ -284,6 +285,23 @@ const trim = (str) => {
 };
 
 const UserBookHistory = () => {
+
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Function to trigger toast message
+  const triggerToast = (message) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage('');
+      window.location.reload(); // Refresh the page after 3 seconds
+    }, 1000);
+  };
+
+
   const [currentBookings, setCurrentBookings] = useState([]);
   const [pastBookings, setPastBookings] = useState([]);
   const [cancelledBookings, setCancelledBookings] = useState([]);
@@ -294,9 +312,13 @@ const UserBookHistory = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
 
   useEffect(() => {
+
+    // const json_body = localStorage.getItem("id");
+
+
     const fetchData = async () => {
       try {
-        const json_body = localStorage.getItem("id");
+
         const responseCurrent = await axios.get(
           `http://localhost:3000/seat/get-booking/${json_body}`
         );
@@ -329,7 +351,21 @@ const UserBookHistory = () => {
       }
     };
 
-    fetchData();
+    var json_body;
+
+    axios.post("http://localhost:3000/decodejwt", {
+      "jwttoken": localStorage.getItem("jwt_token"),
+    })
+      .then((data) => {
+        json_body = data.data.data.id
+        fetchData();
+      })
+      .catch((err) => {
+        console.log("Error in DecodeJWTToken");
+        console.log(err);
+      })
+
+
   }, []);
 
   const handleOptionChange = (e) => {
@@ -363,8 +399,10 @@ const UserBookHistory = () => {
       .post(`http://localhost:3000/api/auth/cancelseat`, json_body)
       .then((data) => {
         console.log(data);
-        alert("Seat cancelled successfully!!!");
-        window.location.reload();
+        setShowPopup(false);
+        triggerToast("Reason Saved & Seat Cancelled successfully!"); // Trigger toast message on successful booking
+        // alert("Seat cancelled successfully!!!");
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -373,6 +411,7 @@ const UserBookHistory = () => {
 
   return (
     <>
+      {showToast && <ToastMessage message={toastMessage} />}
       {loading ? (
         <h1>Loading!!!</h1>
       ) : (
@@ -480,24 +519,24 @@ const UserBookHistory = () => {
             <div>
               <input
                 type="radio"
-                id="leave"
+                id="On Leave"
                 name="reason"
                 value="On Leave"
-                checked={selectedOption === "Leave"}
+                checked={selectedOption === "On Leave"}
                 onChange={handleOptionChange}
               />
-              <label htmlFor="leave">On Leave</label>
+              <label htmlFor="On Leave">On Leave</label>
             </div>
             <div>
               <input
                 type="radio"
-                id="wrongSeat"
+                id="Picked Wrong Seat"
                 name="reason"
-                value="Wrong Seat Selection"
-                checked={selectedOption === "Wrong Seat Cancel"}
+                value="Picked Wrong Seat"
+                checked={selectedOption === "Picked Wrong Seat"}
                 onChange={handleOptionChange}
               />
-              <label htmlFor="wrongSeat">Picked Wrong Seat</label>
+              <label htmlFor="Picked Wrong Seat">Picked Wrong Seat</label>
             </div>
             <div>
               <input
