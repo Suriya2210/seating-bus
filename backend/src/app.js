@@ -23,6 +23,8 @@ const mail_route = require('./routes/email.route');
 
 const { httpLogStream } = require('./utils/logger');
 
+const decodejwt=require('./routes/decodejwt');
+
 //Database
 const sequelize = require ('./utils/database')
 
@@ -81,6 +83,7 @@ app.use('/api/auth', authRoute);
 app.use('/seats_info',seat_info_route);
 app.use('/generate_seat',generate_seat_route);
 app.use('/associates',associatesinfo);
+app.use('/decodejwt',decodejwt);
 app.use(mail_route);
 
 
