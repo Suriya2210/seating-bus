@@ -25,6 +25,17 @@ const generate_FOW_table = async () => {
     }
 }
 
+const generatereport = () => {
+    axios.get('http://localhost:3000/generatereport')
+        .then((data) => {
+            console.log(data);
+            alert("Report generation is success");
+        })
+        .catch((err) => {
+            console.log("Error in report generation")
+        })
+}
+
 const HeroSection = ({ handleDateChange, pickedDate }) => {
     const [date, setdate] = useState('');
     const [today, setToday] = useState('');
@@ -74,6 +85,10 @@ const HeroSection = ({ handleDateChange, pickedDate }) => {
                         </div>
                     </div>
                 </div> */}
+                <br></br>
+                <div className="reportgen-btn">
+                    <button onClick={generatereport}>Generate Report</button>
+                </div>
             </div>
         </header>
     );

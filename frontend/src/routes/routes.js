@@ -36,12 +36,6 @@ import {getAccessLevel} from "../utils/getAccessLevel.js";
 import { useState } from "react";
 
 
-let uid = localStorage.getItem("uid");
-let role =await getAccessLevel(uid);
-console.log("Role from routes "+role);
-
-
-
 export const routes = [
   {
     path: "/",
