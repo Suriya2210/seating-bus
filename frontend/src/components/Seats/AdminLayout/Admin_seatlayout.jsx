@@ -102,12 +102,8 @@ const Admin_seatlayout = () => {
   }, [])
 
   const blockSeat = async () => {
-
-
     var seat_numbers = []
-
     selectedseat.forEach(element => {
-
       var seatno = element.toString();
       while (seatno.length < 3) {
         seatno = '0' + seatno;
@@ -115,7 +111,6 @@ const Admin_seatlayout = () => {
       seatno = 'WKS' + seatno;
       seat_numbers.push(seatno);
     });
-
     const json_body = {
       date: date,
       seat_numbers: seat_numbers
@@ -131,31 +126,45 @@ const Admin_seatlayout = () => {
     console.log(response);
     console.log(`${seat_numbers} are successfully blocked`);
     // window.location.reload()
-
   }
 
   const handleBlockSeatWithGuest = async () => {
-
     var sn = selectedseat[0].toString();
 
     while (sn.length < 3) {
       sn = '0' + sn;
     }
     sn = 'WKS' + sn;
+
     const json_body = {
       date: date,
       seat_number: sn,
       booked_for_name: guestName,
       guest_email: guestEmail,
       is_guest: true,
-    }
-    console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
-    console.log(response);
-    console.log(`${sn} is blocked for guest ${guestname}`);
-    window.location.reload()
+    };
 
+    console.log(json_body);
+
+    var response=axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body,{
+      headers: {
+        Authorization: token.toString()
+      }
+    });
+        console.log(response);
+        triggerToast("Seat Booked for the Guest Successfully!"); // Trigger toast message
+        setShowPopup(false); // Close the popup after successful booking
+        console.log(`${sn} is blocked for guest ${guestName}`);
+        // window.location.reload(); // Refresh the page
+      // })
+      // .catch(error => {
+      //   console.error("Error blocking seat for guest:", error);
+      //   // Handle error if needed
+      // });
   };
+
+
+
 
   const unblockSeat = async () => {
     var seat_numbers = []
@@ -939,6 +948,7 @@ const Admin_seatlayout = () => {
               </div>
 
             </>
+
           )}
         </div>
         {/* BELOW IS THE CODE FOR POP-UP */}
@@ -951,15 +961,17 @@ const Admin_seatlayout = () => {
                 placeholder="Enter Guest Name"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
+                required
               />
               <input
                 type="email"
                 placeholder="Enter Guest Email"
                 value={guestEmail}
                 onChange={(e) => setGuestEmail(e.target.value)}
+                required
               />
               <div className="guestblockmanagebtns">
-                <button onClick={handleBlockSeatWithGuest} class>Book Seat</button>
+                <button onClick={handleBlockSeatWithGuest}>Book Seat</button>
                 <button onClick={handleGuestBlockClose}>Cancel</button>
               </div>
             </div>
