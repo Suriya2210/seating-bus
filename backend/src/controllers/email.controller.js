@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
     port: 25,
     secure: false, // true for 465, false for other ports
     auth: {
-      user:'AKIAYUXGM3VQMLJC2FSM',
-      pass:'BC6iA1cAGSWVkTFp4yLrL7+QomPOqQsci3utkMjrPpX4'
+      user:MAIL_SERVER_USER_NAME,
+      pass:MAIL_SERVER_USER_PASSWORD
     }
   });
  
@@ -36,7 +36,6 @@ const transporter = nodemailer.createTransport({
    
     const setpass_token = generateToken(associate_id,associate_mail);
     console.log(setpass_token);
-    console.log(`http://localhost:3000/resetpass/${setpass_token}`);
     console.log(decodeToken(setpass_token));
     // Create email message
     const mailOptions = {
