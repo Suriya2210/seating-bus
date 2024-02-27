@@ -675,7 +675,7 @@ const Manager_seatlayout = () => {
 
   // }
 
-  const BookSeats = () => {
+  const BookSeats = async () => {
     let flag = true;
 
     const no_duplicates = [];
@@ -698,7 +698,7 @@ const Manager_seatlayout = () => {
 
     // return;
 
-    selectedseat.forEach((element) => {
+    selectedseat.forEach(async (element) => {
       const seat_number_str = changenumbertoseat(element);
       let id = -1;
       associate_info.forEach((i) => {
@@ -719,16 +719,12 @@ const Manager_seatlayout = () => {
         seat_booked_by: trim_manager_name(localStorage.getItem("user")),
       };
 
-      axios
+      var response = await axios
         .post("http://localhost:3000/api/auth/bookseat", json)
 
-        .then((response) => {
-          console.log(response.data);
-        })
-
-        .catch((err) => {
-          console.log(err);
-        });
+        if(response){
+          var bookres = await axios.post('http://localhost:3000/booking-success',response.data.data);
+        }
 
       //  triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
     });

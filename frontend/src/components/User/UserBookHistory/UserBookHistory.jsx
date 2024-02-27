@@ -12,7 +12,7 @@ const trim = (str) => {
 
 const UserBookHistory = () => {
 
-
+  console.log("Loading user book history");
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
@@ -23,7 +23,7 @@ const UserBookHistory = () => {
     setTimeout(() => {
       setShowToast(false);
       setToastMessage('');
-      window.location.reload(); // Refresh the page after 3 seconds
+      // window.location.reload(); // Refresh the page after 3 seconds
     }, 1000);
   };
 
@@ -121,7 +121,7 @@ const UserBookHistory = () => {
     axios
       .post(`http://localhost:3000/api/auth/cancelseat`, json_body)
       .then((data) => {
-        console.log(data);
+        console.log("Cancelled seat "+JSON.stringify(data));
         setShowPopup(false);
         triggerToast("Reason Saved & Seat Cancelled successfully!"); // Trigger toast message on successful booking
         // alert("Seat cancelled successfully!!!");
