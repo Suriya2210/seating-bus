@@ -5,6 +5,7 @@ import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
+import { useHistory } from "react-router-dom";
 
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -21,6 +22,8 @@ for (let k = 0; k < 161; k++) {
 
 const Employee_seatlayout = () => {
 
+  const history = useHistory();
+
 
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -36,7 +39,7 @@ const Employee_seatlayout = () => {
     }, 1000);
   };
 
- 
+
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
 
@@ -48,7 +51,7 @@ const Employee_seatlayout = () => {
   const [employee_seat, setemployee_seat] = useState(null)
   const [userdata, setuserdata] = useState(null);
   const [alreadybooked, setalreadybooked] = useState(null);
-  const [seatBooked,setSeatBooked] = useState(false);
+  const [seatBooked, setSeatBooked] = useState(false);
   useEffect(() => {
     if (seat_info) {
       seat_info.forEach(element => {
@@ -65,20 +68,35 @@ const Employee_seatlayout = () => {
   }
 
   useEffect(() => {
+    axios.post(`http://localhost:3000/seat/is-date-available/${date}`)
+      .then((data) => {
+        if (data.data.message == "The seat is not generated on this date") {
+          alert("The selected date does not come under FOW")
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
+
+  useEffect(() => {
 
     const fetchdata = async () => {
       try {
-        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
+        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`, {
           headers: {
             Authorization: token.toString()
-          }}
-          
-    )
+          }
+        }
+
+        )
         setuserdata(user.data.data);
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`,{
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`, {
           headers: {
             Authorization: token.toString()
-          }});
+          }
+        });
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -153,10 +171,11 @@ const Employee_seatlayout = () => {
         "associate_id": localStorage.getItem('id'),
         "cancelled_by": trim(localStorage.getItem('user'))
       }
-      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body,{
+      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body, {
         headers: {
           Authorization: token.toString()
-        }});
+        }
+      });
       console.log(response.data.data);
       console.log(response.data.message);
       window.location.reload()
@@ -199,10 +218,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} />
         </Tooltip>
@@ -243,10 +262,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "180deg" }} />
         </Tooltip>
@@ -287,11 +306,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-           if(employee_seat===props.seat_id){
-            setemployee_seat(null);
-          }else{
-          setemployee_seat(props.seat_id);
-          }
+            if (employee_seat === props.seat_id) {
+              setemployee_seat(null);
+            } else {
+              setemployee_seat(props.seat_id);
+            }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "270deg" }} />
         </Tooltip>
 
@@ -331,10 +350,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "90deg" }} />
         </Tooltip>
