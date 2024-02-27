@@ -206,7 +206,7 @@ const transporter = nodemailer.createTransport({
         </head>
         <body>
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2>A seat has been booked for you ! on ${booked_date}</h2>
+            <h2>You have booked seats for you/your associates on ${booked_date}</h2>
             <p>Please find the booking details below!</p>
             <p>${bookings}</p>
             <p>If you want to cancel this seat. You can do it under your booking history page</p>

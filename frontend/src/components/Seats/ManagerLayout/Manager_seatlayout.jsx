@@ -697,7 +697,7 @@ const Manager_seatlayout = () => {
     console.log("Success!!");
 
     // return;
-
+    var bookingsArray = [];
     selectedseat.forEach(async (element) => {
       const seat_number_str = changenumbertoseat(element);
       let id = -1;
@@ -718,7 +718,8 @@ const Manager_seatlayout = () => {
 
         seat_booked_by: trim_manager_name(localStorage.getItem("user")),
       };
-
+      var bookingItem = document.getElementById(element).value+" ("+seat_number_str+")";
+      bookingsArray.push(bookingItem);
       var response = await axios
         .post("http://localhost:3000/api/auth/bookseat", json)
 
@@ -729,7 +730,15 @@ const Manager_seatlayout = () => {
       //  triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
     });
     alert("Seat Booking Success!!!");
+    var payload = {
+      "booked_for_date":date,
+      "booked_by":trim_manager_name(localStorage.getItem("user")),
+      "booked_by_id":localStorage.getItem("id"),
+      "bookings":bookingsArray
+    }
     window.location.reload();
+    await axios.post('http://localhost:3000/manager/booking-success',payload);
+ 
   };
 
   return (
