@@ -24,11 +24,13 @@ const transporter = nodemailer.createTransport({
     // Extract email data from request body
     const associate_id = req.params.uid;
     let associate_mail;
+    let associate_name;
     try{
      const user =  await User.findOne({where:{
             associate_id:associate_id
         }});
      associate_mail = user.dataValues.email;
+     associate_name = user.dataValues.associate_name;
     }catch(err){
         console.log("Something went wrong while fetching the mail "+err);
     }
@@ -41,20 +43,20 @@ const transporter = nodemailer.createTransport({
     const mailOptions = {
       from: 'seating_app@compliance.esko-saas.com',
       to: associate_mail,
-      subject: "Welcome to Book Your Seat!",
+      subject: `Welcome to Book Your Seat!`,
       html: `
       <!DOCTYPE html>
       <html lang="en">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Set Your Password</title>
+        <title>Set your password</title>
       </head>
       <body>
         <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2>Welcome to Book Your Seat</h2>
+          <h2>Hi ${associate_name}, Welcome to Book Your Seat</h2>
           <p>You've been added as a new user. To set your password and access your account, please click the link below:</p>
-          <p><a href="http://localhost:3000/associates/resetpass/${setpass_token}" target="_blank">Set Your Password</a></p>
+          <p><a href="http://localhost:3000/associates/resetpass/${setpass_token}" target="_blank">Click here to set your passwordd</a></p>
           <p>If you did not request this, you can ignore this email and your password will remain unchanged.</p>
           <p>Thanks,<br>Admin</p>
         </div>
@@ -145,7 +147,64 @@ const transporter = nodemailer.createTransport({
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Set Your Password</title>
+          <title>Booking details</title>
+        </head>
+        <body>
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2>A seat has been booked for you !</h2>
+            <p>Please find the booking details below!</p>
+            <p>Seat number: ${seat_no}</p>
+            <p>Booked By: ${booked_by}</p>
+            <p>If you want to cancel this seat. You can do it under your booking history page</p>
+            <p>Thanks,<br>Admin</p>
+          </div>
+        </body>
+        </html>
+      `, 
+        text:"test mail"
+      };
+    
+      // Send email
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+    }).catch(err=>{
+      console.log("Error while fetching user data in bookingsuccessmail controller "+err);
+    })
+   
+   
+    
+  }
+
+
+  exports.bookingCancelMail = async (req,res) => {
+    
+    console.log("From booking cancel mail "+JSON.stringify(req.body));
+    // Extract email data from request body
+    let id = req.body.booked_for_id;
+    const seat_no = req.body.seat_number;
+    const booked_by = req.body.seat_booked_by;
+    console.log("Sending mail for this id "+id);
+    User.findOne({where:{
+      associate_id:id
+    }}).then(user=>{
+      console.log("Booked for user "+JSON.stringify(user));
+
+      const mailOptions = {
+        from: 'seating_app@compliance.esko-saas.com',
+        to: user.email,
+        subject: "Booking successful! | Book Your Seat",
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Booking details</title>
         </head>
         <body>
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">

@@ -107,7 +107,7 @@ exports.cancelseat=(req,res,next)=>{
       created_by:req.body.cancelled_by,
       updated_by:req.body.cancelled_by
     }
-
+    console.log("Found booking "+JSON.stringify(seat));
     temp_storingname=seat.booked_for_name,
     seat.booked_for_id=null,
     seat.booked_for_name=null,
@@ -123,7 +123,7 @@ exports.cancelseat=(req,res,next)=>{
     res.status(200).json({
       status:"success",
       message:`${temp_storingname} cancelled the seat ${seat.seat_number} on ${seat.seat_selection_date}`,
-      data:seat
+      data:cancel_data
     })
   })
   .catch((err)=>{
