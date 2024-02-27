@@ -1,25 +1,24 @@
-//node-mailer
 const nodemailer = require('nodemailer');
-
-
+ 
+ 
 const User = require('../models/user');
-
-
+ 
+ 
 const {  MAIL_SERVER_USER_NAME,MAIL_SERVER_USER_PASSWORD } = require('../utils/secrets');
-
+ 
 const { generate: generateToken, decode: decodeToken } = require('../utils/token');
-
+ 
 // Create a transporter object using SMTP details
 const transporter = nodemailer.createTransport({
     host: 'email-smtp.eu-central-1.amazonaws.com',
     port: 25,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: MAIL_SERVER_USER_NAME,
-      pass: MAIL_SERVER_USER_PASSWORD
+      user:'AKIAYUXGM3VQMLJC2FSM',
+      pass:'BC6iA1cAGSWVkTFp4yLrL7+QomPOqQsci3utkMjrPpX4'
     }
   });
-
+ 
   exports.sendMail = async (req, res) => {
     // Extract email data from request body
     const associate_id = req.params.uid;
@@ -34,7 +33,7 @@ const transporter = nodemailer.createTransport({
     }catch(err){
         console.log("Something went wrong while fetching the mail "+err);
     }
-    
+   
     const setpass_token = generateToken(associate_id,associate_mail);
     console.log(setpass_token);
     console.log(`http://localhost:3000/resetpass/${setpass_token}`);
@@ -62,10 +61,10 @@ const transporter = nodemailer.createTransport({
         </div>
       </body>
       </html>
-    `, 
+    `,
       text:"test mail"
     };
-  
+ 
     // Send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -77,20 +76,20 @@ const transporter = nodemailer.createTransport({
       }
     });
   }
-
-
+ 
+ 
   exports.forgotPassMail = async (email) => {
     // Extract email data from request body
     let associate_mail = email;
-  
+ 
     const setpass_token = "test";
-
+ 
     console.log("Sending mail to ..."+associate_mail);
     // Create email message
     const mailOptions = {
       from: 'seating_app@compliance.esko-saas.com',
       to: associate_mail,
-      subject: "Forgot password | Book Your Seat",
+      subject: "Book Your Seat | Forgot password ",
       html: `
       <!DOCTYPE html>
       <html lang="en">
@@ -109,10 +108,10 @@ const transporter = nodemailer.createTransport({
         </div>
       </body>
       </html>
-    `, 
+    `,
       text:"test mail"
     };
-  
+ 
     // Send email
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -122,25 +121,25 @@ const transporter = nodemailer.createTransport({
       }
     });
   }
-
-
+ 
+ 
   exports.bookingSucessMail = async (req,res) => {
-    
+   
     console.log("From booking success mail "+JSON.stringify(req.body));
     // Extract email data from request body
     let id = req.body.booked_for_id;
     const seat_no = req.body.seat_number;
-    const booked_by = req.body.seat_booked_by;
+    const booked_by= req.body.seat_booked_by;
     console.log("Sending mail for this id "+id);
     User.findOne({where:{
       associate_id:id
     }}).then(user=>{
       console.log("Booked for user "+JSON.stringify(user));
-
+ 
       const mailOptions = {
         from: 'seating_app@compliance.esko-saas.com',
         to: user.email,
-        subject: "Booking successful! | Book Your Seat",
+        subject: "Book Your Seat | Booking successful!",
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -151,7 +150,7 @@ const transporter = nodemailer.createTransport({
         </head>
         <body>
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2>A seat has been booked for you !</h2>
+            <h2>A seat has been booked for you ! on date</h2>
             <p>Please find the booking details below!</p>
             <p>Seat number: ${seat_no}</p>
             <p>Booked By: ${booked_by}</p>
@@ -160,10 +159,10 @@ const transporter = nodemailer.createTransport({
           </div>
         </body>
         </html>
-      `, 
+      `,
         text:"test mail"
       };
-    
+   
       // Send email
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -176,28 +175,76 @@ const transporter = nodemailer.createTransport({
       console.log("Error while fetching user data in bookingsuccessmail controller "+err);
     })
    
-   
-    
   }
-
-
+ 
+ 
+  exports.bookingSucessMailManager = async (req,res) => {
+   
+    console.log("From manager booking success mail "+JSON.stringify(req.body));
+    // Extract email data from request body
+    let id = req.body.booked_by_id;
+    const booked_date = req.body.booked_for_date;
+    const booked_by= req.body.booked_by;
+    const bookings = req.body.bookings;
+    console.log("Sending mail for this id "+id);
+    User.findOne({where:{
+      associate_id:id
+    }}).then(user=>{
+      console.log("Booked for user "+JSON.stringify(user));
+ 
+      const mailOptions = {
+        from: 'seating_app@compliance.esko-saas.com',
+        to: user.email,
+        subject: "Book Your Seat | Booking successful!",
+        html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Booking details</title>
+        </head>
+        <body>
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2>A seat has been booked for you ! on ${booked_date}</h2>
+            <p>Please find the booking details below!</p>
+            <p>${bookings}</p>
+            <p>If you want to cancel this seat. You can do it under your booking history page</p>
+            <p>Thanks,<br>Admin</p>
+          </div>
+        </body>
+        </html>
+      `,
+        text:"test mail"
+      };
+   
+      // Send email
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+    }).catch(err=>{
+      console.log("Error while fetching user data in bookingsuccessmail controller "+err);
+    })
+   
+  }
+ 
   exports.bookingCancelMail = async (req,res) => {
-    
+   
     console.log("From booking cancel mail "+JSON.stringify(req.body));
     // Extract email data from request body
-    let id = req.body.booked_for_id;
+    let booked_for_mail = req.body.booked_for_email;
     const seat_no = req.body.seat_number;
-    const booked_by = req.body.seat_booked_by;
-    console.log("Sending mail for this id "+id);
-    User.findOne({where:{
-      associate_id:id
-    }}).then(user=>{
-      console.log("Booked for user "+JSON.stringify(user));
-
+    const cancelled_by = req.body.seat_cancelled_by;
+    const cancellation_date = req.body.seat_cancellation_date;
+    console.log("From ec , The seat "+seat_no+" that was booked on "+cancellation_date+" by "+cancelled_by);
       const mailOptions = {
         from: 'seating_app@compliance.esko-saas.com',
-        to: user.email,
-        subject: "Booking successful! | Book Your Seat",
+        to: booked_for_mail,
+        subject: "Book Your Seat | Booking Cancelled",
         html: `
         <!DOCTYPE html>
         <html lang="en">
@@ -208,19 +255,16 @@ const transporter = nodemailer.createTransport({
         </head>
         <body>
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2>A seat has been booked for you !</h2>
+            <h2>Your seat booking for ${cancellation_date} has been cancelled</h2>
             <p>Please find the booking details below!</p>
             <p>Seat number: ${seat_no}</p>
-            <p>Booked By: ${booked_by}</p>
-            <p>If you want to cancel this seat. You can do it under your booking history page</p>
+            <p>Cancelled by: ${cancelled_by}</p>
             <p>Thanks,<br>Admin</p>
           </div>
         </body>
         </html>
-      `, 
-        text:"test mail"
+      `,
       };
-    
       // Send email
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -228,11 +272,6 @@ const transporter = nodemailer.createTransport({
         } else {
           console.log('Email sent:', info.response);
         }
-      });
-    }).catch(err=>{
-      console.log("Error while fetching user data in bookingsuccessmail controller "+err);
-    })
+      });  
    
-   
-    
   }

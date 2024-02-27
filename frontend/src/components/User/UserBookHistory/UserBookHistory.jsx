@@ -1,21 +1,22 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserBookHistory.css"; // Import CSS for styling
-import ToastMessage from '../ToastMessage'; // Import Toast Message 
+import ToastMessage from '../ToastMessage'; // Import Toast Message
+ 
 
+ 
 const trim = (str) => {
   var string = "";
   for (let i = 1; i < str.length - 1; i++) string += str[i];
   return string;
 };
-
+ 
 const UserBookHistory = () => {
-
+ 
   console.log("Loading user book history");
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
-
+ 
   // Function to trigger toast message
   const triggerToast = (message) => {
     setToastMessage(message);
@@ -26,8 +27,8 @@ const UserBookHistory = () => {
       // window.location.reload(); // Refresh the page after 3 seconds
     }, 1000);
   };
-
-
+ 
+ 
   const [currentBookings, setCurrentBookings] = useState([]);
   const [pastBookings, setPastBookings] = useState([]);
   const [cancelledBookings, setCancelledBookings] = useState([]);
@@ -36,19 +37,19 @@ const UserBookHistory = () => {
   const [selectedOption, setSelectedOption] = useState("Leave");
   const [remarks, setRemarks] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
-
+ 
   useEffect(() => {
-
+ 
     const fetchData = async () => {
       try {
-
+ 
         const responseCurrent = await axios.get(
           `http://localhost:3000/seat/get-booking/${json_body}`
         );
         const responseCancelled = await axios.get(
           `http://localhost:3000/seat/get-cancel-booking/${json_body}`
         );
-
+ 
         if (
           responseCurrent.data.status === "success" &&
           responseCancelled.data.status === "success"
@@ -61,7 +62,7 @@ const UserBookHistory = () => {
           const past = allBookings.filter(
             (booking) => new Date(booking.seat_selection_date).toISOString().split('T')[0] <= currentDate
           );
-
+ 
           setCurrentBookings(current);
           setPastBookings(past);
           setCancelledBookings(responseCancelled.data.datas);
@@ -73,10 +74,10 @@ const UserBookHistory = () => {
         console.error("Error fetching bookings:", error);
       }
     };
-
+ 
     var json_body;
-
-    axios.post("http://localhost:3000/decodejwt", {
+ 
+    axios.post(`http://localhost:3000/decodejwt`, {
       "jwttoken": localStorage.getItem("jwt_token"),
     })
       .then((data) => {
@@ -87,29 +88,29 @@ const UserBookHistory = () => {
         console.log("Error in DecodeJWTToken");
         console.log(err);
       })
-
-
+ 
+ 
   }, []);
-
+ 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
-
+ 
   const handleRemarksChange = (e) => {
     setRemarks(e.target.value);
   };
-
+ 
   const handleCancel = () => {
     setShowPopup(false);
     setRemarks("");
   };
-
-  const handleConfirmCancel = () => {
+ 
+  const handleConfirmCancel = async () => {
     if (!selectedBooking || !selectedBooking.seat_selection_date) {
       console.error("Invalid booking object:", selectedBooking);
       return;
     }
-
+ 
     const json_body = {
       date: selectedBooking.seat_selection_date,
       seat_number: selectedBooking.seat_number,
@@ -118,20 +119,18 @@ const UserBookHistory = () => {
       cancelled_by: trim(localStorage.getItem("user")),
       remarks: selectedOption === "Other" ? remarks : selectedOption,
     };
-    axios
+    var response =  await axios
       .post(`http://localhost:3000/api/auth/cancelseat`, json_body)
-      .then((data) => {
-        console.log("Cancelled seat "+JSON.stringify(data));
+    console.log("Book history "+JSON.stringify(response));
+    if(response){
+        window.location.reload();
         setShowPopup(false);
         triggerToast("Reason Saved & Seat Cancelled successfully!"); // Trigger toast message on successful booking
-        // alert("Seat cancelled successfully!!!");
-        // window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        alert("Seat cancelled successfully!!!");
+        var response = await axios.post(`http://localhost:3000/booking-cancelled`,response.data.data);
+    }
   };
-
+ 
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}
@@ -179,7 +178,7 @@ const UserBookHistory = () => {
                 </table>
               </div>
             </div>
-
+ 
             <div className="separator-line"></div>
             <div className="pb-section">
               <h2 className="pb-h">Past Bookings</h2>
@@ -299,5 +298,5 @@ const UserBookHistory = () => {
     </>
   );
 };
-
+ 
 export default UserBookHistory;

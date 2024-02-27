@@ -108,6 +108,7 @@ exports.cancelseat=(req,res,next)=>{
       updated_by:req.body.cancelled_by
     }
     console.log("Found booking "+JSON.stringify(seat));
+    let booked_for_id = seat.booked_for_id;
     temp_storingname=seat.booked_for_name,
     seat.booked_for_id=null,
     seat.booked_for_name=null,
@@ -119,12 +120,18 @@ exports.cancelseat=(req,res,next)=>{
 
     
     cancel_seat.create(cancel_data);
-
-    res.status(200).json({
-      status:"success",
-      message:`${temp_storingname} cancelled the seat ${seat.seat_number} on ${seat.seat_selection_date}`,
-      data:cancel_data
+    User.findOne({where:{
+      associate_id:booked_for_id
+    }}).then(user=>{
+      const c_data = {...cancel_data,"booked_for_email":user.email};
+      res.status(200).json({
+        status:"success",
+        message:`${temp_storingname} cancelled the seat ${seat.seat_number} on ${seat.seat_selection_date}`,
+        data:c_data
+      })
     })
+
+   
   })
   .catch((err)=>{
     console.log(err);
