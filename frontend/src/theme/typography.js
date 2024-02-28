@@ -32,7 +32,7 @@ const typography = {
   h5: {
     color: palette.text.primary,
     fontWeight: 500,
-    fontSize: '16px',
+    fontSize: '20px',
     letterSpacing: '-0.05px',
     lineHeight: '20px'
   },

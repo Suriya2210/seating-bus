@@ -103,7 +103,7 @@ function Dashboard(props) {
       const adminLinks = [
         { to: "/", text: "Home", icon: <Home /> },
         { to: "/userprofile", text: "Profile", icon: <AssignmentIndIcon /> },
-        { to: "/admin/usermanagement", text: "Admin UserMangement", icon: <PeopleAltIcon /> },
+        { to: "/admin/usermanagement", text: "User Mangement", icon: <PeopleAltIcon /> },
         { to: "/adminmanagebooking", text: "Manage FOW", icon: <EventIcon /> },
         { to: "/auth/login", text: "Logout", icon: <ExitToAppIcon />, onClick: handleLogout },
       ];

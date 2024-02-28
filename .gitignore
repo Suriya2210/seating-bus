@@ -2,3 +2,4 @@ node_modules/
 combined.log
 errors.log
 https_logs.log
+*.log
