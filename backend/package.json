@@ -17,7 +17,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "dotenv": "^16.4.5",
+=======
+    "dotenv": "^16.0.1",
+    "exceljs": "^4.4.0",
+>>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1
     "express": "^4.18.1",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",

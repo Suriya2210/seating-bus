@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ::1 - - [27/Feb/2024:05:15:20 +0000] "OPTIONS /decodejwt HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [27/Feb/2024:05:15:20 +0000] "POST /decodejwt HTTP/1.1" 500 83 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [27/Feb/2024:05:15:20 +0000] "OPTIONS /decodejwt HTTP/1.1" 204 0 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -3417,3 +3418,5 @@
 ::1 - - [27/Feb/2024:14:19:41 +0000] "POST /decodejwt HTTP/1.1" 200 144 "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [27/Feb/2024:14:19:41 +0000] "GET /seat/get-booking/4 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [27/Feb/2024:14:19:41 +0000] "GET /seat/get-cancel-booking/4 HTTP/1.1" 304 - "http://localhost:3005/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+=======
+>>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1

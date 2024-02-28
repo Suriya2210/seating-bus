@@ -5,6 +5,8 @@ import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
+import { useHistory } from "react-router-dom";
+
 import TableGroup from "../TableGroup";
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -25,6 +27,8 @@ for (let k = 0; k < 161; k++) {
 const token = localStorage.getItem("jwt_token");
 
 const Admin_seatlayout = () => {
+
+  const history = useHistory();
 
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -66,6 +70,21 @@ const Admin_seatlayout = () => {
   }
 
   useEffect(() => {
+    axios.post(`http://localhost:3000/seat/is-date-available/${date}`)
+      .then((data) => {
+        if (data.data.message == "The seat is not generated on this date") {
+          alert("The selected date does not come under FOW")
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
+
+  useEffect(() => {
+
+
 
     const fetchdata = async () => {
       try {

@@ -1,11 +1,10 @@
-
 import { Button, makeStyles, TextField, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import validate from "validate.js";
 import { authActions } from "../../actions";
-
+ 
 const constraints = {
   email: {
     presence: { allowEmpty: false, message: "is required!" },
@@ -15,7 +14,7 @@ const constraints = {
     presence: { allowEmpty: false, message: "is required!" },
   },
 };
-
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
    
@@ -39,19 +38,19 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
 }));
-
+ 
 function LoginForm(props) {
   const { login, logout, className, auth } = props;
-
+ 
   const classes = useStyles();
-
+ 
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
     touched: {},
     errors: {},
   });
-
+ 
   useEffect(() => {
     //logout();
   }, []);
@@ -63,7 +62,7 @@ function LoginForm(props) {
       errors: errors || {},
     }));
   }, [formState.values]);
-
+ 
   const handleChange = (event) => {
     setFormState((formState) => ({
       ...formState,
@@ -77,16 +76,16 @@ function LoginForm(props) {
       },
     }));
   };
-
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("pass"+formState.values.password)
     login(formState.values.email, formState.values.password);
   };
-
+ 
   const hasError = (field) =>
     formState.touched[field] && formState.errors[field] ? true : false;
-
+ 
   return (
     <form
       className={clsx(classes.root, className)}
@@ -135,7 +134,7 @@ function LoginForm(props) {
     </form>
   );
 }
-
+ 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
@@ -143,5 +142,6 @@ const mapDispatchToProps = {
   login: authActions.login,
   logout: authActions.logout,
 };
-
+ 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+ 

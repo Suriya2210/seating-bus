@@ -6,13 +6,13 @@ import { LoginForm } from "../LoginForm";
 import { Page } from "../Page";
 // Import your background image
 // import bckImg from "./VioletFlower.jpg";
-
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundImage:`url(https://i.ibb.co/3CZv0S1/purple-Petal.jpg)`,
     height: "100%",
     display: "flex",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
     padding: theme.spacing(6, 2),
     // backgroundImage: `url(${backgroundImage})`, // Set the background image
@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2), // Add some margin for spacing
   },
 }));
-
+ 
 function Login() {
   const classes = useStyles();
-
+ 
   const auth = useSelector((state) => state.auth);
-
+ 
   return (
     <Page title="Book Your Seat" className={classes.root}>
       <Card className={classes.card}>
@@ -51,13 +51,14 @@ function Login() {
               {auth.error.message || auth.error}
             </Alert>
           )} */}
-
+ 
           <LoginForm className={classes.loginForm} />
-          
+         
         </CardContent>
       </Card>
     </Page>
   );
 }
-
+ 
 export default Login;
+ 

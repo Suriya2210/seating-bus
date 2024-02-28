@@ -5,6 +5,11 @@ import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
+<<<<<<< HEAD
+=======
+import { useHistory } from "react-router-dom";
+
+>>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
@@ -22,6 +27,8 @@ for (let k = 0; k < 161; k++) {
 
 const Employee_seatlayout = () => {
 
+  const history = useHistory();
+
 
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -37,6 +44,10 @@ const Employee_seatlayout = () => {
     }, 1000);
   };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
 
@@ -63,6 +74,19 @@ const Employee_seatlayout = () => {
     var str = seatno[4] + seatno[5] + seatno[6];
     return parseInt(str);
   }
+
+  useEffect(() => {
+    axios.post(`http://localhost:3000/seat/is-date-available/${date}`)
+      .then((data) => {
+        if (data.data.message == "The seat is not generated on this date") {
+          alert("The selected date does not come under FOW")
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
 
   useEffect(() => {
 

@@ -6,6 +6,9 @@ import { Tooltip } from "@material-ui/core";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ToastMessage from '../ToastMessage'; // Import Toast Message
+import { useHistory } from "react-router-dom";
+
+// import ToastMessage from '../ToastMessage'; // Import Toast Message
 
 import seatup from "./public/seat-53@2x.png";
 import seatup_imagehover from "./public/armchair-3-1@2x.png";
@@ -53,6 +56,7 @@ const Manager_seatlayout = () => {
     }, 1000);
   };
 
+  const history = useHistory();
   const location = useLocation();
   const [date, setdate] = useState(location.state.selecteddate);
   const [seat_info, set_seat_info] = useState();
@@ -85,6 +89,21 @@ const Manager_seatlayout = () => {
     });
     associate_info = t;
   };
+
+  useEffect(() => {
+    axios.post(`http://localhost:3000/seat/is-date-available/${date}`)
+      .then((data) => {
+        if (data.data.message == "The seat is not generated on this date") {
+          alert("The selected date does not come under FOW")
+          history.push("/home");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
+
+
 
   useEffect(() => {
     console.log(associate_info);
