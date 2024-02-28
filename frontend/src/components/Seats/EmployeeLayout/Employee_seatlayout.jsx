@@ -5,13 +5,14 @@ import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
-
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
+import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 
+import { Link } from "react-router-dom";
 var seat_booked_by = [];
 
 for (let k = 0; k < 161; k++) {
@@ -36,7 +37,6 @@ const Employee_seatlayout = () => {
     }, 1000);
   };
 
- 
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
 
@@ -48,7 +48,7 @@ const Employee_seatlayout = () => {
   const [employee_seat, setemployee_seat] = useState(null)
   const [userdata, setuserdata] = useState(null);
   const [alreadybooked, setalreadybooked] = useState(null);
-  const [seatBooked,setSeatBooked] = useState(false);
+  const [seatBooked, setSeatBooked] = useState(false);
   useEffect(() => {
     if (seat_info) {
       seat_info.forEach(element => {
@@ -68,17 +68,19 @@ const Employee_seatlayout = () => {
 
     const fetchdata = async () => {
       try {
-        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`,{
+        const user = await axios.get(`http://localhost:3000/api/auth/get-user/${localStorage.getItem('id')}`, {
           headers: {
             Authorization: token.toString()
-          }}
-          
-    )
+          }
+        }
+
+        )
         setuserdata(user.data.data);
-        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`,{
+        const val = await axios.get(`http://localhost:3000/generate_seat/get-seat-info/${date}`, {
           headers: {
             Authorization: token.toString()
-          }});
+          }
+        });
         const array = [];
         for (let i = 0; i < 161; i++) {
           array.push(-4);
@@ -126,9 +128,9 @@ const Employee_seatlayout = () => {
         var response = await axios.post('http://localhost:3000/api/auth/bookseat', json_body);
         triggerToast("Seat booked successfully!"); // Trigger toast message on successful booking
         setSeatBooked(true);
-        console.log("Booking details :"+JSON.stringify(response.data.data));
-        if(response){
-          var response = await axios.post('http://localhost:3000/booking-success',response.data.data);
+        console.log("Booking details :" + JSON.stringify(response.data.data));
+        if (response) {
+          var response = await axios.post('http://localhost:3000/booking-success', response.data.data);
         }
         // console.log(response.data.message);
         // window.location.reload()
@@ -156,10 +158,11 @@ const Employee_seatlayout = () => {
         "associate_id": localStorage.getItem('id'),
         "cancelled_by": trim(localStorage.getItem('user'))
       }
-      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body,{
+      var response = await axios.post('http://localhost:3000/api/auth/cancelseat', json_body, {
         headers: {
           Authorization: token.toString()
-        }});
+        }
+      });
       console.log(response.data.data);
       console.log(response.data.message);
       window.location.reload()
@@ -202,10 +205,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} />
         </Tooltip>
@@ -246,10 +249,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "180deg" }} />
         </Tooltip>
@@ -290,11 +293,11 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-           if(employee_seat===props.seat_id){
-            setemployee_seat(null);
-          }else{
-          setemployee_seat(props.seat_id);
-          }
+            if (employee_seat === props.seat_id) {
+              setemployee_seat(null);
+            } else {
+              setemployee_seat(props.seat_id);
+            }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "270deg" }} />
         </Tooltip>
 
@@ -334,10 +337,10 @@ const Employee_seatlayout = () => {
       return (
         <Tooltip placement="top" title={props.seat_id} arrow>
           <img className={props.cname} src={props.seat_id == employee_seat ? seatup_imageselect : imgsrc} onClick={() => {
-            if(employee_seat===props.seat_id){
+            if (employee_seat === props.seat_id) {
               setemployee_seat(null);
-            }else{
-            setemployee_seat(props.seat_id);
+            } else {
+              setemployee_seat(props.seat_id);
             }
           }} onMouseOver={() => setHover(true)} onMouseOut={() => setHover(false)} style={{ rotate: "90deg" }} />
         </Tooltip>
@@ -381,16 +384,46 @@ const Employee_seatlayout = () => {
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}
-      <h1><center>Associate seat booking for /{date}/</center></h1>
+      {/* <h1 className="date-infoh1"><center>Associate seat booking for the date of -- {date}</center></h1> */}
+      <h1 className="date-infoh1">
+        <center>Associate seat booking for the date of -- <span className="date-highlight">{date}</span></center>
+      </h1>
+
       {alreadybooked ? (
         <div className="emp-message-container">
           <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
-          <h1 className="emp-message-title">Visit My Bookings to Cancel Booking</h1>
+          <h1 className="emp-message-title">Visit <Link to="/userbookhistory" className="my-bookings">My Bookings</Link> to Cancel Booking</h1>
           {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
         </div>
       )
         : <button onClick={bookseat} className="empseat-book-button" disabled={!employee_seat}>Book Seat</button>}
+      <div className="manager-seat-legends">
+        <div className="seatgreen">
+          <div>
+            <label>Selected Seat</label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={seatup_imageselect} alt="" />
+          </div>
+        </div>
 
+        <div className="seatyellow">
+          <div>
+            <label>Booked Seat</label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={onblockedseat} alt="" />
+          </div>
+        </div>
+
+        <div className="seatred">
+          <div>
+            <label>Blocked Seat </label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={onbookedseat} alt="" />
+          </div>
+        </div>
+      </div>
+
+      
       <div className="admin-zoom-control">
         <button onClick={handleZoomIn}>+</button> {/* Zoom In */}
         <button onClick={handleZoomOut}>-</button> {/* Zoom Out */}
@@ -402,7 +435,7 @@ const Employee_seatlayout = () => {
           ) : (
             <>
 
-              <div className="manager-legends">
+              {/* <div className="manager-legends">
                 <div className="seatgreen">
                   <label>Selected Seat</label>
                   <img src={seatup_imageselect} alt="" />
@@ -414,9 +447,8 @@ const Employee_seatlayout = () => {
                 <div className="seatred">
                   <label>Blocked Seat</label>
                   <img src={onbookedseat} alt="" />
-
                 </div>
-              </div>
+              </div> */}
 
               <TableGroup />
 

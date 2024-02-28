@@ -1,6 +1,11 @@
 .ubh-h {
     text-align: center;
     margin-bottom: 20px;
+    color: rebeccapurple;
+    text-decoration: underline;
+    font-weight: 400;
+    margin-top: 10px;
+    font-family: sans-serif;
 }
 
 .bookings-container {
@@ -12,6 +17,9 @@
     flex-direction: column;
     height: 100vh;
     justify-content: space-between;
+    font-family: sans-serif;
+    position: relative;
+    top:-20px;
 }
 
 .booking {
@@ -29,23 +37,31 @@
     background-color: #b8b8ff;
     height: 450px;
     margin-bottom: 10px;
+    font-family: sans-serif;
+    font-weight: 400;
 }
 
 .lf-h {
     color: #f8f7ff;
-    top: -10px;
+    top: -5px;
     position: relative;
+    font-family: sans-serif;
+    font-weight: 600;
 }
 
 .pb-h {
     color: #f8f7ff;
-    top: -10px;
+    top: -5px;
     position: relative;
+    font-family: sans-serif;
+    font-weight: 600;
 }
 .cb-h {
     color: #f8f7ff;
-    top: -10px;
+    top: -5px;
     position: relative;
+    font-family: sans-serif;
+    font-weight: 600;
 }
 
 
@@ -59,6 +75,8 @@
     background-color: #b8b8ff;
     margin-bottom: 20px;
     margin-top: 20px;
+    font-family: sans-serif;
+    font-weight: 400;
 }
 .cb-section {
     border: 1px solid #ccc;
@@ -67,6 +85,8 @@
     overflow-y: auto;
     height: 450px;
     background-color: #b8b8ff;
+    font-family: sans-serif;
+    font-weight: 400;
 }
 
 
@@ -93,10 +113,12 @@
 .cb-table th,
 .pb-table th {
     background-color: #f2f2f2;
-    padding: 8px;
+    padding: 7px;
     text-align: center;
     border-bottom: 1px solid #ddd;
     position: sticky;
+    font-family: sans-serif;
+    font-weight: 500;
 }
 
 .lf-table td,
@@ -105,11 +127,12 @@
     padding: 8px;
     border-bottom: 1px solid #ddd;
     text-align: center;
+    font-size: 15px;
 }
 
 
 .lf-table tbody tr:last-of-type {
-    border-bottom: 2px solid rgb(113, 47, 145);
+    border-bottom: 2px solid rgb(149, 93, 177);
 }
 
 .pb-table tbody tr:last-of-type {

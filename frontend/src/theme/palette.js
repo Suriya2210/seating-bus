@@ -8,7 +8,7 @@ const palette = {
   primary: {
     contrastText: white,
     dark: `${rebeccapurple}D3`, // Dark shade of rebeccapurple
-    main: rebeccapurple, // Main shade of rebeccapurple
+    main: "#3E0A6E", // Main shade of rebeccapurple
     light: `${rebeccapurple}99` // Light shade of rebeccapurple
   },
   secondary: {

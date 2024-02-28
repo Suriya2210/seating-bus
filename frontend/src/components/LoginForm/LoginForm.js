@@ -1,4 +1,5 @@
-import { Button, makeStyles, TextField } from "@material-ui/core";
+
+import { Button, makeStyles, TextField, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
@@ -33,10 +34,14 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     background:"#663399"
   },
+  errorText: {
+    color: "#ff0000",
+    marginTop: theme.spacing(1),
+  },
 }));
 
 function LoginForm(props) {
-  const { login, logout, className, ...rest } = props;
+  const { login, logout, className, auth } = props;
 
   const classes = useStyles();
 
@@ -84,7 +89,6 @@ function LoginForm(props) {
 
   return (
     <form
-      {...rest}
       className={clsx(classes.root, className)}
       onSubmit={handleSubmit}
     >
@@ -113,6 +117,11 @@ function LoginForm(props) {
           }
         />
       </div>
+      {auth.error && (
+        <Typography variant="body2" className={classes.errorText}>
+          {auth.error.message || auth.error}
+        </Typography>
+      )}
       <Button
         variant="contained"
         type="submit"
@@ -127,7 +136,9 @@ function LoginForm(props) {
   );
 }
 
-const mapStateToProps = null;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 const mapDispatchToProps = {
   login: authActions.login,
   logout: authActions.logout,

@@ -4,7 +4,7 @@ import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
-
+import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import TableGroup from "../TableGroup";
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
@@ -102,12 +102,8 @@ const Admin_seatlayout = () => {
   }, [])
 
   const blockSeat = async () => {
-
-
     var seat_numbers = []
-
     selectedseat.forEach(element => {
-
       var seatno = element.toString();
       while (seatno.length < 3) {
         seatno = '0' + seatno;
@@ -115,7 +111,6 @@ const Admin_seatlayout = () => {
       seatno = 'WKS' + seatno;
       seat_numbers.push(seatno);
     });
-
     const json_body = {
       date: date,
       seat_numbers: seat_numbers
@@ -131,31 +126,45 @@ const Admin_seatlayout = () => {
     console.log(response);
     console.log(`${seat_numbers} are successfully blocked`);
     // window.location.reload()
-
   }
 
   const handleBlockSeatWithGuest = async () => {
-
     var sn = selectedseat[0].toString();
 
     while (sn.length < 3) {
       sn = '0' + sn;
     }
     sn = 'WKS' + sn;
+
     const json_body = {
       date: date,
       seat_number: sn,
       booked_for_name: guestName,
       guest_email: guestEmail,
       is_guest: true,
-    }
-    console.log(json_body);
-    var response = await axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body);
-    console.log(response);
-    console.log(`${sn} is blocked for guest ${guestname}`);
-    window.location.reload()
+    };
 
+    console.log(json_body);
+
+    var response = axios.post('http://localhost:3000/generate_seat/block-seat-forguest', json_body, {
+      headers: {
+        Authorization: token.toString()
+      }
+    });
+    console.log(response);
+    triggerToast("Seat Booked for the Guest Successfully!"); // Trigger toast message
+    setShowPopup(false); // Close the popup after successful booking
+    console.log(`${sn} is blocked for guest ${guestName}`);
+    // window.location.reload(); // Refresh the page
+    // })
+    // .catch(error => {
+    //   console.error("Error blocking seat for guest:", error);
+    //   // Handle error if needed
+    // });
   };
+
+
+
 
   const unblockSeat = async () => {
     var seat_numbers = []
@@ -518,11 +527,38 @@ const Admin_seatlayout = () => {
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}  {/* Show toast message when state is true */}
-      <h1><center>Admin Seatlayout Page</center></h1>
+      <h1 className="admnseat-h1"><center>Admin SeatLayout Page</center></h1>
+
       <div className="adminseat-buttons">
         <button onClick={blockSeat}>Block Seat</button>
         <button onClick={handleGuestBlock}>Book For Guest</button>
         <button onClick={unblockSeat}>UnBlock Seat</button>
+      </div>
+
+      <div className="manager-seat-legends">
+        <div className="seatgreen">
+          <div>
+            <label>Selected Seat</label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={seatup_imageselect} alt="" />
+          </div>
+        </div>
+
+        <div className="seatyellow">
+          <div>
+            <label>Booked Seat</label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={onblockedseat} alt="" />
+          </div>
+        </div>
+
+        <div className="seatred">
+          <div>
+            <label>Blocked Seat </label>
+            <TrendingFlatIcon className="arrow-icon-red" />
+            <img src={onbookedseat} alt="" />
+          </div>
+        </div>
       </div>
 
       <div className="admin-zoom-control">
@@ -536,22 +572,7 @@ const Admin_seatlayout = () => {
             <div className="loader"></div>
           ) : (
             <>
-
-              <div className="manager-legends">
-                <div className="seatgreen">
-                  <label>Selected Seat</label>
-                  <img src={seatup_imageselect} alt="" />
-                </div>
-                <div className="seatyellow">
-                  <label>Blocked by Admin</label>
-                  <img src={onblockedseat} alt="" />
-                </div>
-                <div className="seatred">
-                  <label>Booked seat</label>
-                  <img src={onbookedseat} alt="" />
-
-                </div>
-              </div>
+              
               <TableGroup />
               <SeatLeftComponent cname="seat-icon" seat_id="WKS-140" />
               <SeatLeftComponent cname="seat-icon1" seat_id="WKS-139" />
@@ -939,6 +960,7 @@ const Admin_seatlayout = () => {
               </div>
 
             </>
+
           )}
         </div>
         {/* BELOW IS THE CODE FOR POP-UP */}
@@ -951,15 +973,17 @@ const Admin_seatlayout = () => {
                 placeholder="Enter Guest Name"
                 value={guestName}
                 onChange={(e) => setGuestName(e.target.value)}
+                required
               />
               <input
                 type="email"
                 placeholder="Enter Guest Email"
                 value={guestEmail}
                 onChange={(e) => setGuestEmail(e.target.value)}
+                required
               />
               <div className="guestblockmanagebtns">
-                <button onClick={handleBlockSeatWithGuest} class>Book Seat</button>
+                <button onClick={handleBlockSeatWithGuest}>Book Seat</button>
                 <button onClick={handleGuestBlockClose}>Cancel</button>
               </div>
             </div>

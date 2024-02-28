@@ -26,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   card: {
-    background: 'rgba(255, 255, 255, 0.5)', // Transparent white background
-    boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )', // Box shadow for glassy effect
-    backdropFilter: 'blur(10px)', // Blur effect for glassy effect
+    backgroundColor:"#FEFCFF",
     borderRadius: '10px', // Rounded corners
     border: '1px solid rgba( 255, 255, 255, 0.18 )', // White border with transparency
     padding: theme.spacing(2), // Adjust padding as needed

@@ -15,8 +15,8 @@ const transporter = nodemailer.createTransport({
     port: 25,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: MAIL_SERVER_USER_NAME,
-      pass: MAIL_SERVER_USER_PASSWORD
+      user: "AKIAYUXGM3VQMLJC2FSM",
+      pass: "BC6iA1cAGSWVkTFp4yLrL7+QomPOqQsci3utkMjrPpX4"
     }
   });
 
@@ -133,7 +133,7 @@ const transporter = nodemailer.createTransport({
     User.findOne({where:{
       associate_id:id
     }}).then(user=>{
-      console.log("Booked for user "+JSON.stringify(user));
+      console.log("Sending mail to  "+JSON.stringify(user.email));
 
       const mailOptions = {
         from: 'seating_app@compliance.esko-saas.com',

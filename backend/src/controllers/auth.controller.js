@@ -38,7 +38,7 @@ exports.signin = (req, res) => {
             else{
                 return res.status(400).json({
                     status:"Failure",
-                    message: "GMAIL AND PASSWORD NOT MATCHED !!",
+                    message: "Email and password does not match",
                 });
             }
           }
