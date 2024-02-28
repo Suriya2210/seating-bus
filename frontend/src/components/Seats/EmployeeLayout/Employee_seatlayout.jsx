@@ -5,11 +5,7 @@ import { Tooltip } from '@material-ui/core';
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
 import ToastMessage from '../ToastMessage'; // Import Toast Message 
-<<<<<<< HEAD
-=======
 import { useHistory } from "react-router-dom";
-
->>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1
 import seatup from './public/seat-53@2x.png'
 import seatup_imagehover from './public/armchair-3-1@2x.png'
 import seatup_imageselect from './public/armchair-5-1@2x.png'
@@ -43,15 +39,8 @@ const Employee_seatlayout = () => {
       // window.location.reload(); // Refresh the page after 3 seconds
     }, 1000);
   };
-
-<<<<<<< HEAD
-=======
-
->>>>>>> b9ad35001873fe692f0c2dc501762c0b4f453ac1
   const token = localStorage.getItem("jwt_token");
   const location = useLocation();
-
-
   const [date, setdate] = useState(location.state.selecteddate)
   const [seat_info, set_seat_info] = useState();
   const [loading, setloading] = useState(true);
@@ -412,15 +401,6 @@ const Employee_seatlayout = () => {
       <h1 className="date-infoh1">
         <center>Associate seat booking for the date of -- <span className="date-highlight">{date}</span></center>
       </h1>
-
-      {alreadybooked ? (
-        <div className="emp-message-container">
-          <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
-          <h1 className="emp-message-title">Visit <Link to="/userbookhistory" className="my-bookings">My Bookings</Link> to Cancel Booking</h1>
-          {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
-        </div>
-      )
-        : <button onClick={bookseat} className="empseat-book-button" disabled={!employee_seat}>Book Seat</button>}
       <div className="manager-seat-legends">
         <div className="seatgreen">
           <div>
@@ -447,7 +427,16 @@ const Employee_seatlayout = () => {
         </div>
       </div>
 
-      
+      {alreadybooked ? (
+        <div className="emp-message-container">
+          <h1 className="emp-message-title">You have already booked a seat {alreadybooked} on {date}</h1>
+          <h1 className="emp-message-title">Visit <Link to="/userbookhistory" className="my-bookings">My Bookings</Link> to cancel booking</h1>
+          {/* <button className="emp-message-button" onClick={cancelbooking}>Cancel Seat</button> */}
+        </div>
+      )
+        : <button onClick={bookseat} className="empseat-book-button" disabled={!employee_seat}>Book Seat</button>}
+
+
       <div className="admin-zoom-control">
         <button onClick={handleZoomIn}>+</button> {/* Zoom In */}
         <button onClick={handleZoomOut}>-</button> {/* Zoom Out */}

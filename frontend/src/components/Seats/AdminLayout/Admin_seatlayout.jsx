@@ -74,7 +74,7 @@ const Admin_seatlayout = () => {
       .then((data) => {
         if (data.data.message == "The seat is not generated on this date") {
           alert("The selected date does not come under FOW")
-          history.push("/home");
+          history.push("/adminhome");
         }
       })
       .catch((err) => {
