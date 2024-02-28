@@ -565,7 +565,7 @@ const Admin_seatlayout = () => {
 
         <div className="seatyellow">
           <div>
-            <label>Booked Seat</label>
+            <label>Blocked Seat</label>
             <TrendingFlatIcon className="arrow-icon-red" />
             <img src={onblockedseat} alt="" />
           </div>
@@ -573,7 +573,7 @@ const Admin_seatlayout = () => {
 
         <div className="seatred">
           <div>
-            <label>Blocked Seat </label>
+            <label>Booked Seat </label>
             <TrendingFlatIcon className="arrow-icon-red" />
             <img src={onbookedseat} alt="" />
           </div>

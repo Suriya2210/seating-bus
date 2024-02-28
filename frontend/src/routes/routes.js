@@ -11,6 +11,7 @@ import AddNewUser from "../components/Admin/AddNewUser/AddNewUser"
 import Table from "../components/Table";
 import AuthLayout from "../layouts/Auth";
 import DashboardLayout from '../layouts/Dashboard';
+import ForgotPwd from "../components/ForgotPage/ForgotPwd.jsx";
 import AdminManageBooking from '../components/Admin/AdminManageBooking/AdminManageBooking'
 import Admin_seatlayout from "../components/Seats/AdminLayout/Admin_seatlayout"
 import Manager_seatlayout from "../components/Seats/ManagerLayout/Manager_seatlayout";
@@ -50,6 +51,11 @@ export const routes = [
         exact: true,
         component: Login,
       },
+      {
+        path: "/auth/forgotpwd", // Add the route for ForgotPwd component
+        exact: true,
+        component: ForgotPwd,
+      },
     ],
   },
   {
@@ -75,7 +81,6 @@ export const routes = [
         component:(props) => {
           return props.isAuthenticated ? <ConditionalRendering/> : <Redirect to="/auth/login" /> 
         }
-   
       },
       {
         path: "/admin/usermanagement",
@@ -111,6 +116,12 @@ export const routes = [
         component: (props) => {return props.isAuthenticated ? <ViewUserPage /> : <Redirect to="/auth/login" />}
           ,
       },
+      // {
+      //   path: "/forgotpwd",
+      //   exact: true,
+      //   component: (props) => {return props.isAuthenticated ?  <ForgotPwd /> : <Redirect to="/auth/login" />}
+      //     ,
+      // },
       {
         path: "/bookyourseat",
         exact: true,
