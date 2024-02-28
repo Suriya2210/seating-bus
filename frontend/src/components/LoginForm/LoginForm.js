@@ -143,9 +143,4 @@ const mapDispatchToProps = {
   logout: authActions.logout,
 };
  
-<<<<<<< HEAD
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-=======
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
- 
->>>>>>> 4f948cc87ce22ad0a97dd7bdee7233a118a0dc67
