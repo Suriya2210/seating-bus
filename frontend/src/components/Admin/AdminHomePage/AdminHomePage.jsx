@@ -67,7 +67,7 @@ const HeroSection = ({ handleDateChange, pickedDate }) => {
                         } className="AdminHomePage-btn-2">Block Seat</Link>
                     </div>
                 </div>
-                
+
                 <div className="reportgen-btn">
                     <button onClick={generatereport} className="AdminHomePage-gr-btn">Generate Report</button>
                 </div>
