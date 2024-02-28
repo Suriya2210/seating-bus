@@ -18,6 +18,7 @@ import onbookedseat from "./public/armchair-6-1@2x.png";
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 import onblockedseat from "./public/armchair-7-1@2x.png";
 
+import {getDate} from '../../../utils/getDate'
 var selectedseat = [];
 var selected_blockedSeat = [];
 
@@ -246,7 +247,7 @@ const Manager_seatlayout = () => {
             onClick={() => {
               if (count_selected == max_seat) {
                 alert(
-                  "You have Selected More Seats than your Direct Report Count Allows !!!"
+                  "You have reached your maximum number of direct reportee"
                 );
               } else if (!selected) {
                 count_selected += 1;
@@ -653,7 +654,7 @@ const Manager_seatlayout = () => {
       {showToast && <ToastMessage message={toastMessage} />}
 
       <h1 className="managerseat-h1">
-        <center>Manager Seat Booking -- {date} </center>
+        <center>Manager Seat Booking - {getDate(date)} </center>
       </h1>
 
       <div className="manager-seat-legends">

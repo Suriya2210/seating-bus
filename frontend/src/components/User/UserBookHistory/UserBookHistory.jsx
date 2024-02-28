@@ -138,7 +138,7 @@ const UserBookHistory = () => {
         <h1>Loading!!!</h1>
       ) : (
         <div className="user-book-history">
-          <h1 className="ubh-h">User Book History</h1>
+          <h1 className="ubh-h">Your Booking history</h1>
           <div className="bookings-container">
             <div className="lf-section">
               <h2 className="lf-h">Current and Future Bookings</h2>

@@ -14,6 +14,7 @@ import seatup_imageselect from './public/armchair-5-1@2x.png'
 import onbookedseat from './public/armchair-6-1@2x.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 
+import {getDate} from '../../../utils/getDate'
 
 var selectedseat = [];
 var selected_blockedSeat = [];
@@ -546,7 +547,7 @@ const Admin_seatlayout = () => {
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}  {/* Show toast message when state is true */}
-      <h1 className="admnseat-h1"><center>Admin SeatLayout Page</center></h1>
+      <h1 className="admnseat-h1"><center>Admin seat management for -{getDate(date)}</center></h1>
 
       <div className="adminseat-buttons">
         <button onClick={blockSeat}>Block Seat</button>

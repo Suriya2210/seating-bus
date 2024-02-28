@@ -9,6 +9,31 @@ const {  MAIL_SERVER_USER_NAME,MAIL_SERVER_USER_PASSWORD } = require('../utils/s
 const { generate: generateToken, decode: decodeToken } = require('../utils/token');
  
 // Create a transporter object using SMTP details
+function getDate(date){
+  // Parse the input date string
+var inputDate = new Date(date);
+
+// Extract year, month, and day components
+var year = inputDate.getFullYear();
+var month = inputDate.toLocaleString('default', { month: 'long' });
+var day = inputDate.getDate();
+
+// Add ordinal suffix to day
+var suffix = "";
+if (day === 1 || day === 21 || day === 31) {
+    suffix = "st";
+} else if (day === 2 || day === 22) {
+    suffix = "nd";
+} else if (day === 3 || day === 23) {
+    suffix = "rd";
+} else {
+    suffix = "th";
+}
+
+// Assemble the components into the desired format
+outputDateStr = day + suffix + " " + month + " " + year;
+return outputDateStr;
+}
 const transporter = nodemailer.createTransport({
     host: 'email-smtp.eu-central-1.amazonaws.com',
     port: 25,
@@ -129,6 +154,7 @@ const transporter = nodemailer.createTransport({
     let id = req.body.booked_for_id;
     const seat_no = req.body.seat_number;
     const booked_by= req.body.seat_booked_by;
+    const booked_date= getDate(req.body.seat_selection_date);
     console.log("Sending mail for this id "+id);
     User.findOne({where:{
       associate_id:id
@@ -149,11 +175,11 @@ const transporter = nodemailer.createTransport({
         </head>
         <body>
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h2>A seat has been booked for you ! on date</h2>
+            <h2>A seat has been booked for you ! on ${booked_date}</h2>
             <p>Please find the booking details below!</p>
             <p>Seat number: ${seat_no}</p>
             <p>Booked By: ${booked_by}</p>
-            <p>If you want to cancel this seat. You can do it under your booking history page</p>
+            <p>If you want to cancel this seat, You can do it under your booking history page</p>
             <p>Thanks,<br>Admin</p>
           </div>
         </body>
@@ -182,7 +208,7 @@ const transporter = nodemailer.createTransport({
     console.log("From manager booking success mail "+JSON.stringify(req.body));
     // Extract email data from request body
     let id = req.body.booked_by_id;
-    const booked_date = req.body.booked_for_date;
+    const booked_date = getDate(req.body.booked_for_date);
     const booked_by= req.body.booked_by;
     const bookings = req.body.bookings;
     console.log("Sending mail for this id "+id);
@@ -208,7 +234,7 @@ const transporter = nodemailer.createTransport({
             <h2>You have booked seats for you/your associates on ${booked_date}</h2>
             <p>Please find the booking details below!</p>
             <p>${bookings}</p>
-            <p>If you want to cancel this seat. You can do it under your booking history page</p>
+            <p>If you want to cancel this seat, You can do it under your booking history page</p>
             <p>Thanks,<br>Admin</p>
           </div>
         </body>
@@ -238,7 +264,7 @@ const transporter = nodemailer.createTransport({
     let booked_for_mail = req.body.booked_for_email;
     const seat_no = req.body.seat_number;
     const cancelled_by = req.body.seat_cancelled_by;
-    const cancellation_date = req.body.seat_cancellation_date;
+    const cancellation_date = getDate(req.body.seat_cancellation_date);
     console.log("From ec , The seat "+seat_no+" that was booked on "+cancellation_date+" by "+cancelled_by);
       const mailOptions = {
         from: 'seating_app@compliance.esko-saas.com',

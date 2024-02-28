@@ -13,6 +13,8 @@ import onbookedseat from './public/bkd_chair.png'
 import onblockedseat from './public/armchair-7-1@2x.png'
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 
+import {getDate} from '../../../utils/getDate'
+
 import { Link } from "react-router-dom";
 var seat_booked_by = [];
 
@@ -397,10 +399,10 @@ const Employee_seatlayout = () => {
   return (
     <>
       {showToast && <ToastMessage message={toastMessage} />}
-      {/* <h1 className="date-infoh1"><center>Associate seat booking for the date of -- {date}</center></h1> */}
-      <h1 className="date-infoh1">
+      <h1 className="date-infoh1"><center>Associate seat booking for the date of - {getDate(date)}</center></h1>
+      {/* <h1 className="date-infoh1">
         <center>Associate seat booking for the date of <span className="date-highlight">{date}</span></center>
-      </h1>
+      </h1> */}
       <div className="manager-seat-legends">
         <div className="seatgreen">
           <div>
