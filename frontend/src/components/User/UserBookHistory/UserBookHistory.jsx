@@ -168,6 +168,7 @@ const UserBookHistory = () => {
                               setSelectedBooking(booking);
                               setShowPopup(true);
                             }}
+                            className="cancelseat-btn"
                           >
                             Cancel Seat
                           </button>
@@ -237,7 +238,7 @@ const UserBookHistory = () => {
       {showPopup && (
         <div className="popup-container">
           <div className="popup">
-            <h2>Select Cancellation Reason:</h2>
+            <h2>Select reason:</h2>
             <div>
               <input
                 type="radio"

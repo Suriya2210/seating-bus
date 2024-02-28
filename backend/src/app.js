@@ -21,6 +21,8 @@ const associatesinfo = require('./routes/associatesinfo.route');
 
 const mail_route = require('./routes/email.route');
 
+const generate_report =require('./routes/generatereport.route');
+
 const { httpLogStream } = require('./utils/logger');
 
 const decodejwt=require('./routes/decodejwt');
@@ -84,6 +86,7 @@ app.use('/seats_info',seat_info_route);
 app.use('/generate_seat',generate_seat_route);
 app.use('/associates',associatesinfo);
 app.use('/decodejwt',decodejwt);
+app.use('/generatereport',generate_report);
 app.use(mail_route);
 
 

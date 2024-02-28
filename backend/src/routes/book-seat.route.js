@@ -5,4 +5,5 @@ router.route('/get-booking/:associate_id').get(bookingController.get_booking);
 // router.route('/delete-booking').delete(bookingController.deleteBooking);
 // router.route('/edit-booking').patch(bookingController.edit_booking);
 router.route('/get-cancel-booking/:associate_id').get(bookingController.cancel_booking);
+router.route('/is-date-available/:date').post(bookingController.is_date_available);
 module.exports = router;

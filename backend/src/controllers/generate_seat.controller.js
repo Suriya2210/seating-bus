@@ -20,6 +20,7 @@ exports.generate = (req,res,next)=>{
                     seat_number:seat_name,
                     seat_selection_date:k,
                     seat_status:1,
+                    seat_booking_status:0,
                     created_by:"varsan",
                     updated_by:"varsan"
                 }
@@ -109,6 +110,11 @@ exports.block_seat_forguest=(req,res,next)=>{
             val.guest_email=guest_email,
             val.is_guest=true,
             val.save();
+            res.status(200).json({
+                status:"success",
+                data:val,
+                message:"Seat is successfully blocked by the guest"
+            })
         })
         .catch((err)=>{
             res.status(400).json({
@@ -140,6 +146,8 @@ exports.unblock_seats=(req,res,next)=>{
             .then((val)=>{
                 val.seat_status=1;
                 val.booked_for_name=null,
+                val.guest_email=null,
+                val.is_guest=null,
                 val.save();
             })  
         }
