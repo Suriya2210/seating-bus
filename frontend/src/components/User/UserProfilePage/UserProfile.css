@@ -1,18 +1,11 @@
-.userprofile-wholebody
-{
-  height: 90.5vh;
-  background-color:white;
-  background-image: url(./cubes_veralto.png);
-}
-
 .userprofile-div {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  top: 5%;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 93vh;
+  background-color: rgb(233, 233, 233);
+  background-image: url(./cubes_veralto.png);
 }
-
 
 @media (max-width: 991px) {
   .div {
@@ -20,24 +13,38 @@
   }
 }
 
-.div-2 {
+/* .div-2 { Modified to align the div to the center of the page to accommodate large screens
   border-radius: 30px;
   background: linear-gradient(to bottom right, #663399, #4b0082);
   width: 738px;
   max-width: 100%;
   padding: 50px 80px;
   position: relative;
-  left: 20%;
+  /* left: 20%;
   position: relative;
   top: 35px;
-  height: 71vh;
+  height: auto;
   animation: fadeIn 0.5s ease-in;
-  box-shadow:#9c9c9c 0px 20px 30px -10px;
+  box-shadow: #9c9c9c 0px 20px 30px -10px;
+  margin: auto; /* Add this line
+} */
+
+.div-2 {
+  border-radius: 30px;
+  background: rgb(254, 249, 255);
+  width: 738px;
+  max-width: 100%;
+  padding: 40px 40px;
+  position: relative;
+  height: auto;
+  animation: fadeIn 0.5s ease-in;
+  box-shadow: #9c9c9c 0px 20px 30px -10px;
 }
 
-.div-2:hover {
+
+/* .div-2:hover {
   background: linear-gradient(to bottom right, #4b0082, #663399);
-}
+} */
 
 
 .img:hover {
@@ -57,8 +64,7 @@
 
 @media (max-width: 991px) {
   .div-2 {
-    margin-top: 40px;
-    padding: 0 20px;
+    padding: 50px 20px;
   }
 }
 
@@ -154,6 +160,7 @@
 .div-5 {
   font-family: Inter, sans-serif;
   margin-top: 42px;
+  margin-bottom: 2px;
 }
 
 @media (max-width: 991px) {
@@ -173,6 +180,7 @@
 .div-7 {
   font-family: Inter, sans-serif;
   margin-top: 31px;
+  margin-bottom: 2px;
 }
 
 /* .div-8 {
@@ -236,6 +244,7 @@
 
 .div-11 {
   font-family: Inter, sans-serif;
+  margin-bottom: 2px;
 }
 
 /* .div-12 {
@@ -255,6 +264,7 @@
 .div-13 {
   font-family: Inter, sans-serif;
   margin-top: 19px;
+  margin-bottom: 2px;
 }
 
 /* .div-14 {
@@ -288,6 +298,7 @@
 
 .div-16 {
   font-family: Inter, sans-serif;
+  margin-bottom: 2px;
 }
 
 /* .div-17 {
@@ -307,6 +318,7 @@
 .div-18 {
   font-family: Inter, sans-serif;
   margin-top: 15px;
+  margin-bottom: 2px;
 }
 
 /* .div-19 {

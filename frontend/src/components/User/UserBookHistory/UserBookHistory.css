@@ -177,6 +177,7 @@
     justify-content: space-evenly;
     height:auto;
     font-family: sans-serif;
+    width: auto;
 }
 
 .popup input[type="radio"]+label {
@@ -192,8 +193,8 @@
 }
 
 .popup input[type="radio"]:checked+label {
-    background-color: rebeccapurple;
-    color: white;
+    background-color: #ddd;
+    /* color: white; */
 }
 
 .popup input[type="radio"]:not(:checked)+label:hover {
@@ -227,7 +228,7 @@
     color: white;
     border: 2px solid green;
     margin-right: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .confirm-btn:hover {
@@ -240,7 +241,8 @@
     background-color: red;
     color: white;
     border: 2px solid red;
-    margin-left: 40px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 .cancel-btn:hover {
     background-color:white;
