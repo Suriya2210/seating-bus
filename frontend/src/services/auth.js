@@ -1,6 +1,7 @@
 import { urlConstants } from "../constants";
 import { axios } from "../utils";
 
+
 export const authService = {
   login,
   logout,
@@ -14,11 +15,13 @@ function login(username, password) {
     })
     .then(response => {
       console.log("working fine")
-      localStorage.setItem("user", JSON.stringify(response.data.data.firstname));
+      localStorage.setItem("user", JSON.stringify(response.data.data.associate_name));
+      localStorage.setItem("id", JSON.stringify(response.data.data.associate_id));
+      localStorage.setItem("jwt_token",response.data.token);
       return response.data;
     });
 }
 
 function logout() {
-  localStorage.removeItem("user");
+  // localStorage.removeItem("user");
 }

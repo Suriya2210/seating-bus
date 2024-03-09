@@ -1,0 +1,347 @@
+
+
+.section-managebooking {
+    height: 40vh;
+    margin: 20px;
+    border: 2px solid #030303;
+    background-color: white;
+    border-radius: 10px;
+    width: auto;
+    min-width: 500px;
+    align-self: center;
+    position: relative;
+    top: 25%;
+    box-shadow: 0px 0px 10px #663399;
+}
+
+.section-managebooking h2 {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.section-manageseat {
+    height: 600px;
+    margin: 10px;
+    border: 2px solid #8b8686;
+    border-radius: 10px;
+    width: auto;
+}
+
+.section-manageseat h2 {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+
+.manage-seat-datebody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    position: relative;
+    top: 50%;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    box-sizing: border-box;
+    /* transition: all 0.3s ease-in-out, margin 0.3s ease; */
+    /* -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease; */
+}
+
+/* RESET FORM ELEMENTS */
+.input-container input[type="date"],
+.input-container input[type="text"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* INPUT CONTAINER  */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    min-width: 217px;
+    height: 70px;
+    padding: 5px 10px 10px 10px;
+    /* background: #fff; */
+    border-radius: 8px;
+    filter: drop-shadow(0px 0px 3px #000);
+    -webkit-filter: drop-shadow(0px 0px 3px #000);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    top: 20px;
+}
+
+.input-container:hover,
+.input-container:focus,
+.input-container:active {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+}
+
+.input-container label {
+    position: relative;
+    width: 100%;
+    font-family: "Segoe UI";
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    line-height: 20px;
+    color: #663399;
+    margin-left: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* top: 20px; */
+}
+
+.input-container input {
+    position: relative;
+    align-items: center;
+    width: auto;
+    height: 6%;
+    font-family: "Lekton", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 21px;
+    text-transform: uppercase;
+    margin-left: 0px;
+}
+
+.section-title {
+    margin-top: 10px;
+    text-decoration: underline;
+    color:#663399;
+}
+
+/* BUTTON CONTAINER */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 197px;
+    height: 71px;
+    padding: 1px;
+    padding-bottom: 2px;
+    background: #663399;
+    border-radius: 8px;
+    filter: drop-shadow(0px 0px 3px #000);
+    -webkit-filter: drop-shadow(0px 0px 3px #000);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    top: 19px;
+    margin-left: 20px;
+}
+
+.button-container:hover,
+.button-container:focus {
+    background: #663399;
+    filter: drop-shadow(0px 0px 3px #663399);
+    -webkit-filter: drop-shadow(0px 0px 3px #663399);
+}
+
+/* -- button -- */
+.button-container .button {
+    position: relative;
+    width: 100%;
+    min-height: 67px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    /* background: #fff; */
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    
+}
+
+.button-container:hover .button:hover {
+    background: #000;
+    color: #fff;
+}
+
+.button-container:hover .button:active {
+    background: #000;
+    color: #fff;
+    background: #663399;
+    filter: drop-shadow(0px 0px 3px #663399);
+    -webkit-filter: drop-shadow(0px 0px 3px #663399);
+}
+
+/* -- button ok -- */
+.button-container .button.ok {
+    background: #131313;
+    color: #fff;
+}
+
+.button-container:hover .button.ok:hover {
+    background: #131313;
+    color: #663399;
+    text-shadow: 0px 0px 10px #663399;
+    -webkit-text-shadow: 0px 0px 10px #663399;
+}
+
+.button-container:hover .button.ok:active {
+    color: #fff;
+    background: #663399;
+    filter: drop-shadow(0px 0px 3px #000);
+    -webkit-filter: drop-shadow(0px 0px 3px #000);
+}
+
+/* RESERVATION BOX */
+.reservation-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    height: 40%;
+    padding: 20px;
+    border-radius: 7px;
+    /* background-color: rgba(255, 255, 255, 1); */
+    position: relative;
+    top: -100px;
+}
+
+.reservation-box .static {
+    position: relative;
+    display: flex;
+    align-items: center;
+    float: left;
+    width: auto;
+    margin-right: 20px;
+}
+
+.reservation-box .flex {
+    position: relative;
+    display: flex;
+    float: left;
+    flex-direction: table;
+    align-items: center;
+    gap: 20px;
+    width: auto;
+}
+
+.reservation-box .top {
+    display: flex;
+    flex-direction: table;
+}
+
+.reservation-box .bottom {
+    position: relative;
+    width: 100%;
+    text-align: right;
+}
+
+.reservation-box .info {
+    width: auto;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: right;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.reservation-box .info:hover,
+.reservation-box .info:focus,
+.reservation-box .info:active {
+    color: #000;
+    border-bottom: 2px solid #663399;
+}
+
+/* RESERVATION BOX SMALL */
+.reservation-box.small,
+.reservation-box.small .flex {
+    flex-direction: column;
+}
+
+.reservation-box.small .top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reservation-box.small .static {
+    margin-right: 0px;
+}
+
+.reservation-box.small .bottom {
+    text-align: center;
+}
+
+.reservation-box.small .button-container {
+    min-width: 217px;
+}
+
+/* RESPOSIVE CODE STARTS */
+@media screen and (max-width: 768px) {
+    /* Adjust reservation box height */
+    .reservation-box {
+        padding: 10px;
+        position: relative;
+        top:-190px;
+        min-width:50%;
+    }
+    
+    .section-managebooking
+    {
+        height: 70%;
+        width: 70%;
+        position: relative;
+        left: 15%;
+        top:10%;
+    }
+    
+    .top{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    /* Reduce height of input container */
+    .input-container {
+        height: 60px;
+        margin: 20px;
+    }
+
+    /* Adjust button container height */
+    .button-container {
+        min-height: 50px;
+        position: relative;
+        left: -10px;
+    }
+
+}
+
+/* RESPOSIVE CODE ENDS */
+
+
+

@@ -6,6 +6,9 @@ import { history } from "./helpers/history";
 import { routes } from "./routes";
 import theme from "./theme";
 
+
+import {getAccessLevel} from "./utils/getAccessLevel.js";
+
 function App() {
   return (
     <ThemeProvider theme={theme}>

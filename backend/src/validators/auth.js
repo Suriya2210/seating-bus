@@ -3,6 +3,7 @@ const validatorHandler = require('../middlewares/validatorHandler');
 
 const signup = (req, res, next) => {
     const schema = Joi.object().keys({
+        id: Joi.number(),
         firstname: Joi.string()
             .trim()
             .alphanum()
@@ -35,7 +36,6 @@ const signin = (req, res, next) => {
             .required(),
         password: Joi.string()
             .trim()
-            .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
             .required()
     });
     validatorHandler(req, res, next, schema);

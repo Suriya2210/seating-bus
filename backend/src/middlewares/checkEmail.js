@@ -2,16 +2,28 @@ const User = require('../models/user');
 
 const checkEmail =  (req, res, next) => {
     const { email } = req.body;
-    User.findByEmail(email, (_, data) => {
-        if (data) {
-            res.status(400).send({
-                status: 'error',
-                message: `A user with email address '${email}' already exits`
-            });
-            return;
+    User.findOne({
+        where:{
+            email:email
         }
-        next();
-    });
+    })
+    .then((val)=>{
+        if(val){
+            return res.status(400).json({
+                status:"Failure",
+                message:"Email already exist"
+            })
+        }
+        else{
+            next();
+        }
+    })
+    .catch((err)=>{
+        res.status(400).json({
+            status:"failure",
+            error:err
+        })
+    })
 }
 
 module.exports = checkEmail;
